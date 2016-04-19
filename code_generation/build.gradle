@@ -1,0 +1,43 @@
+// Gradle task to reformat diceware codes into a properties file.
+// The diceware codes were downloaded from http://world.std.com/~reinhold/diceware.html
+// This task was written by Dillon Connolly
+// Last edited: 1/13/16
+
+task compileSwitchStatement {
+
+	def input = new File('diceware_wordlist.txt')
+	def output = new File('diceware.properties')
+
+	def lines = input.readLines()
+	def numberList = new ArrayList<Integer>()
+	def stringList = new ArrayList<String>()
+
+	// This is not universal code. It just works for my provided list of values
+
+	int k = 0
+	for(int i =0; i<lines.size()-1; i++){
+		if(i>1)	{
+			numberList.add(k,lines[i].substring(0,5))
+			stringList.add(k,lines[i].substring(6))
+			k++
+		}
+	}
+
+	// This generates the properties file
+
+	output.withWriter{ writer ->
+		for(int i=0; i<numberList.size(); i++){
+			writer.writeLine("${numberList[i]} = ${stringList[i]}")
+		}
+	}
+}
+
+task testIntCombine {
+	int number = 1
+	String value = ""
+	while(value.length() < 5){
+		value = value.concat(Integer.toString(number))
+		number++
+	}
+	println value
+}
