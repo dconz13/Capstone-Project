@@ -12,13 +12,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.temp_layout);
+        setContentView(R.layout.main_activity_container);
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new TempFragment())
+                    .add(R.id.main_container, new TempFragment())
                     .commit();
         }
     }
-
 }
