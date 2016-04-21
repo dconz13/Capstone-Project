@@ -2,25 +2,21 @@ package com.conz13.d.strongpasswordcreator;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 /**
  * Created by dillon on 4/17/16.
  */
 public class MainActivity extends AppCompatActivity {
 
-    private String[] tempList = {"item1","item2","item3","item4"};
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -28,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
+        NavigationView navDrawer = (NavigationView) findViewById(R.id.nav_drawer);
+        setUpNavigationDrawerListener(navDrawer);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
         Toolbar tempToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, tempToolbar,
                 R.string.drawer_open,R.string.drawer_close);
-        mDrawerList = (ListView) findViewById(R.id.drawer_list);
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tempList));
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -46,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content_frame, new WordGenerationFragment())
+                    .add(R.id.main_content_frame, new WordGenerationFragment())
                     .commit();
         }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -74,5 +72,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
+    }
+
+    private void setUpNavigationDrawerListener(NavigationView navView) {
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_home:
+                        Log.d("navItemSelected", "menu_home");
+                        return true;
+                    case R.id.menu_locker:
+                        Log.d("navItemSelected", "menu_locker");
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 }
