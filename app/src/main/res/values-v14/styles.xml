@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Settings theme -->
+    <style name="SettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/ActionBar.V14.StrongPassword.NoTitle</item>
+    </style>
+
+    <style name="ActionBar.V14.StrongPassword.NoTitle" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@color/colorPrimary</item>
+        <item name="height">56dp</item>
+    </style>
+
+</resources>

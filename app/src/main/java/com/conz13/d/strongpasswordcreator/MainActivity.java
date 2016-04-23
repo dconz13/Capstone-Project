@@ -1,5 +1,7 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationView navDrawer = (NavigationView) findViewById(R.id.nav_drawer);
         setUpNavigationDrawerListener(navDrawer);
+        //find out why this causes illegalargumentexception. why is child null view
+        //navDrawer.addHeaderView(findViewById(R.id.nav_drawer_header));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
         Toolbar tempToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -37,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         setSupportActionBar(tempToolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        } catch(NullPointerException e){
+            Log.e(LOG_TAG, e.toString());
+        }
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
@@ -47,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -75,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpNavigationDrawerListener(NavigationView navView) {
+        final Context context = getApplicationContext();
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -85,9 +93,18 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_locker:
                         Log.d("navItemSelected", "menu_locker");
                         return true;
+                    case R.id.menu_settings:
+                        startActivity(new Intent(context, SettingsActivity.class));
+                        Log.d("navItemSelected", "menu_settings");
+                        return true;
+                    case R.id.menu_help:
+                        Log.d("navItemSelected", "menu_help");
+                        return true;
+                    default:
+                        return false;
                 }
-                return false;
             }
         });
     }
+
 }

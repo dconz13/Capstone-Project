@@ -4,6 +4,7 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="settings">Settings</string>
     <string name="help">Help / Contact</string>
+    <string name="nav_header">Navigation drawer header image</string>
 
     <!-- Menu item strings -->
     <string name="home">Home</string>

@@ -32,7 +32,7 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/nav_menu">
 
-        <include layout="@layout/nav_drawer_settings_list_item" />
+        <!--<include layout="@layout/nav_drawer_header" />-->
 
     </android.support.design.widget.NavigationView>
 

@@ -10,4 +10,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Settings theme -->
+    <style name="SettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
 </resources>

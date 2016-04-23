@@ -12,5 +12,8 @@ public class SettingsFragment extends PreferenceFragment{
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.preferences);
+        //Toolbar toolbar = (Toolbar)getActivity().findViewById(R.id.settings_toolbar);
+        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
     }
 }

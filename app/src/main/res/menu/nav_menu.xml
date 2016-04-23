@@ -2,12 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="@string/home"
-        app:showAsAction="never"
-        android:orderInCategory="1"
-        android:id="@+id/menu_home" />
-    <item android:title="@string/my_locker"
-        app:showAsAction="never"
-        android:orderInCategory="2"
-        android:id="@+id/menu_locker"/>
+    <group android:id="@+id/options_group" android:checkableBehavior="single">
+        <item android:title="@string/home"
+            app:showAsAction="never"
+            android:orderInCategory="1"
+            android:id="@+id/menu_home" />
+        <item android:title="@string/my_locker"
+            app:showAsAction="never"
+            android:orderInCategory="2"
+            android:id="@+id/menu_locker"/>
+    </group>
+
+    <group android:id="@+id/settings_group" android:checkableBehavior="single">
+        <item android:title="@string/settings"
+            app:showAsAction="never"
+            android:orderInCategory="3"
+            android:id="@+id/menu_settings" />
+        <item android:title="@string/help"
+            app:showAsAction="never"
+            android:orderInCategory="4"
+            android:id="@+id/menu_help" />
+    </group>
 </menu>
