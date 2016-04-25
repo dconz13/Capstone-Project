@@ -9,4 +9,9 @@
     <!-- Menu item strings -->
     <string name="home">Home</string>
     <string name="my_locker">My Locker</string>
+
+    <!-- List item titles -->
+    <string name="username_label">Username:</string>
+    <string name="password_label">Password:</string>
+    <string name="additional_info_label">Additional Info:</string>
 </resources>
