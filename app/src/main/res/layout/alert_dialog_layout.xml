@@ -33,6 +33,7 @@
         android:padding="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:id="@+id/show_password_checkbox"/>
+        android:id="@+id/alert_dialog_checkbox"
+        android:onClick="setPasswordTextVisibility"/>
 
 </LinearLayout>

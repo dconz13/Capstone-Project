@@ -3,6 +3,7 @@ package com.conz13.d.strongpasswordcreator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -12,8 +13,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 /**
  * Created by dillon on 4/17/16.
@@ -124,11 +129,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPositiveClick(){
-
+        // Replace the Word Generation Fragment with the LockerFragment
     }
 
     public void onNegativeClick(){
         // Switch the highlighted item back to the "Home" entry
         mNavDrawer.setCheckedItem(R.id.menu_home);
+    }
+
+    public void setPasswordTextVisibility(View view){
+        View parentView = view.getRootView();
+        EditText editText = (EditText) parentView.findViewById(R.id.alert_password_entry);
+        CheckBox checkBox = (CheckBox) view;
+
+        if(checkBox.isChecked()){
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            editText.setSelection(editText.getText().length());
+        }else{
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            editText.setSelection(editText.getText().length());
+        }
     }
 }
