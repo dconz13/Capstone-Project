@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -21,14 +23,15 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private NavigationView mNavDrawer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        NavigationView navDrawer = (NavigationView) findViewById(R.id.nav_drawer);
-        setUpNavigationDrawerListener(navDrawer);
+        mNavDrawer = (NavigationView) findViewById(R.id.nav_drawer);
+        setUpNavigationDrawerListener(mNavDrawer);
         //find out why this causes illegalargumentexception. why is child null view
         //navDrawer.addHeaderView(findViewById(R.id.nav_drawer_header));
 
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.menu_locker:
                         Log.d("navItemSelected", "menu_locker");
+                        showAlertDialog();
                         return true;
                     case R.id.menu_settings:
                         startActivity(new Intent(context, SettingsActivity.class));
@@ -107,4 +111,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void showAlertDialog(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment previousFrag = getSupportFragmentManager().findFragmentByTag(getString(R.string.alert_dialog_tag));
+        if(previousFrag != null){
+            ft.remove(previousFrag);
+        }
+        // Setting this to null allows you to go back with the back button but for dialog fragment it isn't necessary
+        // ft.addToBackStack(null);
+
+        new PasswordPromptDialogFragment().show(ft, getString(R.string.alert_dialog_tag));
+    }
+
+    public void onPositiveClick(){
+
+    }
+
+    public void onNegativeClick(){
+        // Switch the highlighted item back to the "Home" entry
+        mNavDrawer.setCheckedItem(R.id.menu_home);
+    }
 }

@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:padding="5dp"
+        android:padding="12dp"
         android:src="@drawable/ic_mode_edit_white_24dp"
-        android:background="@android:color/transparent"
+        android:background="?android:selectableItemBackground"
         />
 
 </RelativeLayout>

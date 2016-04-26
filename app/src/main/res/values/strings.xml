@@ -14,4 +14,13 @@
     <string name="username_label">Username:</string>
     <string name="password_label">Password:</string>
     <string name="additional_info_label">Additional Info:</string>
+
+    <!-- Alert dialog for entering locker -->
+    <string name="alert_dialog_title">Unlock Locker</string>
+    <string name="alert_dialog_body">Please enter your password to enter your locker</string>
+    <string name="alert_edit_hint">Password</string>
+    <string name="show_password">Show Password</string>
+    <string name="alert_dialog_positive">Submit</string>
+    <string name="alert_dialog_negative">Cancel</string>
+    <string name="alert_dialog_tag" translatable="false">alert_dialog</string>
 </resources>
