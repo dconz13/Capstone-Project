@@ -24,7 +24,6 @@
         android:layout_marginRight="5dp"
         android:layout_marginEnd="5dp"
         android:inputType="textPassword"
-        android:fontFamily="sans-serif"
         android:id="@+id/alert_password_entry"/>
     <CheckBox
         android:layout_width="wrap_content"

@@ -18,6 +18,14 @@ public class Utility {
 
     private static final String LOG_TAG = Utility.class.getSimpleName();
 
+    /**
+     * Gets the diceware passphrase associated with the supplied number from the
+     * 'diceware.properties' file located in the assets folder.
+     *
+     * @param context context for the AssetManager
+     * @param number number used to look up diceware passphrase
+     */
+
     static public String getPropertyValue(Context context, int number) {
 
         InputStream input = null;
