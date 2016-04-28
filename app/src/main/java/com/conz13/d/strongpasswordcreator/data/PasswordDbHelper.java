@@ -15,9 +15,9 @@ import java.io.File;
 public class PasswordDbHelper extends SQLiteOpenHelper {
 
     // Increment version if the schema is changed
-    private static final int DATABASE_VERSION = 0;
+    private static final int DATABASE_VERSION = 1;
 
-    private static final String DATABASE_NAME = "password.db";
+    public static final String DATABASE_NAME = "password.db";
 
     private Context mContext;
 
@@ -38,6 +38,8 @@ public class PasswordDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase.loadLibs(mContext);
         File databaseFile = mContext.getDatabasePath(DATABASE_NAME);
+        databaseFile.mkdirs();
+        databaseFile.delete();
         sqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(databaseFile, "test123", null);
         sqLiteDatabase.execSQL(SQL_CREATE_PASSWORD_TABLE);
     }

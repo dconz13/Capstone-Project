@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 /**
  * Created by dillon on 4/17/16.
  */
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         mNavDrawer = (NavigationView) findViewById(R.id.nav_drawer);
         setUpNavigationDrawerListener(mNavDrawer);
+        mNavDrawer.setCheckedItem(R.id.menu_home);
         //find out why this causes illegalargumentexception. why is child null view
         //navDrawer.addHeaderView(findViewById(R.id.nav_drawer_header));
 
@@ -61,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.main_content_frame, new WordGenerationFragment())
                     .commit();
         }
+        tempSqlTestMethod();
+    }
+
+    public void tempSqlTestMethod(){
+        // Some reason the files aren't being included
+        SQLiteDatabase.loadLibs(this);
     }
 
     @Override
