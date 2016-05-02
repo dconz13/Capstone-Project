@@ -15,6 +15,7 @@ import java.util.HashSet;
  */
 public class DatabaseTest extends AndroidTestCase{
 
+
     private final String SQL_CREATE_PASSWORD_TABLE = "CREATE TABLE " +
             PasswordContract.PasswordEntry.TABLE_NAME + " (" +
             PasswordContract.PasswordEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -44,6 +45,7 @@ public class DatabaseTest extends AndroidTestCase{
 
         //SQLiteDatabase.loadLibs(mContext);
         deleteDatabase();
+
         File databaseFile = mContext.getDatabasePath(PasswordDbHelper.DATABASE_NAME);
         databaseFile.mkdirs();
         databaseFile.delete();
