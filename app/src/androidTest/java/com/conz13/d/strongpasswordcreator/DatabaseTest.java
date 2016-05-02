@@ -43,15 +43,23 @@ public class DatabaseTest extends AndroidTestCase{
         final HashSet<String> tableNameHashSet = new HashSet<>();
         tableNameHashSet.add(PasswordContract.PasswordEntry.TABLE_NAME);
 
-        //SQLiteDatabase.loadLibs(mContext);
         deleteDatabase();
 
+        PasswordDbHelper dbHelper = new PasswordDbHelper(mContext);
+
+        /**
+         * NOTES:
+         * You must first call open or create with the password and file before you can call the
+         * dbHelper class. Otherwise it crashes. The openOrCreateDatabase call creates the database
+         * with the password.
+         */
         File databaseFile = mContext.getDatabasePath(PasswordDbHelper.DATABASE_NAME);
         databaseFile.mkdirs();
         databaseFile.delete();
-        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(databaseFile,PASSWORD,null);
-        db.execSQL(SQL_CREATE_PASSWORD_TABLE);
-        assertEquals(true, db.isOpen());
+        SQLiteDatabase.openOrCreateDatabase(databaseFile,PASSWORD,null);
+        SQLiteDatabase db = dbHelper.getReadableDatabase(PASSWORD);
 
+        assertEquals(true, db.isOpen());
     }
+
 }
