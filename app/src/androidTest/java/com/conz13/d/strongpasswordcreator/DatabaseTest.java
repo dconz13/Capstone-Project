@@ -15,15 +15,6 @@ import java.util.HashSet;
  */
 public class DatabaseTest extends AndroidTestCase{
 
-
-    private final String SQL_CREATE_PASSWORD_TABLE = "CREATE TABLE " +
-            PasswordContract.PasswordEntry.TABLE_NAME + " (" +
-            PasswordContract.PasswordEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            PasswordContract.PasswordEntry.HEADER_TITLE + " TEXT UNIQUE NOT NULL, " +
-            PasswordContract.PasswordEntry.USERNAME + " TEXT, " +
-            PasswordContract.PasswordEntry.PASSWORD + " TEXT, " +
-            PasswordContract.PasswordEntry.ADD_INFO + " TEXT " + ");";
-
     private static final String PASSWORD = "test123";
 
     /**
@@ -57,9 +48,14 @@ public class DatabaseTest extends AndroidTestCase{
         databaseFile.mkdirs();
         databaseFile.delete();
         SQLiteDatabase.openOrCreateDatabase(databaseFile,PASSWORD,null);
+
+        // Can get a readable database
         SQLiteDatabase db = dbHelper.getReadableDatabase(PASSWORD);
-
         assertEquals(true, db.isOpen());
+        db.close();
+        // Can get a writeable database
+        db = dbHelper.getWritableDatabase(PASSWORD);
+        assertEquals(true, db.isOpen());
+        db.close();
     }
-
 }

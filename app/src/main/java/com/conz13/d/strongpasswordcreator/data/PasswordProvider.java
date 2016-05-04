@@ -28,8 +28,11 @@ public class PasswordProvider extends ContentProvider {
     private static final SQLiteQueryBuilder mPasswordQueryBuilder;
     private static final String PASSWORD;
 
+    // If the setTables isn't called for the SQLiteQueryBuilder object
+    // when working with SQLCipher, Invalid Tables error will be thrown.
     static{
         mPasswordQueryBuilder = new SQLiteQueryBuilder();
+        mPasswordQueryBuilder.setTables(PasswordContract.PasswordEntry.TABLE_NAME);
         // TODO: Use Utility method to access KeyChain to get the password after it is saved
         PASSWORD = "test123";
     }
@@ -80,7 +83,7 @@ public class PasswordProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri  uri) {
-        // Seems silly to switch one but this is the framework for the future
+        // Seems silly to switch 2 possible outcomes but this is the framework for the future
         switch(mUriMatcher.match(uri)){
             case DATA:
                 return PasswordContract.PasswordEntry.CONTENT_TYPE;
@@ -116,8 +119,8 @@ public class PasswordProvider extends ContentProvider {
         final SQLiteDatabase db = mDbHelper.getWritableDatabase(PASSWORD);
         int rowsDeleted;
 
-        if(null == selection )
-            selection = "1";
+        //if(null == selection )
+            //selection = "1";
         switch(mUriMatcher.match(uri)){
             case DATA: {
                 rowsDeleted = db.delete(PasswordContract.PasswordEntry.TABLE_NAME, selection, selectionArgs);

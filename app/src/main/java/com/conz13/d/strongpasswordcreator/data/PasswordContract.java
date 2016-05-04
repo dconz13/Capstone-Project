@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
  */
 public final class PasswordContract {
 
-    public static final String CONTENT_AUTHORITY = "com.conz13.d.strongpasswordcreator";
+    public static final String CONTENT_AUTHORITY = "com.conz13.d.strongpasswordcreator.provider";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     // Only path necessary to get the data for each item.
@@ -30,7 +30,7 @@ public final class PasswordContract {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_DATA;
 
-        public static final String TABLE_NAME = "password";
+        public static final String TABLE_NAME = "password_table";
 
         // Title for the list item store as a String. Unique and not null.
         public static final String HEADER_TITLE = "header_title";
