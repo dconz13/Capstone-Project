@@ -15,6 +15,7 @@ import java.util.Random;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
@@ -39,7 +40,7 @@ public class dicewarePassphraseUnitTest {
         context = mActivityTestRule.getActivity().getApplicationContext();
 
         while(num<66666){
-            word = Utility.getPropertyValue(context, num);
+            word = Utility.getPropertyValue(context, Integer.toString(num));
             if(word == null){
                 break;
             }
@@ -125,7 +126,7 @@ public class dicewarePassphraseUnitTest {
             while (temp.length() < 5) {
                 temp = temp.concat(Integer.toString(rndNumber.nextInt(MAX_INT) + 1));
             }
-            String word = Utility.getPropertyValue(context, Integer.parseInt(temp));
+            String word = Utility.getPropertyValue(context, temp);
             if(word == null){
                 nullFlag = true;
                 Log.e("randomDicewareIsNotNull", "value was: " + temp);
@@ -134,6 +135,37 @@ public class dicewarePassphraseUnitTest {
         }
 
         assertFalse(nullFlag);
+    }
+
+    @Test
+    public void testGetDiceRoll(){
+        int arrayToTest[];
+        int timesToTest = 1000;
+        boolean flag = true;
+
+        for(int i =0; i < timesToTest; i++){
+            arrayToTest = Utility.getDiceRoll();
+            for(int y : arrayToTest){
+                if(y < 1 || y > 6){
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        assertTrue(flag);
+    }
+
+    @Test
+    public void testConvertArrayToString(){
+        int arrayToTest[] = new int[5];
+        arrayToTest[0] = 1;
+        arrayToTest[1] = 2;
+        arrayToTest[2] = 3;
+        arrayToTest[3] = 4;
+        arrayToTest[4] = 5;
+        String stringToTest = Utility.convertIntArrayToString(arrayToTest);
+
+        assertEquals("12345", stringToTest);
     }
 
 }
