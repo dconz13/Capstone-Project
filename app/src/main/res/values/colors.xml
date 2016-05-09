@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Main app colors -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="navDrawerBackground">#FFF</color>
+
+    <!-- Misc. colors -->
+    <color name="red">#ff0000</color>
+    <color name="shadow">#4000</color>
 </resources>

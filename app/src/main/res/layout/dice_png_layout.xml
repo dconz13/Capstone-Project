@@ -4,45 +4,45 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_marginTop="20dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp">
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:layout_marginStart="@dimen/default_margin"
+    android:layout_marginEnd="@dimen/default_margin">
 
     <ImageView
+        android:id="@+id/dice_holder_one"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:id="@+id/dice_holder_one"
-        android:src="@drawable/one"
         android:layout_weight="1"
+        android:src="@drawable/one"
         android:contentDescription="@string/dice_one_content_description"/>
     <ImageView
+        android:id="@+id/dice_holder_two"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:id="@+id/dice_holder_two"
-        android:src="@drawable/two"
         android:layout_weight="1"
+        android:src="@drawable/two"
         android:contentDescription="@string/dice_two_content_description"/>
     <ImageView
+        android:id="@+id/dice_holder_three"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:id="@+id/dice_holder_three"
-        android:src="@drawable/three"
         android:layout_weight="1"
+        android:src="@drawable/three"
         android:contentDescription="@string/dice_three_content_description"/>
     <ImageView
+        android:id="@+id/dice_holder_four"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:id="@+id/dice_holder_four"
-        android:src="@drawable/four"
         android:layout_weight="1"
+        android:src="@drawable/four"
         android:contentDescription="@string/dice_four_content_description"/>
     <ImageView
+        android:id="@+id/dice_holder_five"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:id="@+id/dice_holder_five"
-        android:src="@drawable/five"
         android:layout_weight="1"
+        android:src="@drawable/five"
         android:contentDescription="@string/dice_five_content_description"/>
 
 

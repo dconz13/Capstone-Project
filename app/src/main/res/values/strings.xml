@@ -14,7 +14,7 @@
     <string name="home">Home</string>
     <string name="my_locker">My Locker</string>
 
-    <!-- List item titles -->
+    <!-- Child List item titles -->
     <string name="username_label">Username:</string>
     <string name="password_label">Password:</string>
     <string name="additional_info_label">Additional Info:</string>
@@ -36,7 +36,17 @@
     <string name="dice_five_content_description">You rolled a five.</string>
     <string name="dice_six_content_description">You rolled a six.</string>
 
+    <!-- Resultant Word Descriptions -->
+    <string name="roll_button_text">Roll!</string>
+    <string name="roll_button_content_description">Button to roll the dice</string>
+    <!-- TODO: Fill in word that was generated -->
+    <string name="resultant_word_content_description">Resultant word</string>
+    <string name="move_button_content_description">Drag to move item up or down in the list</string>
+    <string name="delete_button_content_description">Press to delete list item</string>
+    <string name="add_to_list_button_content_description">Press to add word to list below</string>
+
     <!-- Dice on rotate save state keys -->
     <string name="dice_array_key" translatable="false">dice_array</string>
+    <string name="words_list_key" translatable="false">string_array_list</string>
 
 </resources>

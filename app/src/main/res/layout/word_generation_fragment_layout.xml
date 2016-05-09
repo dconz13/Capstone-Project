@@ -3,19 +3,72 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- View for the dice PNG images -->
     <include layout="@layout/dice_png_layout"
         android:id="@+id/dice_layout" />
-    <Button
-        android:id="@+id/spin_button"
-        android:layout_width="wrap_content"
+
+    <!-- View for the interactive strip below dice PNG-->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="roll!"
-        android:layout_gravity="center_horizontal"/>
-    <TextView
-        android:id="@+id/temp_word_textview"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <!-- TODO: create ripple effect for this button -->
+        <ImageButton
+            android:id="@+id/add_to_list_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:src="@drawable/ic_add_black_24dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/add_to_list_button_content_description"/>
+        <TextView
+            android:id="@+id/temp_word_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:padding="10dp"
+            android:contentDescription="@string/resultant_word_content_description"
+            />
+        <Button
+            android:id="@+id/roll_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/roll_button_text"
+            android:layout_gravity="center_horizontal"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@color/colorAccent"
+            android:contentDescription="@string/roll_button_content_description"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/elevation_shadow"/>
+
+    <!-- Recycler view for the word list -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/resultant_word_recycler_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="temp"
-        android:padding="10dp"
-        />
+        android:scrollbars="vertical" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
 </LinearLayout>
