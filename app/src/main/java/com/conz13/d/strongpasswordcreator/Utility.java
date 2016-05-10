@@ -56,7 +56,9 @@ public class Utility {
     }
 
     /**
-     * Generates a random 5 digit number where each digit is between 1 and 6
+     * Generates a random 5 digit number where each digit is between 1 and 6. Each digit of the number
+     * is stored as it's own index in an integer array.
+     * @return temp (the integer array holding the 5 digit number)
      */
     public static int[] getDiceRoll(){
         Random rndNumber = new Random();
@@ -68,6 +70,13 @@ public class Utility {
         return temp;
     }
 
+    /**
+     * Converts an integer array into a single String
+     *
+     * @param input integer array to be converted into a String
+     * @return temp (the concatenated String)
+     */
+
     public static String convertIntArrayToString(int[] input){
         String temp = "";
         for (int i : input){
@@ -75,6 +84,13 @@ public class Utility {
         }
         return temp;
     }
+
+    /**
+     * Gets the drawable representation for a number
+     *
+     * @param number generated number 1-6
+     * @return returns the drawable associated with the number
+     */
 
     public static int getDiceImage(int number){
         switch(number){

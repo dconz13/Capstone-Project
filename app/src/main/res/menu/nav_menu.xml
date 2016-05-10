@@ -17,6 +17,7 @@
         <item android:title="@string/settings"
             app:showAsAction="never"
             android:orderInCategory="3"
+            android:icon="@drawable/ic_settings_black_24dp"
             android:id="@+id/menu_settings" />
         <item android:title="@string/help"
             app:showAsAction="never"

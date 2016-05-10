@@ -1,7 +1,9 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -19,9 +21,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by dillon on 4/17/16.
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SQLiteDatabase.loadLibs(this);
         setContentView(R.layout.main_activity_layout);
 
         // TODO: Add item icons
@@ -65,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_content_frame, new WordGenerationFragment())
+                    .add(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                     .commit();
         }
-
     }
 
     @Override
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
     }
 
-    private void setUpNavigationDrawerListener(NavigationView navView) {
+    private void setUpNavigationDrawerListener(final NavigationView navView) {
         final Context context = getApplicationContext();
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -104,10 +109,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
                         Log.d("navItemSelected", "menu_home");
+                        launchWordGenerationFragment();
+                        if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
+                            mDrawerLayout.closeDrawers();
+                        }
                         return true;
                     case R.id.menu_locker:
                         Log.d("navItemSelected", "menu_locker");
-                        showAlertDialog();
+                        //showAlertDialog();
+                        launchLockerFragment();
+                        if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
+                            mDrawerLayout.closeDrawers();
+                        }
                         return true;
                     case R.id.menu_settings:
                         startActivity(new Intent(context, SettingsActivity.class));
@@ -121,6 +134,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void launchLockerFragment(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_content_frame, new LockerFragment(), getString(R.string.locker_fragment_tag))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void launchWordGenerationFragment(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void updateMenu(){
+
     }
 
     private void showAlertDialog(){
@@ -156,8 +187,13 @@ public class MainActivity extends AppCompatActivity {
         // Switch the highlighted item back to the "Home" entry
         mNavDrawer.setCheckedItem(R.id.menu_home);
     }
-    public void onSavePositiveClick(){
+    public void onSavePositiveClick(ContentValues contentValues){
         // Save to database
+        Uri contentUri = PasswordContract.PasswordEntry.CONTENT_URI;
+        this.getContentResolver().insert(contentUri, contentValues);
+        // Clear list in fragment
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));
+        ((WordGenerationFragment)fragment).clearList();
     }
 
     public void onSaveNegativeClick(){

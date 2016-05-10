@@ -41,10 +41,6 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
         mWords = resultantWords;
     }
 
-    public void setmWords(ArrayList<String> words){
-        mWords = words;
-    }
-
     public static interface GeneratedWordAdapterOnClickHandler {
         void onClick(GeneratedWordViewHolder vh);
     }
@@ -52,7 +48,7 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
     @Override
     public GeneratedWordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.resultant_word_list_item,parent,false);
+                .inflate(R.layout.resultant_word_list_item, parent, false);
 
         return new GeneratedWordViewHolder(view);
     }

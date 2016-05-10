@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +30,8 @@ public class WordGenerationFragment extends Fragment {
     private ImageView mDiceFour;
     private ImageView mDiceFive;
     private TextView mTextView;
+
+    private Menu mMenu;
 
     private RecyclerView mRecyclerView;
     private GeneratedWordRecyclerAdapter mAdapter;
@@ -50,6 +55,7 @@ public class WordGenerationFragment extends Fragment {
             if(mResultantWords == null)
                 mResultantWords = new ArrayList<>();
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -87,7 +93,33 @@ public class WordGenerationFragment extends Fragment {
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
         }
+
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.generator_menu, menu);
+        mMenu = menu;
+        if(!mResultantWords.isEmpty()){
+            enableDeleteAll();
+        }
+        else {
+            disableDeleteAll();
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_delete_all){
+            // TODO: add "are you sure you want to delete all?" alert dialog
+            clearList();
+        }
+        if(item.getItemId() == R.id.action_settings) {
+            // Launch Settings activity
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void spinOnClick(Button rollButton){
@@ -107,8 +139,8 @@ public class WordGenerationFragment extends Fragment {
             public void onClick(View v) {
                 if(!mTextView.getText().equals(""))
                 if(mResultantWords.add(String.valueOf(mTextView.getText()))){
-                    mAdapter.setmWords(mResultantWords);
                     mAdapter.notifyDataSetChanged();
+                    enableDeleteAll();
                 }
             }
         });
@@ -137,4 +169,27 @@ public class WordGenerationFragment extends Fragment {
         String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString);
         mTextView.setText(dicewareWord);
     }
+
+    public void clearList(){
+        mResultantWords.clear();
+        mAdapter.notifyDataSetChanged();
+        disableDeleteAll();
+    }
+
+    private void enableDeleteAll(){
+        MenuItem item = mMenu.findItem(R.id.action_delete_all);
+        if(!item.isEnabled()) {
+            item.setEnabled(true);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+    }
+
+    private void disableDeleteAll(){
+        MenuItem item = mMenu.findItem(R.id.action_delete_all);
+        if(item.isEnabled()){
+            item.setEnabled(false);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        }
+    }
+
 }
