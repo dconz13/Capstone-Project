@@ -1,6 +1,7 @@
 package com.conz13.d.strongpasswordcreator;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,11 @@ import java.util.ArrayList;
 /**
  * Created by dillon on 5/5/16.
  */
-public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<GeneratedWordRecyclerAdapter.GeneratedWordViewHolder> {
+public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<GeneratedWordRecyclerAdapter.GeneratedWordViewHolder>
+        {
     private ArrayList<String> mWords;
 
+            // TODO: set up ItemTouchHelper for swipe to delete and drag on reorder icon
     public class GeneratedWordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final ImageView mDeleteButton;
         public final ImageView mReorderButton;
@@ -30,7 +33,7 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
 
         @Override
         public void onClick(View v) {
-            // Do something
+
         }
     }
 

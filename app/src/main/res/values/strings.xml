@@ -28,6 +28,13 @@
     <string name="alert_dialog_negative">Cancel</string>
     <string name="alert_dialog_tag" translatable="false">alert_dialog</string>
 
+    <!-- Alert dialog for saving password -->
+    <string name="save_dialog_title">Save your strong password</string>
+    <string name="save_dialog_positive">Save</string>
+    <string name="save_dialog_negative">Cancel</string>
+    <string name="save_dialog_tag" translatable="false">save_dialog</string>
+    <string name="save_dialog_password_key" translatable="false">password_array_list_key</string>
+
     <!-- Dice png content descriptions -->
     <string name="dice_one_content_description">You rolled a one.</string>
     <string name="dice_two_content_description">You rolled a two.</string>

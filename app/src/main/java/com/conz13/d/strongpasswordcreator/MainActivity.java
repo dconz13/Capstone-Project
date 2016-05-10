@@ -21,6 +21,8 @@ import android.widget.EditText;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 /**
  * Created by dillon on 4/17/16.
  */
@@ -36,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
+        // TODO: Add item icons
+
         mNavDrawer = (NavigationView) findViewById(R.id.nav_drawer);
         setUpNavigationDrawerListener(mNavDrawer);
         mNavDrawer.setCheckedItem(R.id.menu_home);
-        //find out why this causes illegalargumentexception. why is child null view
+        // TODO: find out why this causes illegalargumentexception. why is child null view
         //navDrawer.addHeaderView(findViewById(R.id.nav_drawer_header));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
@@ -64,12 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.main_content_frame, new WordGenerationFragment())
                     .commit();
         }
-        tempSqlTestMethod();
-    }
 
-    public void tempSqlTestMethod(){
-        // Some reason the files aren't being included
-        SQLiteDatabase.loadLibs(this);
     }
 
     @Override
@@ -136,6 +135,19 @@ public class MainActivity extends AppCompatActivity {
         new PasswordPromptDialogFragment().show(ft, getString(R.string.alert_dialog_tag));
     }
 
+    public void showSaveDialog(ArrayList<String> wordList){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment prev = getSupportFragmentManager().findFragmentByTag(getString(R.string.save_dialog_tag));
+        if(prev != null){
+            ft.remove(prev);
+        }
+        Bundle args = new Bundle();
+        args.putStringArrayList(getString(R.string.save_dialog_password_key), wordList);
+        SaveDialogFragment saveDialogFragment = new SaveDialogFragment();
+        saveDialogFragment.setArguments(args);
+        saveDialogFragment.show(ft, getString(R.string.save_dialog_tag));
+    }
+
     public void onPositiveClick(){
         // Replace the Word Generation Fragment with the LockerFragment
     }
@@ -143,6 +155,13 @@ public class MainActivity extends AppCompatActivity {
     public void onNegativeClick(){
         // Switch the highlighted item back to the "Home" entry
         mNavDrawer.setCheckedItem(R.id.menu_home);
+    }
+    public void onSavePositiveClick(){
+        // Save to database
+    }
+
+    public void onSaveNegativeClick(){
+        // Do nothing
     }
 
     public void setPasswordTextVisibility(View view){

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- View for the dice PNG images -->
@@ -9,6 +11,7 @@
 
     <!-- View for the interactive strip below dice PNG-->
     <LinearLayout
+        android:id="@+id/linear_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,6 +20,7 @@
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginTop="10dp"
+        android:layout_below="@+id/dice_layout"
         android:gravity="center_vertical">
 
         <!-- TODO: create ripple effect for this button -->
@@ -55,20 +59,33 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/mock_elevation_shadow"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="@dimen/default_margin"
+        android:layout_below="@+id/linear_holder"
         android:background="@drawable/elevation_shadow"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        app:fabSize="normal"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:elevation="4dp"
+        android:src="@drawable/ic_save_black_24dp" />
 
     <!-- Recycler view for the word list -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/resultant_word_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/mock_elevation_shadow"
         android:scrollbars="vertical" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-
-</LinearLayout>
+</RelativeLayout>

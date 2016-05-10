@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:layout_height="wrap_content"
-    android:weightSum="4">
+    android:layout_height="wrap_content">
 
     <!-- Appears on swipe to the right -->
     <ImageView
@@ -17,17 +16,6 @@
         android:contentDescription="@string/delete_button_content_description"/>
 
     <!-- Appears on long press -->
-    <ImageView
-        android:id="@+id/reorder_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_reorder_black_24dp"
-        android:visibility="gone"
-        android:contentDescription="@string/move_button_content_description"/>
 
     <TextView
         android:id="@+id/resultant_word"
@@ -37,6 +25,18 @@
         android:layout_marginStart="15dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_weight="3"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/reorder_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_reorder_black_24dp"
+        android:contentDescription="@string/move_button_content_description"/>
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.conz13.d.strongpasswordcreator;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,11 +41,14 @@ public class WordGenerationFragment extends Fragment {
         if(null != savedInstanceState){
             if(null != savedInstanceState.getIntArray(getString(R.string.dice_array_key))){
                 mGeneratedNumber = savedInstanceState.getIntArray(getString(R.string.dice_array_key));
+            }
+            if(null != savedInstanceState.getStringArrayList(getString(R.string.words_list_key))){
                 mResultantWords = savedInstanceState.getStringArrayList(getString(R.string.words_list_key));
             }
         } else {
             // Only executed if the save state was not preserved
-            mResultantWords = new ArrayList<>();
+            if(mResultantWords == null)
+                mResultantWords = new ArrayList<>();
         }
     }
 
@@ -52,6 +56,8 @@ public class WordGenerationFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         if(null != mGeneratedNumber) {
             outState.putIntArray(getString(R.string.dice_array_key), mGeneratedNumber);
+        }
+        if(null != mResultantWords) {
             outState.putStringArrayList(getString(R.string.words_list_key), mResultantWords);
         }
         super.onSaveInstanceState(outState);
@@ -76,6 +82,7 @@ public class WordGenerationFragment extends Fragment {
 
         spinOnClick((Button)rootView.findViewById(R.id.roll_button));
         addOnClick((ImageButton)rootView.findViewById(R.id.add_to_list_button));
+        fabOnClick((FloatingActionButton)rootView.findViewById(R.id.save_fab));
 
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
@@ -98,11 +105,21 @@ public class WordGenerationFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mTextView.getText() != null)
+                if(!mTextView.getText().equals(""))
                 if(mResultantWords.add(String.valueOf(mTextView.getText()))){
                     mAdapter.setmWords(mResultantWords);
                     mAdapter.notifyDataSetChanged();
                 }
+            }
+        });
+    }
+
+    private void fabOnClick(FloatingActionButton fab){
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start dialog for saving to database
+                ((MainActivity)getActivity()).showSaveDialog(mResultantWords);
             }
         });
     }
