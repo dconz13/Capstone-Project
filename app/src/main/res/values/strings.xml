@@ -69,4 +69,7 @@
     <string name="additional_info_label">Additional Info:</string>
     <string name="edit_button_content_description">Edit content</string>
 
+    <!-- Edit Activity -->
+    <string name="edit_toolbar_label">Edit Mode</string>
+
 </resources>

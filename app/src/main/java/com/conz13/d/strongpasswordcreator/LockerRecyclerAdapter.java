@@ -1,6 +1,5 @@
 package com.conz13.d.strongpasswordcreator;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAdapter.LockerViewHolder> {
 
     private Cursor mCursor;
+    private OnEditButtonPressed mOnEditButtonPressed;
 
     public class LockerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final TextView mHeaderTextView;
@@ -37,8 +37,12 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         @Override
         public void onClick(View v) {
             // Execute edit button
-
+            mOnEditButtonPressed.startEditActivity(v);
         }
+    }
+
+    public LockerRecyclerAdapter(OnEditButtonPressed editButtonPressed){
+        mOnEditButtonPressed = editButtonPressed;
     }
 
     @Override

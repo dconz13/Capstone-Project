@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                     .commit();
+
         }
     }
 
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.menu_settings:
                         startActivity(new Intent(context, SettingsActivity.class));
+
                         return true;
                     case R.id.menu_help:
                         return true;

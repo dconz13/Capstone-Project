@@ -1,5 +1,6 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelper;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -109,6 +111,8 @@ public class WordGenerationFragment extends Fragment
 
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
+        } else{
+            initDice();
         }
 
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
@@ -201,14 +205,24 @@ public class WordGenerationFragment extends Fragment
         });
     }
 
-    private void setUpDice(int generatedNumber[]){
-        mDiceOne.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[0])));
-        mDiceTwo.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[1])));
-        mDiceThree.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[2])));
-        mDiceFour.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[3])));
-        mDiceFive.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[4])));
+    // Used Picasso to load large PNG files on a separate thread so less frames would be skipped.
+    // Also used Picasso to avoid writing an inefficient AsyncTask.
+    private void initDice(){
+        Context context = getContext();
+        Picasso.with(context).load(Utility.getDiceImage(1)).into(mDiceOne);
+        Picasso.with(context).load(Utility.getDiceImage(2)).into(mDiceTwo);
+        Picasso.with(context).load(Utility.getDiceImage(3)).into(mDiceThree);
+        Picasso.with(context).load(Utility.getDiceImage(4)).into(mDiceFour);
+        Picasso.with(context).load(Utility.getDiceImage(5)).into(mDiceFive);
+    }
 
-        // TODO: make a separate set up list text entries so that on rotate the list view is preserved too
+    private void setUpDice(int generatedNumber[]){
+        Context context = getContext();
+        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[0])).into(mDiceOne);
+        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[1])).into(mDiceTwo);
+        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[2])).into(mDiceThree);
+        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[3])).into(mDiceFour);
+        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[4])).into(mDiceFive);
 
         String numberAsString = Utility.convertIntArrayToString(generatedNumber);
         String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString);

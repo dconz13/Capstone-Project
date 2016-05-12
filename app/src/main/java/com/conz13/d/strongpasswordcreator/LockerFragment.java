@@ -1,6 +1,7 @@
 package com.conz13.d.strongpasswordcreator;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +21,8 @@ import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 /**
  * Created by dillon on 4/17/16.
  */
-public class LockerFragment extends Fragment  implements LoaderManager.LoaderCallbacks<Cursor> {
+public class LockerFragment extends Fragment  implements LoaderManager.LoaderCallbacks<Cursor>,
+            OnEditButtonPressed {
     private static final String LOG_TAG = LockerFragment.class.getSimpleName();
 
     private static final int LOADER = 0;
@@ -43,6 +45,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     private RecyclerView.LayoutManager mLayoutManager;
     private LockerRecyclerAdapter mAdapter;
 
+    // TODO: Add hiding the toolbar on scroll of the list
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new LockerRecyclerAdapter();
+        mAdapter = new LockerRecyclerAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
@@ -93,5 +96,9 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         mAdapter.swapCursor(null);
     }
 
-
+    @Override
+    public void startEditActivity(View view) {
+        // Send bundle of arguments from the view
+        startActivity(new Intent(getContext(), EditActivity.class));
+    }
 }

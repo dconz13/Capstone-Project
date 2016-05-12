@@ -11,38 +11,33 @@
 
     <ImageView
         android:id="@+id/dice_holder_one"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
-        android:src="@drawable/one"
         android:contentDescription="@string/dice_one_content_description"/>
     <ImageView
         android:id="@+id/dice_holder_two"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
-        android:src="@drawable/two"
         android:contentDescription="@string/dice_two_content_description"/>
     <ImageView
         android:id="@+id/dice_holder_three"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
-        android:src="@drawable/three"
         android:contentDescription="@string/dice_three_content_description"/>
     <ImageView
         android:id="@+id/dice_holder_four"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
-        android:src="@drawable/four"
         android:contentDescription="@string/dice_four_content_description"/>
     <ImageView
         android:id="@+id/dice_holder_five"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
-        android:src="@drawable/five"
         android:contentDescription="@string/dice_five_content_description"/>
 
 
