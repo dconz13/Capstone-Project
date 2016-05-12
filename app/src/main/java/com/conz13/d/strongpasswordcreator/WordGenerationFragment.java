@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
-import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelper;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
 import com.squareup.picasso.Picasso;
@@ -209,20 +208,30 @@ public class WordGenerationFragment extends Fragment
     // Also used Picasso to avoid writing an inefficient AsyncTask.
     private void initDice(){
         Context context = getContext();
-        Picasso.with(context).load(Utility.getDiceImage(1)).into(mDiceOne);
-        Picasso.with(context).load(Utility.getDiceImage(2)).into(mDiceTwo);
-        Picasso.with(context).load(Utility.getDiceImage(3)).into(mDiceThree);
-        Picasso.with(context).load(Utility.getDiceImage(4)).into(mDiceFour);
-        Picasso.with(context).load(Utility.getDiceImage(5)).into(mDiceFive);
+        mDiceOne.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(1)));
+        mDiceTwo.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(2)));
+        mDiceThree.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(3)));
+        mDiceFour.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(4)));
+        mDiceFive.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(5)));
+//        Picasso.with(context).load(Utility.getDiceImage(1)).into(mDiceOne);
+//        Picasso.with(context).load(Utility.getDiceImage(2)).into(mDiceTwo);
+//        Picasso.with(context).load(Utility.getDiceImage(3)).into(mDiceThree);
+//        Picasso.with(context).load(Utility.getDiceImage(4)).into(mDiceFour);
+//        Picasso.with(context).load(Utility.getDiceImage(5)).into(mDiceFive);
     }
 
     private void setUpDice(int generatedNumber[]){
         Context context = getContext();
-        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[0])).into(mDiceOne);
-        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[1])).into(mDiceTwo);
-        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[2])).into(mDiceThree);
-        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[3])).into(mDiceFour);
-        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[4])).into(mDiceFive);
+        mDiceOne.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[0])));
+        mDiceTwo.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[1])));
+        mDiceThree.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[2])));
+        mDiceFour.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[3])));
+        mDiceFive.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[4])));
+//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[0])).into(mDiceOne);
+//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[1])).into(mDiceTwo);
+//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[2])).into(mDiceThree);
+//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[3])).into(mDiceFour);
+//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[4])).into(mDiceFive);
 
         String numberAsString = Utility.convertIntArrayToString(generatedNumber);
         String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString);
