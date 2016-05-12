@@ -12,8 +12,10 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
@@ -30,38 +32,57 @@ public class SaveDialogFragment extends DialogFragment {
     private EditText mUsernameEditText;
     private EditText mAddInfoEditText;
 
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View rootView = inflater.inflate(R.layout.save_password_dialog_layout,null);
+        final View rootView = inflater.inflate(R.layout.save_password_dialog_layout,null);
         mPasswordEditText = (EditText) rootView.findViewById(R.id.save_password_edit_text);
         mHeaderEditText = (EditText) rootView.findViewById(R.id.save_header_edit_text);
         mUsernameEditText = (EditText) rootView.findViewById(R.id.save_username_edit_text);
         mAddInfoEditText = (EditText) rootView.findViewById(R.id.save_add_info_edit_text);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setTitle(getString(R.string.save_dialog_title))
+        final AlertDialog builder = new AlertDialog.Builder(getActivity())
+                .setTitle(getString(R.string.save_dialog_title))
                 .setView(rootView)
-                .setPositiveButton(getString(R.string.save_dialog_positive), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // submit the password for entry
-                        ((MainActivity)getActivity()).onSavePositiveClick(buildContentValues());
-                    }
-                })
+                .setPositiveButton(getString(R.string.save_dialog_positive), null)
                 .setNegativeButton(getString(R.string.save_dialog_negative), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Close the dialog
                         ((MainActivity)getActivity()).onSaveNegativeClick();
                     }
+                })
+                .create();
+
+        // Use View.OnClickListener instead of DialogInterface.OnClickListener so the view can validate before closing
+        builder.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = builder.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        if(checkHeaderAndPassword()){
+                            // Check if it exists first
+                            if(Utility.checkIfEntryExists(getContext(), mHeaderEditText.getText().toString())){
+                                Toast.makeText(getContext(),"That header name already exists",Toast.LENGTH_SHORT)
+                                        .show();
+                            }else {
+                                ((MainActivity) getActivity()).onSavePositiveClick(buildContentValues());
+                                builder.dismiss();
+                            }
+                        }
+                    }
                 });
+            }
+        });
 
         setPasswordString();
 
-        return builder.create();
+        return builder;
     }
 
     private ContentValues buildContentValues(){
@@ -88,5 +109,25 @@ public class SaveDialogFragment extends DialogFragment {
                 mPasswordEditText.setText(result);
             }
         }
+    }
+
+    private boolean checkHeaderAndPassword(){
+        boolean headerFlag = false;
+        boolean passwordFlag = false;
+        if(mHeaderEditText.getText().toString().isEmpty()){
+            mHeaderEditText.setHint("You must set a Header");
+            mHeaderEditText.setHintTextColor(getResources().getColor(R.color.red));
+            headerFlag = true;
+        }
+        if(mPasswordEditText.getText().toString().isEmpty()){
+            mPasswordEditText.setHint("You must set a Password");
+            mPasswordEditText.setHintTextColor(getResources().getColor(R.color.red));
+            passwordFlag = true;
+        }
+        // if either flag is tripped it will return false and prevent the view from closing
+        if(headerFlag || passwordFlag){
+            return false;
+        }
+        return true;
     }
 }

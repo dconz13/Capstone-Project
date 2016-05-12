@@ -46,11 +46,11 @@ public class PasswordProvider extends ContentProvider {
         return uriMatcher;
     }
 
-    private Cursor getDataCursor(String[] projection, String sortOrder){
+    private Cursor getDataCursor(String[] projection, String selection, String[] selectionArgs, String sortOrder){
         return mPasswordQueryBuilder.query(mDbHelper.getReadableDatabase(PASSWORD),
                 projection,
-                null,
-                null,
+                selection,
+                selectionArgs,
                 null,
                 null,
                 sortOrder
@@ -70,7 +70,7 @@ public class PasswordProvider extends ContentProvider {
         switch(mUriMatcher.match(uri)){
             // "data"
             case DATA:{
-                cursor = getDataCursor(projection, sortOrder);
+                cursor = getDataCursor(projection, selection, selectionArgs, sortOrder);
                 break;
             }
             default:

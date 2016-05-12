@@ -1,8 +1,13 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
+
+import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -109,6 +114,32 @@ public class Utility {
             default:
                 return -1;
         }
+    }
+
+    public static boolean checkIfEntryExists(Context context, String headerName){
+        Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
+        String[] projection = {"header_title"};
+        String selection = "header_title='" + headerName + "' ";
+        boolean existsFlag = false;
+        Cursor cursor = context.getContentResolver().query(
+                uri,
+                projection,
+                selection,
+                null,
+                null
+        );
+        try {
+
+            if(cursor.moveToFirst()){
+                existsFlag = true;
+            }
+        }catch (NullPointerException e){
+            Log.e(LOG_TAG, e.getMessage());
+            existsFlag = false;
+        }finally{
+            cursor.close();
+        }
+        return existsFlag;
     }
 
 }
