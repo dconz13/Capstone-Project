@@ -1,11 +1,15 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,12 +21,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
+import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelper;
+import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
+import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
+
 import java.util.ArrayList;
 
 /**
  * Created by dillon on 4/18/16.
  */
-public class WordGenerationFragment extends Fragment {
+public class WordGenerationFragment extends Fragment
+    implements ClearDeleteButton, OnDragListener{
 
     private ImageView mDiceOne;
     private ImageView mDiceTwo;
@@ -37,6 +47,9 @@ public class WordGenerationFragment extends Fragment {
     private GeneratedWordRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> mResultantWords;
+    private ItemTouchHelper mItemTouchHelper;
+
+    private AlertDialog mDeleteAllDialog;
 
     int mGeneratedNumber[];
 
@@ -83,8 +96,12 @@ public class WordGenerationFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new GeneratedWordRecyclerAdapter(mResultantWords);
+        mAdapter = new GeneratedWordRecyclerAdapter(mResultantWords, this, this);
         mRecyclerView.setAdapter(mAdapter);
+
+        ItemTouchHelper.Callback callback = new GeneratedWordItemTouchHelperCallback(mAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 
         spinOnClick((Button)rootView.findViewById(R.id.roll_button));
         addOnClick((ImageButton)rootView.findViewById(R.id.add_to_list_button));
@@ -94,7 +111,18 @@ public class WordGenerationFragment extends Fragment {
             setUpDice(mGeneratedNumber);
         }
 
+        ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
+
         return rootView;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if(null != mDeleteAllDialog){
+            mDeleteAllDialog.dismiss();
+        }
     }
 
     @Override
@@ -113,11 +141,27 @@ public class WordGenerationFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_delete_all){
-            // TODO: add "are you sure you want to delete all?" alert dialog
-            clearList();
+            // Alert Dialog to confirm before deleting the list
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(getString(R.string.delete_all_title))
+                    .setMessage(getString(R.string.delete_all_message))
+                    .setPositiveButton(R.string.delete_all_positive, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            clearList();
+                        }
+                    });
+            builder.setNegativeButton(R.string.delete_all_negative, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing!
+                        }
+                    });
+            mDeleteAllDialog = builder.create();
+            mDeleteAllDialog.show();
         }
         if(item.getItemId() == R.id.action_settings) {
-            // Launch Settings activity
+            startActivity(new Intent(getContext(), SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -138,10 +182,11 @@ public class WordGenerationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!mTextView.getText().equals(""))
-                if(mResultantWords.add(String.valueOf(mTextView.getText()))){
-                    mAdapter.notifyDataSetChanged();
-                    enableDeleteAll();
-                }
+                    if(mResultantWords.size()<20) // Does anyone really need a password this long?
+                        if(mResultantWords.add(String.valueOf(mTextView.getText()))){
+                            mAdapter.notifyDataSetChanged();
+                            enableDeleteAll();
+                        }
             }
         });
     }
@@ -192,4 +237,13 @@ public class WordGenerationFragment extends Fragment {
         }
     }
 
+    @Override
+    public void clearDeleteButton() {
+        disableDeleteAll();
+    }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
 }

@@ -15,7 +15,6 @@ import android.widget.TextView;
 public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAdapter.LockerViewHolder> {
 
     private Cursor mCursor;
-    private Context mContext;
 
     public class LockerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final TextView mHeaderTextView;
@@ -38,12 +37,10 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         @Override
         public void onClick(View v) {
             // Execute edit button
+
         }
     }
 
-    public LockerRecyclerAdapter(Context context) {
-        mContext = context;
-    }
     @Override
     public LockerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -73,6 +70,7 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         String add_info = "Additional info: ";
         add_info = add_info.concat(" " + mCursor.getString(LockerFragment.COL_ADD_INFO));
         holder.mAddInfoTextView.setText(add_info);
+
     }
 
     @Override

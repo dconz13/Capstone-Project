@@ -55,8 +55,10 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new LockerRecyclerAdapter(getContext());
+        mAdapter = new LockerRecyclerAdapter();
         mRecyclerView.setAdapter(mAdapter);
+
+        ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
 
         return rootView;
     }
@@ -90,4 +92,6 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
     }
+
+
 }

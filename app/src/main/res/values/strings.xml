@@ -34,6 +34,13 @@
     <string name="save_dialog_tag" translatable="false">save_dialog</string>
     <string name="save_dialog_password_key" translatable="false">password_array_list_key</string>
 
+    <!-- Alert Dialog for "Delete All" in list-->
+    <string name="delete_all_title">Delete List</string>
+    <string name="delete_all_message">Are you sure you want to delete the list?</string>
+    <string name="delete_all_positive">Delete all</string>
+    <string name="delete_all_negative">Cancel</string>
+
+
     <!-- Dice png content descriptions -->
     <string name="dice_one_content_description">You rolled a one.</string>
     <string name="dice_two_content_description">You rolled a two.</string>

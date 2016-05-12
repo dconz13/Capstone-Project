@@ -4,27 +4,13 @@
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:layout_height="wrap_content">
 
-    <!-- Appears on swipe to the right -->
-    <ImageView
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:src="@drawable/ic_delete_black_24dp"
-        android:background="@color/red"
-        android:visibility="gone"
-        android:contentDescription="@string/delete_button_content_description"/>
-
-    <!-- Appears on long press -->
-
     <TextView
         android:id="@+id/resultant_word"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_gravity="center"
-        android:gravity="center"
         android:layout_weight="3"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

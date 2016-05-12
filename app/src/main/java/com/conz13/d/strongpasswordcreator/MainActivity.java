@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private NavigationView mNavDrawer;
 
+    public static final int HOME = 0;
+    public static final int LOCKER = 1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +88,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Easy way to update nav menu selected item from fragments in onCreateView
+    public void updateNavItemSelected(int tag){
+        switch(tag){
+            case HOME: {
+                mNavDrawer.setCheckedItem(R.id.menu_home);
+                break;
+            }
+            case LOCKER: {
+                mNavDrawer.setCheckedItem(R.id.menu_locker);
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -108,14 +128,12 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
-                        Log.d("navItemSelected", "menu_home");
                         launchWordGenerationFragment();
                         if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
                             mDrawerLayout.closeDrawers();
                         }
                         return true;
                     case R.id.menu_locker:
-                        Log.d("navItemSelected", "menu_locker");
                         //showAlertDialog();
                         launchLockerFragment();
                         if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
@@ -124,10 +142,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.menu_settings:
                         startActivity(new Intent(context, SettingsActivity.class));
-                        Log.d("navItemSelected", "menu_settings");
                         return true;
                     case R.id.menu_help:
-                        Log.d("navItemSelected", "menu_help");
                         return true;
                     default:
                         return false;
@@ -148,10 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                 .addToBackStack(null)
                 .commit();
-    }
-
-    public void updateMenu(){
-
     }
 
     private void showAlertDialog(){
