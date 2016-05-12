@@ -1,38 +1,30 @@
 package com.conz13.d.strongpasswordcreator;
 
 import android.app.Dialog;
-
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by dillon on 5/9/16.
  */
 public class SaveDialogFragment extends DialogFragment {
-    private ArrayList<String> mPasswordWords;
     private EditText mPasswordEditText;
     private EditText mHeaderEditText;
     private EditText mUsernameEditText;
     private EditText mAddInfoEditText;
-
-
 
     @NonNull
     @Override
@@ -65,6 +57,7 @@ public class SaveDialogFragment extends DialogFragment {
                 positiveButton.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
+                        // Check header and password are not empty
                         if(checkHeaderAndPassword()){
                             // Check if it exists first
                             if(Utility.checkIfEntryExists(getContext(), mHeaderEditText.getText().toString())){
@@ -97,12 +90,13 @@ public class SaveDialogFragment extends DialogFragment {
 
     private void setPasswordString(){
         Bundle bundle = getArguments();
+        ArrayList<String> passwordWords;
 
         if(bundle.containsKey(getString(R.string.save_dialog_password_key))){
-            mPasswordWords = bundle.getStringArrayList(getString(R.string.save_dialog_password_key));
-            if(null != mPasswordWords) {
+            passwordWords = bundle.getStringArrayList(getString(R.string.save_dialog_password_key));
+            if(null != passwordWords) {
                 String result = "";
-                for(String word : mPasswordWords){
+                for(String word : passwordWords){
                     result = result.concat(word + " ");
                 }
                 result = result.trim();

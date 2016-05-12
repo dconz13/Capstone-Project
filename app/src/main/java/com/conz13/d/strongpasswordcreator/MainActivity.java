@@ -26,7 +26,6 @@ import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by dillon on 4/17/16.

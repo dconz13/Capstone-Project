@@ -1,6 +1,5 @@
 package com.conz13.d.strongpasswordcreator;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
