@@ -38,6 +38,9 @@ import java.util.ArrayList;
 public class WordGenerationFragment extends Fragment
     implements ClearDeleteButton, OnDragListener{
 
+    public static final int DELETE_ALL_BUTTON = 0;
+    public static final int SAVE_BUTTON = 1;
+
     private ImageView mDiceOne;
     private ImageView mDiceTwo;
     private ImageView mDiceThree;
@@ -52,7 +55,6 @@ public class WordGenerationFragment extends Fragment
     private GeneratedWordRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> mResultantWords;
-    private ArrayList<String> mPreviousWords;
     private ItemTouchHelper mItemTouchHelper;
     private CoordinatorLayout mCoordLayout;
 
@@ -159,7 +161,7 @@ public class WordGenerationFragment extends Fragment
                     .setPositiveButton(R.string.delete_all_positive, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            clearList();
+                            clearList(DELETE_ALL_BUTTON);
                         }
                     });
             builder.setNegativeButton(R.string.delete_all_negative, new DialogInterface.OnClickListener() {
@@ -247,15 +249,13 @@ public class WordGenerationFragment extends Fragment
         mAddButton.setVisibility(View.VISIBLE);
     }
 
-    public void clearList(){
-        mPreviousWords = new ArrayList<>();
-        mPreviousWords.addAll(mResultantWords);
+    public void clearList(int source){
         mResultantWords.clear();
         mAdapter.notifyDataSetChanged();
         disableDeleteAll();
-        mAddButton.setVisibility(View.INVISIBLE);
-        mTextView.setText("");
-        Snackbar.make(mCoordLayout, getString(R.string.save_dialog_snackbar), Snackbar.LENGTH_LONG).show();
+
+        if(source == SAVE_BUTTON)
+            Snackbar.make(mCoordLayout, getString(R.string.save_dialog_snackbar), Snackbar.LENGTH_LONG).show();
     }
 
     private void enableDeleteAll(){

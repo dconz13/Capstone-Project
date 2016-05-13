@@ -155,17 +155,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchLockerFragment(){
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_content_frame, new LockerFragment(), getString(R.string.locker_fragment_tag))
-                .addToBackStack(null)
-                .commit();
+        if(!getSupportFragmentManager().findFragmentByTag(getString(R.string.locker_fragment_tag)).isVisible()) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_content_frame, new LockerFragment(), getString(R.string.locker_fragment_tag))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     private void launchWordGenerationFragment(){
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
-                .addToBackStack(null)
-                .commit();
+        if(!getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag)).isVisible()) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     private void showAlertDialog(){
@@ -207,8 +211,7 @@ public class MainActivity extends AppCompatActivity {
         this.getContentResolver().insert(contentUri, contentValues);
         // Clear list in fragment
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));
-        ((WordGenerationFragment)fragment).clearList();
-        //TODO: snackbar saving successfully saved and showing an UNDO button to restore the list.
+        ((WordGenerationFragment)fragment).clearList(WordGenerationFragment.SAVE_BUTTON);
     }
 
     public void onSaveNegativeClick(){
