@@ -97,8 +97,10 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     }
 
     @Override
-    public void startEditActivity(View view) {
+    public void startEditActivity(long Id) {
         // Send bundle of arguments from the view
-        startActivity(new Intent(getContext(), EditActivity.class));
+        Intent data = new Intent(getContext(), EditActivity.class);
+        data.putExtras(Utility.buildBundleFromId(getContext(), Id));
+        startActivity(data);
     }
 }

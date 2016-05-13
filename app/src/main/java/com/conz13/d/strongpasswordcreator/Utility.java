@@ -1,9 +1,11 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
@@ -36,10 +38,11 @@ public class Utility {
         InputStream input = null;
         String temp = "";
         Properties properties = new Properties();
+        String language="_en";
 
         try {
             AssetManager assetManager = context.getAssets();
-            input = assetManager.open("diceware.properties");
+            input = assetManager.open("diceware" + language + ".properties");
             properties.load(input);
 
             temp = properties.getProperty(number);
@@ -62,6 +65,7 @@ public class Utility {
     /**
      * Generates a random 5 digit number where each digit is between 1 and 6. Each digit of the number
      * is stored as it's own index in an integer array.
+     *
      * @return temp (the integer array holding the 5 digit number)
      */
     public static int[] getDiceRoll(){
@@ -115,6 +119,13 @@ public class Utility {
         }
     }
 
+    /**
+     * Checks the database to see if the Header name is already in use
+     *
+     * @param context application context
+     * @param headerName header string to check the database for
+     * @return returns true if the entry exists
+     */
     public static boolean checkIfEntryExists(Context context, String headerName){
         Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
         String[] projection = {"header_title"};
@@ -139,6 +150,69 @@ public class Utility {
             cursor.close();
         }
         return existsFlag;
+    }
+
+    /**
+     * Updates the currently selected entry
+     *
+     * @param context application context
+     * @param contentValues content values to update
+     * @param ID used to make sure the correct entry is updated
+     * @return returns true on successful update
+     */
+    public static boolean updateExistingEntry(Context context, ContentValues contentValues, long ID){
+        Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
+        String selection = "_ID='" + ID + "'";
+
+        int rows = context.getContentResolver().update(
+                uri,
+                contentValues,
+                selection,
+                null
+                );
+
+        if(rows > 0) return true;
+
+        else return false;
+    }
+
+    /**
+     * Builds a bundle from a give id. The Id is supplied from the recycler view entry in the locker
+     * @param context application context
+     * @param id id of the entry the cursor will use to select the rows
+     * @return returns a bundle of all values from all rows
+     */
+    public static Bundle buildBundleFromId(Context context, long id){
+        Bundle bundle = new Bundle();
+        Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
+        String selection = "_ID='" + id + "'";
+        Cursor cursor = context.getContentResolver().query(
+                uri,
+                null,
+                selection,
+                null,
+                null
+        );
+        try {
+            if(cursor.moveToFirst()) {
+                bundle.putLong(context.getString(R.string.intent_extra_id),
+                        cursor.getLong(0));
+                bundle.putString(context.getString(R.string.intent_extra_header),
+                        cursor.getString(cursor.getColumnIndex(PasswordContract.PasswordEntry.HEADER_TITLE)));
+                bundle.putString(context.getString(R.string.intent_extra_user),
+                        cursor.getString(cursor.getColumnIndex(PasswordContract.PasswordEntry.USERNAME)));
+                bundle.putString(context.getString(R.string.intent_extra_pass),
+                        cursor.getString(cursor.getColumnIndex(PasswordContract.PasswordEntry.PASSWORD)));
+                bundle.putString(context.getString(R.string.intent_extra_add_info),
+                        cursor.getString(cursor.getColumnIndex(PasswordContract.PasswordEntry.ADD_INFO)));
+            }
+        } catch (NullPointerException e){
+            Log.e(LOG_TAG, e.getMessage());
+        }finally {
+            cursor.close();
+        }
+
+        return bundle;
     }
 
 }

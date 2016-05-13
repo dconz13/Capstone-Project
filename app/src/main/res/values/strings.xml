@@ -33,8 +33,8 @@
     <string name="save_dialog_negative">Cancel</string>
     <string name="save_dialog_tag" translatable="false">save_dialog</string>
     <string name="save_dialog_password_key" translatable="false">password_array_list_key</string>
-    <string name="save_dialog_header_empty">You must enter a Header</string>
-    <string name="save_dialog_password_empty">You must enter a Password</string>
+    <string name="save_dialog_header_empty">Header field can not be empty</string>
+    <string name="save_dialog_password_empty">Password field can not be empty</string>
     <string name="save_dialog_header_not_unique">That header name is already in use</string>
     <string name="save_dialog_header_hint">Header (ex: Example.com)</string>
     <string name="save_dialog_username_hint">Username (Optional)</string>
@@ -80,5 +80,13 @@
 
     <!-- Edit Activity -->
     <string name="edit_toolbar_label">Edit Mode</string>
+    <string name="edit_fragment_tag" translatable="false">edit_fragment_tag</string>
+    <string name="edit_save_button">Save</string>
+    <string name="intent_extra_header" translatable="false">header_intent_extra</string>
+    <string name="intent_extra_user" translatable="false">user_intent_extra</string>
+    <string name="intent_extra_pass" translatable="false">pass_intent_extra</string>
+    <string name="intent_extra_add_info" translatable="false">add_info_intent_extra</string>
+    <string name="intent_extra_id" translatable="false">id_intent_extra</string>
+    <string name="previous_header_key" translatable="false">previous_header_key</string>
 
 </resources>

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+
 /**
  * Created by dillon on 5/10/16.
  */
@@ -22,6 +24,7 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         public final TextView mUsernameTextView;
         public final TextView mPasswordTextView;
         public final TextView mAddInfoTextView;
+        public long ID;
 
         public LockerViewHolder(View view){
             super(view);
@@ -30,6 +33,7 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
             mUsernameTextView = (TextView)view.findViewById(R.id.locker_item_username_label);
             mPasswordTextView = (TextView)view.findViewById(R.id.locker_item_password_label);
             mAddInfoTextView = (TextView)view.findViewById(R.id.locker_item_additional_info_label);
+            ID = -1;
 
             mEditButton.setOnClickListener(this);
         }
@@ -37,7 +41,7 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         @Override
         public void onClick(View v) {
             // Execute edit button
-            mOnEditButtonPressed.startEditActivity(v);
+            mOnEditButtonPressed.startEditActivity(ID);
         }
     }
 
@@ -75,7 +79,10 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         add_info = add_info.concat(" " + mCursor.getString(LockerFragment.COL_ADD_INFO));
         holder.mAddInfoTextView.setText(add_info);
 
+        holder.ID = mCursor.getLong(0);
     }
+
+
 
     @Override
     public int getItemCount() {

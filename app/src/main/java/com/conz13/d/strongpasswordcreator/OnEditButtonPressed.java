@@ -1,6 +1,5 @@
 package com.conz13.d.strongpasswordcreator;
 
-import android.view.View;
 
 /**
  * Created by dillon on 5/11/16.
@@ -8,5 +7,5 @@ import android.view.View;
  * Used to launch a new activity from the locker fragment
  */
 public interface OnEditButtonPressed {
-    void startEditActivity(View view);
+    void startEditActivity(long Id);
 }

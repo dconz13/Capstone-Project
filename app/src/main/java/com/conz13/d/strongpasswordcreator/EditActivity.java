@@ -1,7 +1,11 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,6 +33,16 @@ public class EditActivity extends AppCompatActivity {
         } catch(NullPointerException e){
             Log.e(LOG_TAG, e.toString());
         }
+
+        Bundle extras = getIntent().getExtras();
+
+        if(savedInstanceState == null){
+            Fragment editFragment = new EditFragment();
+            editFragment.setArguments(extras);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.edit_content_frame, editFragment, getString(R.string.edit_fragment_tag))
+                    .commit();
+        }
     }
 
     @Override
@@ -39,7 +53,6 @@ public class EditActivity extends AppCompatActivity {
                 return true;
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
