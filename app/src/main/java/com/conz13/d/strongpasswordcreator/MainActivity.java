@@ -76,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                     .commit();
-
         }
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -142,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return true;
                     case R.id.menu_settings:
+                        // TODO: Create helper method to change the nav selection to the current fragment
                         startActivity(new Intent(context, SettingsActivity.class));
-
                         return true;
                     case R.id.menu_help:
                         return true;
@@ -155,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchLockerFragment(){
-        if(!getSupportFragmentManager().findFragmentByTag(getString(R.string.locker_fragment_tag)).isVisible()) {
+        if(null == getSupportFragmentManager().findFragmentByTag(getString(R.string.locker_fragment_tag))
+                || !getSupportFragmentManager().findFragmentByTag(getString(R.string.locker_fragment_tag)).isVisible()){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_content_frame, new LockerFragment(), getString(R.string.locker_fragment_tag))
                     .addToBackStack(null)
@@ -164,7 +166,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchWordGenerationFragment(){
-        if(!getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag)).isVisible()) {
+        // I think the null check may be unnecessary for this fragment but since it crashed for the
+        // other fragment here, I decided to add the check just to be safe from weird cases
+        if(null == getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag))
+                || !getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag)).isVisible()) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                     .addToBackStack(null)
