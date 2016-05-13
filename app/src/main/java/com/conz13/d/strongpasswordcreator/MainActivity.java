@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
         // Clear list in fragment
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));
         ((WordGenerationFragment)fragment).clearList();
+        //TODO: snackbar saving successfully saved and showing an UNDO button to restore the list.
     }
 
     public void onSaveNegativeClick(){

@@ -33,6 +33,15 @@
     <string name="save_dialog_negative">Cancel</string>
     <string name="save_dialog_tag" translatable="false">save_dialog</string>
     <string name="save_dialog_password_key" translatable="false">password_array_list_key</string>
+    <string name="save_dialog_header_empty">You must enter a Header</string>
+    <string name="save_dialog_password_empty">You must enter a Password</string>
+    <string name="save_dialog_header_not_unique">That header name is already in use</string>
+    <string name="save_dialog_header_hint">Header (ex: Example.com)</string>
+    <string name="save_dialog_username_hint">Username (Optional)</string>
+    <string name="save_dialog_password_hint">Strong Password</string>
+    <string name="save_dialog_password_add_info_hint">Additional Info (Optional)</string>
+    <string name="save_dialog_snackbar">Strong Password saved!</string>
+    <string name="save_dialog_snackbar_action">Undo</string>
 
     <!-- Alert Dialog for "Delete All" in list-->
     <string name="delete_all_title">Delete List</string>

@@ -5,12 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +44,7 @@ public class WordGenerationFragment extends Fragment
     private ImageView mDiceFour;
     private ImageView mDiceFive;
     private TextView mTextView;
+    private ImageButton mAddButton;
 
     private Menu mMenu;
 
@@ -48,7 +52,9 @@ public class WordGenerationFragment extends Fragment
     private GeneratedWordRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> mResultantWords;
+    private ArrayList<String> mPreviousWords;
     private ItemTouchHelper mItemTouchHelper;
+    private CoordinatorLayout mCoordLayout;
 
     private AlertDialog mDeleteAllDialog;
 
@@ -92,6 +98,7 @@ public class WordGenerationFragment extends Fragment
         mDiceFour = (ImageView)rootView.findViewById(R.id.dice_holder_four);
         mDiceFive = (ImageView)rootView.findViewById(R.id.dice_holder_five);
         mTextView = (TextView)rootView.findViewById(R.id.temp_word_textview);
+        mAddButton = (ImageButton)rootView.findViewById(R.id.add_to_list_button);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.resultant_word_recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -107,6 +114,7 @@ public class WordGenerationFragment extends Fragment
         spinOnClick((Button)rootView.findViewById(R.id.roll_button));
         addOnClick((ImageButton)rootView.findViewById(R.id.add_to_list_button));
         fabOnClick((FloatingActionButton)rootView.findViewById(R.id.save_fab));
+        mCoordLayout = (CoordinatorLayout)rootView.findViewById(R.id.coord_layout);
 
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
@@ -236,12 +244,18 @@ public class WordGenerationFragment extends Fragment
         String numberAsString = Utility.convertIntArrayToString(generatedNumber);
         String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString);
         mTextView.setText(dicewareWord);
+        mAddButton.setVisibility(View.VISIBLE);
     }
 
     public void clearList(){
+        mPreviousWords = new ArrayList<>();
+        mPreviousWords.addAll(mResultantWords);
         mResultantWords.clear();
         mAdapter.notifyDataSetChanged();
         disableDeleteAll();
+        mAddButton.setVisibility(View.INVISIBLE);
+        mTextView.setText("");
+        Snackbar.make(mCoordLayout, getString(R.string.save_dialog_snackbar), Snackbar.LENGTH_LONG).show();
     }
 
     private void enableDeleteAll(){

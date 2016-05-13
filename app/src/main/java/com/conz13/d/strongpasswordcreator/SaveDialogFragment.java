@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
@@ -61,8 +60,7 @@ public class SaveDialogFragment extends DialogFragment {
                         if(checkHeaderAndPassword()){
                             // Check if it exists first
                             if(Utility.checkIfEntryExists(getContext(), mHeaderEditText.getText().toString())){
-                                Toast.makeText(getContext(),"That header name already exists",Toast.LENGTH_SHORT)
-                                        .show();
+                                mHeaderEditText.setError(getString(R.string.save_dialog_header_not_unique));
                             }else {
                                 ((MainActivity) getActivity()).onSavePositiveClick(buildContentValues());
                                 builder.dismiss();
@@ -109,13 +107,11 @@ public class SaveDialogFragment extends DialogFragment {
         boolean headerFlag = false;
         boolean passwordFlag = false;
         if(mHeaderEditText.getText().toString().isEmpty()){
-            mHeaderEditText.setHint("You must set a Header");
-            mHeaderEditText.setHintTextColor(getResources().getColor(R.color.red));
+            mHeaderEditText.setError(getString(R.string.save_dialog_header_empty));
             headerFlag = true;
         }
         if(mPasswordEditText.getText().toString().isEmpty()){
-            mPasswordEditText.setHint("You must set a Password");
-            mPasswordEditText.setHintTextColor(getResources().getColor(R.color.red));
+            mPasswordEditText.setError(getString(R.string.save_dialog_password_empty));
             passwordFlag = true;
         }
         // if either flag is tripped it will return false and prevent the view from closing
