@@ -1,6 +1,7 @@
 package com.conz13.d.strongpasswordcreator;
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+import com.conz13.d.strongpasswordcreator.helper.ItemTouchHelperViewHolder;
+
 
 /**
  * Created by dillon on 5/10/16.
@@ -18,7 +20,8 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
     private Cursor mCursor;
     private OnEditButtonPressed mOnEditButtonPressed;
 
-    public class LockerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class LockerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            ItemTouchHelperViewHolder {
         public final TextView mHeaderTextView;
         public final ImageButton mEditButton;
         public final TextView mUsernameTextView;
@@ -42,6 +45,19 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         public void onClick(View v) {
             // Execute edit button
             mOnEditButtonPressed.startEditActivity(ID);
+        }
+
+        @Override
+        public void onItemSelected() {
+            // Shows that this is the selected view
+            itemView.setBackgroundColor(Color.WHITE);
+        }
+
+        @Override
+        public void onItemClear() {
+            // Reset background color and reset text alpha to opaque
+            itemView.setBackgroundColor(0);
+            itemView.setAlpha(1.0f);
         }
     }
 
@@ -82,12 +98,11 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         holder.ID = mCursor.getLong(0);
     }
 
-
-
     @Override
     public int getItemCount() {
         if(null == mCursor)
             return 0;
         return mCursor.getCount();
     }
+
 }

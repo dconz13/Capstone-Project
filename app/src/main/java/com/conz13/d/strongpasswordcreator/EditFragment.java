@@ -1,10 +1,11 @@
 package com.conz13.d.strongpasswordcreator;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +31,8 @@ public class EditFragment extends Fragment {
 
     private String previousHeaderText;
 
+    private AlertDialog mDeleteDialog;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class EditFragment extends Fragment {
         mAddInfoText = (EditText)rootView.findViewById(R.id.edit_add_info_edit_text);
 
         initTextFields();
+        initDeleteButton((Button)rootView.findViewById(R.id.edit_delete_button));
 
         return rootView;
     }
@@ -70,6 +74,50 @@ public class EditFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if(null != mDeleteDialog){
+            mDeleteDialog.dismiss();
+        }
+    }
+
+    private void initDeleteButton(Button button){
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // Alert Dialog to confirm before deleting the list
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.delete_title))
+                        .setMessage(getString(R.string.delete_message))
+                        .setPositiveButton(R.string.delete_positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String selection = "_ID='" + Long.toString(ID) + "'";
+                                getContext().getContentResolver().delete(
+                                        PasswordContract.PasswordEntry.CONTENT_URI,
+                                        selection,
+                                        null
+                                );
+                                getActivity().onBackPressed();
+                            }
+                        });
+                builder.setNegativeButton(R.string.delete_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing!
+                    }
+                });
+                mDeleteDialog = builder.create();
+                mDeleteDialog.show();
+            }
+        });
+    }
+
+    /**
+     * Initializes the edit text fields from the bundle provided by getArguments
+     */
     private void initTextFields(){
         Bundle bundle = getArguments();
         if(bundle != null){

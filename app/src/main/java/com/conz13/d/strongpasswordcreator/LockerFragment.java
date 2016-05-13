@@ -103,4 +103,5 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         data.putExtras(Utility.buildBundleFromId(getContext(), Id));
         startActivity(data);
     }
+
 }

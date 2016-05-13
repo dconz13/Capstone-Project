@@ -43,12 +43,17 @@
     <string name="save_dialog_snackbar">Strong Password saved!</string>
     <string name="save_dialog_snackbar_action">Undo</string>
 
-    <!-- Alert Dialog for "Delete All" in list-->
+    <!-- Alert Dialog for "Delete All" in list -->
     <string name="delete_all_title">Delete List</string>
     <string name="delete_all_message">Are you sure you want to delete the list?</string>
     <string name="delete_all_positive">Delete all</string>
     <string name="delete_all_negative">Cancel</string>
 
+    <!-- Alert Dialog for "Delete" in edit -->
+    <string name="delete_title">Delete</string>
+    <string name="delete_message">Are you sure you want to delete this entry? This cannot be reversed!</string>
+    <string name="delete_positive">Delete</string>
+    <string name="delete_negative">Cancel</string>
 
     <!-- Dice png content descriptions -->
     <string name="dice_one_content_description">You rolled a one.</string>
@@ -82,6 +87,8 @@
     <string name="edit_toolbar_label">Edit Mode</string>
     <string name="edit_fragment_tag" translatable="false">edit_fragment_tag</string>
     <string name="edit_save_button">Save</string>
+    <string name="edit_delete_button">Delete</string>
+    <string name="edit_delete_button_content_description">Button to delete the current entry</string>
     <string name="intent_extra_header" translatable="false">header_intent_extra</string>
     <string name="intent_extra_user" translatable="false">user_intent_extra</string>
     <string name="intent_extra_pass" translatable="false">pass_intent_extra</string>

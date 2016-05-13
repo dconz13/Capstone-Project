@@ -30,7 +30,7 @@ public class dicewarePassphraseUnitTest {
             new ActivityTestRule<MainActivity>(MainActivity.class);
 
 
-    // Tests to make sure there are no null values in the diceware.properties file
+    // Tests to make sure there are no null values in the diceware_en.properties file
     @Test
     public void testAllPossibleValuesTest() {
         int num = 11111;

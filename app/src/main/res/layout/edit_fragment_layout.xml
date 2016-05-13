@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5">
+    android:weightSum="4">
     <!-- Header -->
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -56,4 +56,12 @@
             android:hint="@string/save_dialog_password_add_info_hint" />
     </android.support.design.widget.TextInputLayout>
 
+    <Button
+        android:id="@+id/edit_delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:text="@string/edit_save_button"
+        android:contentDescription="@string/edit_save_button_content_description"/>
 </LinearLayout>

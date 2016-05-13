@@ -3,7 +3,6 @@ package com.conz13.d.strongpasswordcreator;
 import android.graphics.Color;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
-import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelper;
-import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperViewHolder;
+import com.conz13.d.strongpasswordcreator.helper.ItemTouchHelper;
+import com.conz13.d.strongpasswordcreator.helper.ItemTouchHelperViewHolder;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
 
 import java.util.ArrayList;
@@ -23,14 +22,14 @@ import java.util.Collections;
  * Created by dillon on 5/5/16.
  */
 public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<GeneratedWordRecyclerAdapter.GeneratedWordViewHolder>
-    implements GeneratedWordItemTouchHelper{
+    implements ItemTouchHelper {
     private ArrayList<String> mWords;
     private ClearDeleteButton mClearDeleteButton;
     private OnDragListener mOnDragListener;
 
     // TODO: set up ItemTouchHelper for swipe to delete and drag on reorder icon
     public class GeneratedWordViewHolder extends RecyclerView.ViewHolder implements
-            GeneratedWordItemTouchHelperViewHolder{
+            ItemTouchHelperViewHolder {
         public final ImageView mDeleteButton;
         public final ImageView mReorderButton;
         public final TextView mResultantWord;

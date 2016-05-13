@@ -27,7 +27,7 @@ public class Utility {
 
     /**
      * Gets the diceware passphrase associated with the supplied number from the
-     * 'diceware.properties' file located in the assets folder.
+     * 'diceware_en.properties' file located in the assets folder.
      *
      * @param context context for the AssetManager
      * @param number number used to look up diceware passphrase
