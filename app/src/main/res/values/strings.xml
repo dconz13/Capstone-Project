@@ -95,5 +95,8 @@
     <string name="intent_extra_add_info" translatable="false">add_info_intent_extra</string>
     <string name="intent_extra_id" translatable="false">id_intent_extra</string>
     <string name="previous_header_key" translatable="false">previous_header_key</string>
+    <string name="edit_snackbar_key" translatable="false">snackbar_key</string>
+    <string name="edit_snackbar_save">Strong Password saved!</string>
+    <string name="edit_snackbar_delete">Strong Password deleted</string>
 
 </resources>

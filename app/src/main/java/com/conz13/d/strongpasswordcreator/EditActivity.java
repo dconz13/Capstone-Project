@@ -47,7 +47,7 @@ public class EditActivity extends AppCompatActivity {
 
     public void setResult(CharSequence message){
         Intent intent = new Intent();
-        intent.putExtra("message", message);
+        intent.putExtra(getString(R.string.edit_snackbar_key), message);
         setResult(RESULT_OK, intent);
         finish();
     }

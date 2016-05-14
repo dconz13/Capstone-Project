@@ -69,7 +69,7 @@ public class EditFragment extends Fragment {
         if(item.getItemId() == R.id.edit_save_button){
             if(checkHeaderAndPasswordNotEmpty() && !checkHeaderInUse()) {
                 if(Utility.updateExistingEntry(getContext(), getContentValues(), ID)){
-                    ((EditActivity)getActivity()).setResult("Saved entry!");
+                    ((EditActivity)getActivity()).setResult(getString(R.string.edit_snackbar_save));
                 }
 
             }
@@ -103,7 +103,7 @@ public class EditFragment extends Fragment {
                                         selection,
                                         null
                                 );
-                                ((EditActivity)getActivity()).setResult("Deleted entry");
+                                ((EditActivity)getActivity()).setResult(getString(R.string.edit_snackbar_delete));
                             }
                         });
                 builder.setNegativeButton(R.string.delete_negative, new DialogInterface.OnClickListener() {

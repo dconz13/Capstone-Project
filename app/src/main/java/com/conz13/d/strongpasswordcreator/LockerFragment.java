@@ -108,10 +108,9 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(LOG_TAG, "requestCode: " + Integer.toString(requestCode) + " resultCode: " + Integer.toString(resultCode));
         if(requestCode == 1){
             if(resultCode == MainActivity.RESULT_OK){
-                CharSequence message = data.getCharSequenceExtra("message");
+                CharSequence message = data.getCharSequenceExtra(getString(R.string.edit_snackbar_key));
                 Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG).show();
             }
         }
