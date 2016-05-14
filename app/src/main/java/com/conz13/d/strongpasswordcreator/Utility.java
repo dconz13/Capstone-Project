@@ -38,7 +38,7 @@ public class Utility {
         InputStream input = null;
         String temp = "";
         Properties properties = new Properties();
-        String language="_en";
+        String language = "_en";
 
         try {
             AssetManager assetManager = context.getAssets();

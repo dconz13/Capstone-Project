@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class EditFragment extends Fragment {
     private EditText mUsernameText;
     private EditText mPasswordText;
     private EditText mAddInfoText;
+    private View snackBarRef;
     private long ID;
 
     private String previousHeaderText;
@@ -48,6 +50,7 @@ public class EditFragment extends Fragment {
         mUsernameText = (EditText)rootView.findViewById(R.id.edit_username_edit_text);
         mPasswordText = (EditText)rootView.findViewById(R.id.edit_password_edit_text);
         mAddInfoText = (EditText)rootView.findViewById(R.id.edit_add_info_edit_text);
+        snackBarRef = rootView;
 
         initTextFields();
         initDeleteButton((Button)rootView.findViewById(R.id.edit_delete_button));
@@ -66,7 +69,7 @@ public class EditFragment extends Fragment {
         if(item.getItemId() == R.id.edit_save_button){
             if(checkHeaderAndPasswordNotEmpty() && !checkHeaderInUse()) {
                 if(Utility.updateExistingEntry(getContext(), getContentValues(), ID)){
-                    getActivity().onBackPressed();
+                    ((EditActivity)getActivity()).setResult("Saved entry!");
                 }
 
             }
@@ -100,7 +103,7 @@ public class EditFragment extends Fragment {
                                         selection,
                                         null
                                 );
-                                getActivity().onBackPressed();
+                                ((EditActivity)getActivity()).setResult("Deleted entry");
                             }
                         });
                 builder.setNegativeButton(R.string.delete_negative, new DialogInterface.OnClickListener() {

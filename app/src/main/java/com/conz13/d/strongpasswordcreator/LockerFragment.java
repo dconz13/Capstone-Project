@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -101,7 +102,18 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         // Send bundle of arguments from the view
         Intent data = new Intent(getContext(), EditActivity.class);
         data.putExtras(Utility.buildBundleFromId(getContext(), Id));
-        startActivity(data);
+        startActivityForResult(data, 1);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(LOG_TAG, "requestCode: " + Integer.toString(requestCode) + " resultCode: " + Integer.toString(resultCode));
+        if(requestCode == 1){
+            if(resultCode == MainActivity.RESULT_OK){
+                CharSequence message = data.getCharSequenceExtra("message");
+                Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG).show();
+            }
+        }
+    }
 }

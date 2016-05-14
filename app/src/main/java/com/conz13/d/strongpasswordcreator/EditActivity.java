@@ -45,6 +45,13 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    public void setResult(CharSequence message){
+        Intent intent = new Intent();
+        intent.putExtra("message", message);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
