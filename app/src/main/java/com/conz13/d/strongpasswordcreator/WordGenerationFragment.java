@@ -244,7 +244,7 @@ public class WordGenerationFragment extends Fragment
 //        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[4])).into(mDiceFive);
 
         String numberAsString = Utility.convertIntArrayToString(generatedNumber);
-        String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString);
+        String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString, Utility.getLanguage(context));
         mTextView.setText(dicewareWord);
         mAddButton.setVisibility(View.VISIBLE);
     }

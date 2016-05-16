@@ -24,6 +24,25 @@ import static org.junit.Assert.assertTrue;
 @LargeTest
 public class dicewarePassphraseUnitTest {
     Context context;
+    // Uncomment fr, pl and tr when lists are updated
+    String languages[] = {"_ca",
+    "_da",
+    "_nl",
+    "_en",
+    "_eo",
+    "_fi",
+    //"_fr",
+    "_de",
+    "_it",
+    "_jp",
+    "_mi",
+    "_no",
+   //"_pl",
+    "_ru",
+    "_es",
+    "_sv"
+   //"_tr"
+    };
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule =
@@ -39,13 +58,16 @@ public class dicewarePassphraseUnitTest {
         int listLength = 7776;
         context = mActivityTestRule.getActivity().getApplicationContext();
 
-        while(num<66666){
-            word = Utility.getPropertyValue(context, Integer.toString(num));
-            if(word == null){
-                break;
+        for(String language : languages) {
+            Log.v("testAllPossibleValues", language);
+            while (num < 66666) {
+                word = Utility.getPropertyValue(context, Integer.toString(num), language);
+                if (word == null) {
+                    break;
+                }
+                counter++;
+                num = handleNumber(num);
             }
-            counter ++;
-            num = handleNumber(num);
         }
         assertEquals(listLength,counter);
         assertNotNull(word);
@@ -121,16 +143,18 @@ public class dicewarePassphraseUnitTest {
         context = mActivityTestRule.getActivity().getApplicationContext();
 
         Random rndNumber = new Random();
-        for(int i= 0; i<x; i++) {
-            String temp = "";
-            while (temp.length() < 5) {
-                temp = temp.concat(Integer.toString(rndNumber.nextInt(MAX_INT) + 1));
-            }
-            String word = Utility.getPropertyValue(context, temp);
-            if(word == null){
-                nullFlag = true;
-                Log.e("randomDicewareIsNotNull", "value was: " + temp);
-                break;
+        for(String language: languages) {
+            for (int i = 0; i < x; i++) {
+                String temp = "";
+                while (temp.length() < 5) {
+                    temp = temp.concat(Integer.toString(rndNumber.nextInt(MAX_INT) + 1));
+                }
+                String word = Utility.getPropertyValue(context, temp, language);
+                if (word == null) {
+                    nullFlag = true;
+                    Log.e("randomDicewareIsNotNull", "value was: " + temp);
+                    break;
+                }
             }
         }
 

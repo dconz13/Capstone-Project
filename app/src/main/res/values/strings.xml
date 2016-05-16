@@ -119,17 +119,17 @@
         <item>English</item>
         <item>Esperanto</item>
         <item>Finnish</item>
-        <item>French</item>
+        <!--<item>French</item>-->
         <item>German</item>
         <item>Italian</item>
         <item>Japanese</item>
         <item>Maori</item>
         <item>Norwegian</item>
-        <item>Polish</item>
+        <!--<item>Polish</item>-->
         <item>Russian</item>
         <item>Spanish</item>
         <item>Swedish</item>
-        <item>Turkish</item>
+        <!--<item>Turkish</item>-->
     </string-array>
     <string-array name="diceware_languages_values">
         <item>_ca</item>
@@ -138,17 +138,17 @@
         <item>_en</item>
         <item>_eo</item>
         <item>_fi</item>
-        <item>_fr</item>
+        <!--<item>_fr</item>-->
         <item>_de</item>
         <item>_it</item>
         <item>_jp</item>
         <item>_mi</item>
         <item>_no</item>
-        <item>_pl</item>
+        <!--<item>_pl</item>-->
         <item>_ru</item>
         <item>_es</item>
         <item>_sv</item>
-        <item>_tr</item>
+        <!--<item>_tr</item>-->
     </string-array>
 
     <string name="about_key" translatable="false">about_key</string>

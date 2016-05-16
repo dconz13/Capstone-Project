@@ -35,12 +35,11 @@ public class Utility {
      * @param number number used to look up diceware passphrase
      */
 
-    static public String getPropertyValue(Context context, String number) {
+    static public String getPropertyValue(Context context, String number, String language) {
 
         InputStream input = null;
         String temp = "";
         Properties properties = new Properties();
-        String language = getLanguage(context);
 
         try {
             AssetManager assetManager = context.getAssets();
