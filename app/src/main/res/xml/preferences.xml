@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Animations enabled by default -->
     <CheckBoxPreference
-        android:key="temp"
-        android:title="temp check box"
-        android:summary="this is a check box"
-        android:defaultValue="True"/>
+        android:key="@string/disable_dice_animation_key"
+        android:title="@string/disable_dice_animation_title"
+        android:summary="@string/disable_dice_animation_summary"
+        android:defaultValue="True"
+        android:enabled="false"/>
+
+    <!-- Diceware list language options English default-->
+    <ListPreference
+        android:key="@string/change_language_key"
+        android:title="@string/change_language_title"
+        android:defaultValue="@string/change_language_default"
+        android:entries="@array/diceware_languages_entries"
+        android:entryValues="@array/diceware_languages_values"
+        android:dialogTitle="@string/change_language_dialog_title"
+        />
+
+    <!-- Change current password -->
+    <EditTextPreference
+        android:key="@string/change_password_key"
+        android:title="@string/change_password_title"
+        android:enabled="false"
+        />
+
 </PreferenceScreen>

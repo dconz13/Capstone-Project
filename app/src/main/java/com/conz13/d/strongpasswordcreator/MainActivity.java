@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mNavDrawer = (NavigationView) findViewById(R.id.nav_drawer);
         setUpNavigationDrawerListener(mNavDrawer);
         mNavDrawer.setCheckedItem(R.id.menu_home);
+
         // TODO: find out why this causes illegalargumentexception. why is child null view
         //navDrawer.addHeaderView(findViewById(R.id.nav_drawer_header));
 

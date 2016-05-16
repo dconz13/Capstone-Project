@@ -5,8 +5,8 @@
 
 task compileSwitchStatement {
 
-	def input = new File('diceware_wordlist.txt')
-	def output = new File('diceware.properties')
+	def input = new File('word_lists/diceware_swedish.txt')
+	def output = new File('properties_files/diceware_sv.properties')
 
 	def lines = input.readLines()
 	def numberList = new ArrayList<Integer>()
@@ -15,12 +15,10 @@ task compileSwitchStatement {
 	// This is not universal code. It just works for my provided list of values
 
 	int k = 0
-	for(int i =0; i<lines.size()-1; i++){
-		if(i>1)	{
-			numberList.add(k,lines[i].substring(0,5))
-			stringList.add(k,lines[i].substring(6))
-			k++
-		}
+	for(int i =0; i<lines.size(); i++){
+		numberList.add(k,lines[i].substring(0,5))
+		stringList.add(k,lines[i].substring(6))
+		k++
 	}
 
 	// This generates the properties file

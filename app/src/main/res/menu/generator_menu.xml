@@ -11,4 +11,8 @@
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings_black_24dp"
         app:showAsAction="never"/>
+
+    <item android:title="@string/sign_out"
+        android:id="@+id/sign_out"
+        app:showAsAction="never"/>
 </menu>

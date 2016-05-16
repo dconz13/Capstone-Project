@@ -2,10 +2,12 @@ package com.conz13.d.strongpasswordcreator;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
@@ -38,7 +40,7 @@ public class Utility {
         InputStream input = null;
         String temp = "";
         Properties properties = new Properties();
-        String language = "_en";
+        String language = getLanguage(context);
 
         try {
             AssetManager assetManager = context.getAssets();
@@ -60,6 +62,11 @@ public class Utility {
         }
 
         return temp;
+    }
+
+    public static String getLanguage(Context context){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getString(context.getString(R.string.change_language_key), "_en");
     }
 
     /**

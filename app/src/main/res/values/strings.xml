@@ -16,7 +16,8 @@
     <string name="nav_header">Navigation drawer header image</string>
 
     <!-- Menu item strings -->
-    <string name="delete_list">Delete All</string>
+    <string name="delete_list">Delete all</string>
+    <string name="sign_out">Sign out</string>
 
     <!-- Alert dialog for entering locker -->
     <string name="alert_dialog_title">Unlock Locker</string>
@@ -44,7 +45,7 @@
     <string name="save_dialog_snackbar_action">Undo</string>
 
     <!-- Alert Dialog for "Delete All" in list -->
-    <string name="delete_all_title">Delete List</string>
+    <string name="delete_all_title">Delete list</string>
     <string name="delete_all_message">Are you sure you want to delete the list?</string>
     <string name="delete_all_positive">Delete all</string>
     <string name="delete_all_negative">Cancel</string>
@@ -98,5 +99,60 @@
     <string name="edit_snackbar_key" translatable="false">snackbar_key</string>
     <string name="edit_snackbar_save">Strong Password saved!</string>
     <string name="edit_snackbar_delete">Strong Password deleted</string>
+
+    <!-- Settings Activity -->
+    <string name="disable_dice_animation_key" translatable="false">disable_dice_animation_key</string>
+    <string name="disable_dice_animation_title">Dice roll animation</string>
+    <string name="disable_dice_animation_summary">Dice roll animation enabled</string>
+
+    <string name="change_password_key" translatable="false">change_password_key</string>
+    <string name="change_password_title">Change password</string>
+
+    <string name="change_language_key" translatable="false">change_language_key</string>
+    <string name="change_language_title">Change diceware list language</string>
+    <string name="change_language_default">English</string>
+    <string name="change_language_dialog_title">Choose a language</string>
+    <string-array name="diceware_languages_entries">
+        <item>Catalan</item>
+        <item>Danish</item>
+        <item>Dutch</item>
+        <item>English</item>
+        <item>Esperanto</item>
+        <item>Finnish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Maori</item>
+        <item>Norwegian</item>
+        <item>Polish</item>
+        <item>Russian</item>
+        <item>Spanish</item>
+        <item>Swedish</item>
+        <item>Turkish</item>
+    </string-array>
+    <string-array name="diceware_languages_values">
+        <item>_ca</item>
+        <item>_da</item>
+        <item>_nl</item>
+        <item>_en</item>
+        <item>_eo</item>
+        <item>_fi</item>
+        <item>_fr</item>
+        <item>_de</item>
+        <item>_it</item>
+        <item>_jp</item>
+        <item>_mi</item>
+        <item>_no</item>
+        <item>_pl</item>
+        <item>_ru</item>
+        <item>_es</item>
+        <item>_sv</item>
+        <item>_tr</item>
+    </string-array>
+
+    <string name="about_key" translatable="false">about_key</string>
+    <string name="about_title">About</string>
+    <string name="about_summary">Learn more about diceware</string>
 
 </resources>
