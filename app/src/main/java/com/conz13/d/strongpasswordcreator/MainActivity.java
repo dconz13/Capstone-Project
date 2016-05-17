@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return true;
                     case R.id.menu_locker:
-                        //showAlertDialog();
                         launchLockerFragment();
                         if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
                             mDrawerLayout.closeDrawers();
@@ -176,18 +175,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showAlertDialog(){
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Fragment previousFrag = getSupportFragmentManager().findFragmentByTag(getString(R.string.alert_dialog_tag));
-        if(previousFrag != null){
-            ft.remove(previousFrag);
-        }
-        // Setting this to null allows you to go back with the back button but for dialog fragment it isn't necessary
-        // ft.addToBackStack(null);
-
-        new PasswordPromptDialogFragment().show(ft, getString(R.string.alert_dialog_tag));
-    }
-
     public void showSaveDialog(ArrayList<String> wordList){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment prev = getSupportFragmentManager().findFragmentByTag(getString(R.string.save_dialog_tag));
@@ -201,14 +188,6 @@ public class MainActivity extends AppCompatActivity {
         saveDialogFragment.show(ft, getString(R.string.save_dialog_tag));
     }
 
-    public void onPositiveClick(){
-        // Replace the Word Generation Fragment with the LockerFragment
-    }
-
-    public void onNegativeClick(){
-        // Switch the highlighted item back to the "Home" entry
-        mNavDrawer.setCheckedItem(R.id.menu_home);
-    }
     public void onSavePositiveClick(ContentValues contentValues){
         // Save to database
         Uri contentUri = PasswordContract.PasswordEntry.CONTENT_URI;
