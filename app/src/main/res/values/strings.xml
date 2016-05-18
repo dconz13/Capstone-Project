@@ -162,5 +162,9 @@
     <string name="login_edit_text">Password</string>
     <string name="login_checkbox">Show password</string>
     <string name="login_skip_button">Skip</string>
+    <string name="login_password_empty_error">Please enter your password</string>
+    <string name="login_password_wrong_error">Incorrect password</string>
+    <string name="password_bundle_key" translatable="false">password_bundle_key</string>
+
 
 </resources>

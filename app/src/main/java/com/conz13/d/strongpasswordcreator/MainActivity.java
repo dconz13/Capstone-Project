@@ -3,8 +3,10 @@ package com.conz13.d.strongpasswordcreator;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -40,12 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int HOME = 0;
     public static final int LOCKER = 1;
+    public boolean skippedFlag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SQLiteDatabase.loadLibs(this);
         setContentView(R.layout.main_activity_layout);
+
+        skippedFlag = getIntent().getExtras().getBoolean(getString(R.string.password_bundle_key));
 
         // TODO: Add item icons
 
@@ -78,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                     .commit();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.edit().remove(getString(R.string.password_bundle_key));
+        //sharedPreferences.edit().clear();
+        sharedPreferences.edit().apply();
     }
 
     @Override
@@ -199,20 +212,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSaveNegativeClick(){
         // Do nothing
-    }
-
-    public void setPasswordTextVisibility(View view){
-        View parentView = view.getRootView();
-        EditText editText = (EditText) parentView.findViewById(R.id.alert_password_entry);
-        CheckBox checkBox = (CheckBox) view;
-
-        if(checkBox.isChecked()){
-            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            editText.setSelection(editText.getText().length());
-        }else{
-            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            editText.setSelection(editText.getText().length());
-        }
     }
 
 }
