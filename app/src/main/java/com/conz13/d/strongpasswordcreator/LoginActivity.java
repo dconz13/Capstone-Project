@@ -13,10 +13,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
-import com.conz13.d.strongpasswordcreator.data.PasswordProvider;
-
 import net.sqlcipher.database.SQLiteDatabase;
-import net.sqlcipher.database.SQLiteOpenHelper;
+
 
 /**
  * Created by dillon on 5/17/16.
@@ -55,11 +53,14 @@ public class LoginActivity extends AppCompatActivity {
                 editText.setText("");
 
                 startActivity(intent);
+            } else {
+                editText.setError(getString(R.string.login_password_wrong_error));
             }
         } else {
             editText.setError(getString(R.string.login_password_empty_error));
         }
     }
+
 
     private boolean verifyPassword(String password){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     .apply();
             return true;
         } catch (Exception e){
-            Log.e(LOG_TAG, e.getMessage());
+            //Log.e(LOG_TAG, e.getMessage());
             return false;
         } finally{
             dbHelper.close();

@@ -209,7 +209,14 @@ public class WordGenerationFragment extends Fragment
             @Override
             public void onClick(View v) {
                 // Start dialog for saving to database
-                ((MainActivity)getActivity()).showSaveDialog(mResultantWords);
+                boolean skipFlag = ((MainActivity)getActivity()).skippedFlag;
+                // skipFlag = true if login was skipped
+                if(!skipFlag) {
+                    ((MainActivity) getActivity()).showSaveDialog(mResultantWords);
+                } else {
+                    Snackbar.make(mCoordLayout, getString(R.string.save_dialog_snackbar_skip_mode),
+                            Snackbar.LENGTH_LONG).show();
+                }
             }
         });
     }

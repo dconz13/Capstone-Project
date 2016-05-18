@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
@@ -27,6 +28,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     private static final String LOG_TAG = LockerFragment.class.getSimpleName();
 
     private static final int LOADER = 0;
+    private boolean mSkipFlag;
 
     private static final String[] PASSWORD_COLUMNS = {
             PasswordContract.PasswordEntry.TABLE_NAME + "." + PasswordContract.PasswordEntry._ID,
@@ -45,6 +47,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private LockerRecyclerAdapter mAdapter;
+    private TextView mEmptyTextView;
 
     // TODO: Add hiding the toolbar on scroll of the list
     @Override
@@ -58,9 +61,16 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.locker_recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mEmptyTextView = (TextView) rootView.findViewById(R.id.locker_empty);
 
         mAdapter = new LockerRecyclerAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
+
+        mSkipFlag = ((MainActivity)getActivity()).skippedFlag;
+        if(mSkipFlag){
+            mEmptyTextView.setText(getContext().getString(R.string.locker_empty_skipped));
+            mEmptyTextView.setVisibility(View.VISIBLE);
+        }
 
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
 
@@ -69,7 +79,10 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        getLoaderManager().initLoader(LOADER, null, this);
+        mSkipFlag = ((MainActivity)getActivity()).skippedFlag;
+        if(!mSkipFlag) {
+            getLoaderManager().initLoader(LOADER, null, this);
+        }
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -89,6 +102,10 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if(data.getCount() == 0) {
+            mEmptyTextView.setText(getContext().getString(R.string.locker_empty_text_view));
+            mEmptyTextView.setVisibility(View.VISIBLE);
+        }
         mAdapter.swapCursor(data);
     }
 
