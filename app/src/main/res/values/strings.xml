@@ -84,7 +84,7 @@
     <string name="password_label">Password:</string>
     <string name="additional_info_label">Additional Info:</string>
     <string name="edit_button_content_description">Edit content</string>
-    <string name="locker_empty_text_view">Your saved passwords will appear here</string>
+    <string name="locker_empty_text_view">Saved passwords will appear here</string>
     <string name="locker_empty_skipped">Log in to view saved passwords here</string>
 
     <!-- Edit Activity -->

@@ -1,7 +1,9 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -63,21 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private boolean verifyPassword(String password){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        PasswordDbHelper dbHelper = new PasswordDbHelper(this);
-        try {
-            dbHelper.getReadableDatabase(password);
-            sharedPreferences.edit()
-                    .putString(getString(R.string.password_bundle_key), password)
-                    .apply();
-            return true;
-        } catch (Exception e){
-            //Log.e(LOG_TAG, e.getMessage());
-            return false;
-        } finally{
-            dbHelper.close();
-        }
-
+        return new VerifyPasswordTask(this).doInBackground(password);
     }
 
     public void skip(View view) {
@@ -86,5 +74,32 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra(getString(R.string.password_bundle_key), true);
         editText.setText("");
         startActivity(intent);
+    }
+
+    private class VerifyPasswordTask extends AsyncTask<String, Void, Boolean> {
+        private Context mContext;
+
+        public VerifyPasswordTask(Context context){
+            mContext = context;
+        }
+        @Override
+        protected Boolean doInBackground(String... params) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+            PasswordDbHelper dbHelper = new PasswordDbHelper(mContext);
+            String password = params[0];
+
+            try {
+                dbHelper.getReadableDatabase(password);
+                sharedPreferences.edit()
+                        .putString(mContext.getString(R.string.password_bundle_key), password)
+                        .apply();
+                return true;
+            } catch (Exception e){
+                //Log.e(LOG_TAG, e.getMessage());
+                return false;
+            } finally{
+                dbHelper.close();
+            }
+        }
     }
 }
