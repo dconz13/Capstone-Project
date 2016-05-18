@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpNavigationDrawerListener(final NavigationView navView) {
-        final Context context = getApplicationContext();
+        final Context context = this;
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {

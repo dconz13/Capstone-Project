@@ -57,6 +57,7 @@ public class EditActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case android.R.id.home:{
                 onBackPressed();
+                this.finish();
                 return true;
             }
         }

@@ -153,28 +153,38 @@ public class WordGenerationFragment extends Fragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete_all){
-            // Alert Dialog to confirm before deleting the list
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(getString(R.string.delete_all_title))
-                    .setMessage(getString(R.string.delete_all_message))
-                    .setPositiveButton(R.string.delete_all_positive, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            clearList(DELETE_ALL_BUTTON);
-                        }
-                    });
-            builder.setNegativeButton(R.string.delete_all_negative, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Do nothing!
-                        }
-                    });
-            mDeleteAllDialog = builder.create();
-            mDeleteAllDialog.show();
-        }
-        if(item.getItemId() == R.id.action_settings) {
-            startActivity(new Intent(getContext(), SettingsActivity.class));
+        switch(item.getItemId()) {
+            case R.id.action_delete_all: {
+                // Alert Dialog to confirm before deleting the list
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.delete_all_title))
+                        .setMessage(getString(R.string.delete_all_message))
+                        .setPositiveButton(R.string.delete_all_positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                clearList(DELETE_ALL_BUTTON);
+                            }
+                        });
+                builder.setNegativeButton(R.string.delete_all_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing!
+                    }
+                });
+                mDeleteAllDialog = builder.create();
+                mDeleteAllDialog.show();
+                break;
+            }
+            case R.id.action_settings: {
+                startActivity(new Intent(getContext(), SettingsActivity.class));
+                break;
+            }
+            case R.id.sign_out: {
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
+                break;
+            }
+            default: break;
         }
         return super.onOptionsItemSelected(item);
     }

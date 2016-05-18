@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 editText.setText("");
 
                 startActivity(intent);
+                this.finish();
             } else {
                 editText.setError(getString(R.string.login_password_wrong_error));
             }
@@ -62,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             editText.setError(getString(R.string.login_password_empty_error));
         }
     }
-
 
     private boolean verifyPassword(String password){
         return new VerifyPasswordTask(this).doInBackground(password);
@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra(getString(R.string.password_bundle_key), true);
         editText.setText("");
         startActivity(intent);
+        this.finish();
     }
 
     private class VerifyPasswordTask extends AsyncTask<String, Void, Boolean> {
