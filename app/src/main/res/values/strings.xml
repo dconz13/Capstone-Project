@@ -133,7 +133,7 @@
         <!--<item>Russian</item>-->
         <item>Spanish</item>
         <item>Swedish</item>
-        <!--<item>Turkish</item>-->
+        <item>Turkish</item>
     </string-array>
     <string-array name="diceware_languages_values">
         <item>_ca</item>
@@ -152,7 +152,7 @@
         <!--<item>_ru</item>-->
         <item>_es</item>
         <item>_sv</item>
-        <!--<item>_tr</item>-->
+        <item>_tr</item>
     </string-array>
 
     <string name="about_key" translatable="false">about_key</string>

@@ -40,8 +40,8 @@ public class dicewarePassphraseUnitTest {
    //"_pl",
     "_ru",
     "_es",
-    "_sv"
-   //"_tr"
+    "_sv",
+    "_tr"
     };
 
     @Rule

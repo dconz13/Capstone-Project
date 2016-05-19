@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        skippedFlag = getIntent().getExtras().getBoolean(getString(R.string.skipped_key));
+        if(getIntent().hasExtra(getString(R.string.skipped_key))) {
+            skippedFlag = getIntent().getExtras().getBoolean(getString(R.string.skipped_key));
+        }
 
         // TODO: Add item icons
 
