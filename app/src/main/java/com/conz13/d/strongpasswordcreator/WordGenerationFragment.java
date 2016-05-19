@@ -180,8 +180,7 @@ public class WordGenerationFragment extends Fragment
                 break;
             }
             case R.id.sign_out: {
-                startActivity(new Intent(getContext(), LoginActivity.class));
-                getActivity().finish();
+                ((MainActivity)getActivity()).signOut();
                 break;
             }
             default: break;

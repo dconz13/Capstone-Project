@@ -59,7 +59,8 @@ public class SaveDialogFragment extends DialogFragment {
                         // Check header and password are not empty
                         if(checkHeaderAndPassword()){
                             // Check if it exists first
-                            if(Utility.checkIfEntryExists(getContext(), mHeaderEditText.getText().toString())){
+                            String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+                            if(Utility.checkIfEntryExists(getContext(), password, mHeaderEditText.getText().toString())){
                                 mHeaderEditText.setError(getString(R.string.save_dialog_header_not_unique));
                             }else {
                                 ((MainActivity) getActivity()).onSavePositiveClick(buildContentValues());

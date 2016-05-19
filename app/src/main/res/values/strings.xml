@@ -166,7 +166,9 @@
     <string name="login_skip_button">Skip</string>
     <string name="login_password_empty_error">Please enter your password</string>
     <string name="login_password_wrong_error">Incorrect password</string>
+    <!-- If this is changed, change hardcoded key in PasswordProvider class -->
     <string name="password_bundle_key" translatable="false">password_bundle_key</string>
+    <string name="skipped_key" translatable="false">skipped_key</string>
 
 
 </resources>

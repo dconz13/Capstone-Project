@@ -25,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        skippedFlag = getIntent().getExtras().getBoolean(getString(R.string.password_bundle_key));
+        skippedFlag = getIntent().getExtras().getBoolean(getString(R.string.skipped_key));
 
         // TODO: Add item icons
 
@@ -84,13 +85,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.edit().remove(getString(R.string.password_bundle_key));
-        //sharedPreferences.edit().clear();
-        sharedPreferences.edit().apply();
+    public void signOut() {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
     @Override
@@ -183,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 || !getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag)).isVisible()) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit();
         }
     }
@@ -203,8 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSavePositiveClick(ContentValues contentValues){
         // Save to database
-        Uri contentUri = PasswordContract.PasswordEntry.CONTENT_URI;
-        this.getContentResolver().insert(contentUri, contentValues);
+//        Uri contentUri = PasswordContract.PasswordEntry.CONTENT_URI;
+//        this.getContentResolver().insert(contentUri, contentValues);
+        saveToDatabase(contentValues);
         // Clear list in fragment
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));
         ((WordGenerationFragment)fragment).clearList(WordGenerationFragment.SAVE_BUTTON);
@@ -212,6 +210,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSaveNegativeClick(){
         // Do nothing
+    }
+
+    private long saveToDatabase(ContentValues contentValues){
+        PasswordDbHelper dbHelper = new PasswordDbHelper(this);
+        String password = ((MyApplication)getApplication()).getPASSWORD();
+        SQLiteDatabase db = dbHelper.getWritableDatabase(password);
+        long row = 0;
+        try {
+            row = db.insert(PasswordContract.PasswordEntry.TABLE_NAME, null, contentValues);
+            Log.d(LOG_TAG, "ROW: " + Long.toString(row));
+        } catch(Exception e){
+            Log.e(LOG_TAG, e.getMessage());
+            return row;
+        } finally {
+            db.close();
+        }
+        return row;
     }
 
 }

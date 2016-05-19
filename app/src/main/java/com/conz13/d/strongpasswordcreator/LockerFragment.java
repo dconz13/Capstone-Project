@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.conz13.d.strongpasswordcreator.data.DatabaseCursorLoader;
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
 /**
@@ -90,13 +92,16 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // TODO: add sort options in locker menu
         String sortOrder = PasswordContract.PasswordEntry.HEADER_TITLE + " ASC";
-
-        return new CursorLoader(getActivity(),
-                PasswordContract.PasswordEntry.CONTENT_URI,
+        String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+        return new DatabaseCursorLoader(getActivity(),
+                password,
                 PASSWORD_COLUMNS,
                 null,
                 null,
-                sortOrder
+                null,
+                null,
+                sortOrder,
+                null
                 );
     }
 
@@ -118,7 +123,8 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     public void startEditActivity(long Id) {
         // Send bundle of arguments from the view
         Intent data = new Intent(getContext(), EditActivity.class);
-        data.putExtras(Utility.buildBundleFromId(getContext(), Id));
+        String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+        data.putExtras(Utility.buildBundleFromId(getContext(), password, Id));
         startActivityForResult(data, 1);
     }
 
@@ -127,6 +133,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
             if(resultCode == MainActivity.RESULT_OK){
+                getLoaderManager().restartLoader(LOADER, null, this);
                 CharSequence message = data.getCharSequenceExtra(getString(R.string.edit_snackbar_key));
                 Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG).show();
             }

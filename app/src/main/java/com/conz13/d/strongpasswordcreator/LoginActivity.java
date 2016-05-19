@@ -50,12 +50,13 @@ public class LoginActivity extends AppCompatActivity {
             String password = editText.getText().toString();
             if(verifyPassword(password)){
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra(getString(R.string.password_bundle_key), false);
+                ((MyApplication)getApplication()).setPASSWORD(password);
+                intent.putExtra(getString(R.string.skipped_key), false);
 
                 editText.setText("");
 
                 startActivity(intent);
-                this.finish();
+               // this.finish();
             } else {
                 editText.setError(getString(R.string.login_password_wrong_error));
             }
@@ -71,10 +72,11 @@ public class LoginActivity extends AppCompatActivity {
     public void skip(View view) {
         EditText editText = (EditText) view.getRootView().findViewById(R.id.login_edit_text);
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(getString(R.string.password_bundle_key), true);
+        intent.putExtra(getString(R.string.skipped_key), true);
+        ((MyApplication)getApplication()).setPASSWORD("");
         editText.setText("");
         startActivity(intent);
-        this.finish();
+        //this.finish();
     }
 
     private class VerifyPasswordTask extends AsyncTask<String, Void, Boolean> {
@@ -85,15 +87,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         @Override
         protected Boolean doInBackground(String... params) {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
             PasswordDbHelper dbHelper = new PasswordDbHelper(mContext);
             String password = params[0];
 
             try {
                 dbHelper.getReadableDatabase(password);
-                sharedPreferences.edit()
-                        .putString(mContext.getString(R.string.password_bundle_key), password)
-                        .apply();
                 return true;
             } catch (Exception e){
                 //Log.e(LOG_TAG, e.getMessage());

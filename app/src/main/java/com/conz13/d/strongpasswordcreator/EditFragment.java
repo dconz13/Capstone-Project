@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 /**
  * Created by dillon on 5/12/16.
@@ -68,7 +71,8 @@ public class EditFragment extends Fragment {
         // Save item
         if(item.getItemId() == R.id.edit_save_button){
             if(checkHeaderAndPasswordNotEmpty() && !checkHeaderInUse()) {
-                if(Utility.updateExistingEntry(getContext(), getContentValues(), ID)){
+                String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+                if(Utility.updateExistingEntry(getContext(), password, getContentValues(), ID)){
                     ((EditActivity)getActivity()).setResult(getString(R.string.edit_snackbar_save));
                 }
 
@@ -98,11 +102,7 @@ public class EditFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String selection = "_ID='" + Long.toString(ID) + "'";
-                                getContext().getContentResolver().delete(
-                                        PasswordContract.PasswordEntry.CONTENT_URI,
-                                        selection,
-                                        null
-                                );
+                                deleteFromDb(selection);
                                 ((EditActivity)getActivity()).setResult(getString(R.string.edit_snackbar_delete));
                             }
                         });
@@ -116,6 +116,13 @@ public class EditFragment extends Fragment {
                 mDeleteDialog.show();
             }
         });
+    }
+
+    private void deleteFromDb(String selection){
+        String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+        SQLiteDatabase db = new PasswordDbHelper(getContext()).getWritableDatabase(password);
+        db.delete(PasswordContract.PasswordEntry.TABLE_NAME, selection, null);
+        db.close();
     }
 
     /**
@@ -164,7 +171,8 @@ public class EditFragment extends Fragment {
      */
     private boolean checkHeaderInUse(){
         // Only in use if the entry exists and the header is not the same
-        if(Utility.checkIfEntryExists(getContext(), mHeaderText.getText().toString()) && !isHeaderSame()){
+        String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+        if(Utility.checkIfEntryExists(getContext(), password, mHeaderText.getText().toString()) && !isHeaderSame()){
             mHeaderText.setError(getString(R.string.save_dialog_header_not_unique));
             return true;
         }

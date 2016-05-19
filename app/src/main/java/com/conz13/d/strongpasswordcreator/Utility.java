@@ -11,6 +11,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -129,18 +132,23 @@ public class Utility {
      * Checks the database to see if the Header name is already in use
      *
      * @param context application context
+     * @param password password to access the db
      * @param headerName header string to check the database for
      * @return returns true if the entry exists
      */
-    public static boolean checkIfEntryExists(Context context, String headerName){
-        Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
-        String[] projection = {"header_title"};
+    public static boolean checkIfEntryExists(Context context, String password, String headerName){
+        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
+        String[] columns = {"header_title"};
         String selection = "header_title='" + headerName + "' ";
         boolean existsFlag = false;
-        Cursor cursor = context.getContentResolver().query(
-                uri,
-                projection,
+        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
+        Cursor cursor = db.query(
+                table_name,
+                columns,
                 selection,
+                null,
+                null,
+                null,
                 null,
                 null
         );
@@ -154,6 +162,7 @@ public class Utility {
             existsFlag = false;
         }finally{
             cursor.close();
+            db.close();
         }
         return existsFlag;
     }
@@ -162,40 +171,51 @@ public class Utility {
      * Updates the currently selected entry
      *
      * @param context application context
+     * @param password password to access the db
      * @param contentValues content values to update
      * @param ID used to make sure the correct entry is updated
      * @return returns true on successful update
      */
-    public static boolean updateExistingEntry(Context context, ContentValues contentValues, long ID){
-        Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
+    public static boolean updateExistingEntry(Context context, String password, ContentValues contentValues, long ID){
+        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
+        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String selection = "_ID='" + ID + "'";
 
-        int rows = context.getContentResolver().update(
-                uri,
+        int rows = db.update(
+                table_name,
                 contentValues,
                 selection,
                 null
                 );
+
+        db.close();
 
         if(rows > 0) return true;
 
         else return false;
     }
 
+    // TODO: Put all database queries in the Utilities file to avoid forgetting to close the db
+
     /**
      * Builds a bundle from a give id. The Id is supplied from the recycler view entry in the locker
      * @param context application context
+     * @param password password to access the db
      * @param id id of the entry the cursor will use to select the rows
      * @return returns a bundle of all values from all rows
      */
-    public static Bundle buildBundleFromId(Context context, long id){
+    public static Bundle buildBundleFromId(Context context, String password, long id){
         Bundle bundle = new Bundle();
-        Uri uri = PasswordContract.PasswordEntry.CONTENT_URI;
+        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
+        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String selection = "_ID='" + id + "'";
-        Cursor cursor = context.getContentResolver().query(
-                uri,
+        Cursor cursor = db.query(
+                table_name,
                 null,
                 selection,
+                null,
+                null,
+                null,
                 null,
                 null
         );
@@ -216,6 +236,7 @@ public class Utility {
             Log.e(LOG_TAG, e.getMessage());
         }finally {
             cursor.close();
+            db.close();
         }
 
         return bundle;
