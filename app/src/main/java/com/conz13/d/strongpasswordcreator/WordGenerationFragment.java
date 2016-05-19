@@ -148,6 +148,9 @@ public class WordGenerationFragment extends Fragment
         else {
             disableDeleteAll();
         }
+        if(((MainActivity)getActivity()).skippedFlag){
+            menu.findItem(R.id.sign_out).setTitle(getContext().getString(R.string.sign_in));
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

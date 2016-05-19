@@ -19,6 +19,7 @@
     <!-- Menu item strings -->
     <string name="delete_list">Delete all</string>
     <string name="sign_out">Sign out</string>
+    <string name="sign_in">Sign in</string>
 
     <!-- Alert dialog for entering locker -->
     <string name="alert_dialog_title">Unlock Locker</string>
@@ -129,7 +130,7 @@
         <item>Maori</item>
         <item>Norwegian</item>
         <!--<item>Polish</item>-->
-        <item>Russian</item>
+        <!--<item>Russian</item>-->
         <item>Spanish</item>
         <item>Swedish</item>
         <!--<item>Turkish</item>-->
@@ -148,7 +149,7 @@
         <item>_mi</item>
         <item>_no</item>
         <!--<item>_pl</item>-->
-        <item>_ru</item>
+        <!--<item>_ru</item>-->
         <item>_es</item>
         <item>_sv</item>
         <!--<item>_tr</item>-->
@@ -166,9 +167,10 @@
     <string name="login_skip_button">Skip</string>
     <string name="login_password_empty_error">Please enter your password</string>
     <string name="login_password_wrong_error">Incorrect password</string>
-    <!-- If this is changed, change hardcoded key in PasswordProvider class -->
-    <string name="password_bundle_key" translatable="false">password_bundle_key</string>
     <string name="skipped_key" translatable="false">skipped_key</string>
+    <string name="logout_dialog_message">Are you sure you want to sign out of Strong Password Creator?</string>
+    <string name="logout_dalog_positive">Sign out</string>
+    <string name="logout_dialog_negative">Cancel</string>
 
 
 </resources>

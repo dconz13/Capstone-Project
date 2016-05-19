@@ -2,6 +2,7 @@ package com.conz13.d.strongpasswordcreator;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -86,8 +88,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signOut() {
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+        if(skippedFlag){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+        else{
+            final Context context = this;
+            new AlertDialog.Builder(this)
+                    .setMessage(getString(R.string.logout_dialog_message))
+                    .setPositiveButton(getString(R.string.logout_dalog_positive), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(context, LoginActivity.class));
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.logout_dialog_negative), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing
+                        }
+                    })
+                    .show();
+        }
     }
 
     @Override
@@ -168,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 || !getSupportFragmentManager().findFragmentByTag(getString(R.string.locker_fragment_tag)).isVisible()){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_content_frame, new LockerFragment(), getString(R.string.locker_fragment_tag))
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit();
         }
     }
