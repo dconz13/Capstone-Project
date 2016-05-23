@@ -148,7 +148,7 @@ public class WordGenerationFragment extends Fragment
         else {
             disableDeleteAll();
         }
-        if(((MainActivity)getActivity()).skippedFlag){
+        if(((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN()){
             menu.findItem(R.id.sign_out).setTitle(getContext().getString(R.string.sign_in));
         }
         super.onCreateOptionsMenu(menu, inflater);
@@ -221,7 +221,7 @@ public class WordGenerationFragment extends Fragment
             @Override
             public void onClick(View v) {
                 // Start dialog for saving to database
-                boolean skipFlag = ((MainActivity)getActivity()).skippedFlag;
+                boolean skipFlag = ((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN();
                 // skipFlag = true if login was skipped
                 if(!skipFlag) {
                     ((MainActivity) getActivity()).showSaveDialog(mResultantWords);

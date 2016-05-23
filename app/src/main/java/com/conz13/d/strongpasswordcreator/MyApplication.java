@@ -8,6 +8,7 @@ import android.app.Application;
 public class MyApplication extends Application {
 
     private String PASSWORD;
+    private boolean SKIPPED_LOGIN;
 
     public String getPASSWORD(){
         return this.PASSWORD;
@@ -17,5 +18,7 @@ public class MyApplication extends Application {
         this.PASSWORD = password;
     }
 
+    public boolean getSKIPPED_LOGIN(){ return this.SKIPPED_LOGIN;}
 
+    public void setSKIPPED_LOGIN(boolean skippedLogin){this.SKIPPED_LOGIN = skippedLogin;}
 }

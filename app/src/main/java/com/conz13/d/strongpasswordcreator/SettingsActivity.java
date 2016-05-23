@@ -1,8 +1,14 @@
 package com.conz13.d.strongpasswordcreator;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 /**
  * Created by dillon on 4/17/16.
@@ -30,5 +36,23 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showChangePasswordDialog(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag(getString(R.string.change_password_dialog_tag));
+        if(prev != null){
+            ft.remove(prev);
+        }
+        ChangePassDialogFragment dialogFragment = new ChangePassDialogFragment();
+        dialogFragment.show(ft, getString(R.string.change_password_dialog_tag));
+    }
+
+    public void changePassword(String newPass){
+        String currentPass = ((MyApplication)getApplication()).getPASSWORD();
+        SQLiteDatabase db = new PasswordDbHelper(this).getReadableDatabase(currentPass);
+        db.changePassword(newPass);
+        db.close();
+        ((MyApplication)getApplication()).setPASSWORD(newPass);
     }
 }

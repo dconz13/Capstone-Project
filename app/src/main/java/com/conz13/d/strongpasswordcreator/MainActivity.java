@@ -4,13 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,12 +15,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
@@ -45,16 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int HOME = 0;
     public static final int LOCKER = 1;
-    public boolean skippedFlag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
-
-        if(getIntent().hasExtra(getString(R.string.skipped_key))) {
-            skippedFlag = getIntent().getExtras().getBoolean(getString(R.string.skipped_key));
-        }
 
         // TODO: Add item icons
 
@@ -90,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signOut() {
+        boolean skippedFlag = ((MyApplication)getApplication()).getSKIPPED_LOGIN();
         if(skippedFlag){
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -225,8 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSavePositiveClick(ContentValues contentValues){
         // Save to database
-//        Uri contentUri = PasswordContract.PasswordEntry.CONTENT_URI;
-//        this.getContentResolver().insert(contentUri, contentValues);
         saveToDatabase(contentValues);
         // Clear list in fragment
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));

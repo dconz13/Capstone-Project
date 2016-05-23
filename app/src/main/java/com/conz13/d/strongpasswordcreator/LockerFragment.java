@@ -68,7 +68,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         mAdapter = new LockerRecyclerAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mSkipFlag = ((MainActivity)getActivity()).skippedFlag;
+        mSkipFlag = ((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN();
         if(mSkipFlag){
             mEmptyTextView.setText(getContext().getString(R.string.locker_empty_skipped));
             mEmptyTextView.setVisibility(View.VISIBLE);
@@ -81,7 +81,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        mSkipFlag = ((MainActivity)getActivity()).skippedFlag;
+        mSkipFlag = ((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN();
         if(!mSkipFlag) {
             getLoaderManager().initLoader(LOADER, null, this);
         }

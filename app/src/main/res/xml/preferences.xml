@@ -19,11 +19,4 @@
         android:dialogTitle="@string/change_language_dialog_title"
         />
 
-    <!-- Change current password -->
-    <EditTextPreference
-        android:key="@string/change_password_key"
-        android:title="@string/change_password_title"
-        android:enabled="false"
-        />
-
 </PreferenceScreen>

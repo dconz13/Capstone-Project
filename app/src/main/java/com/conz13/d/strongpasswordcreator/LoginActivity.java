@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             if(verifyPassword(password)){
                 Intent intent = new Intent(this, MainActivity.class);
                 ((MyApplication)getApplication()).setPASSWORD(password);
-                intent.putExtra(getString(R.string.skipped_key), false);
+                ((MyApplication) getApplication()).setSKIPPED_LOGIN(false);
 
                 editText.setText("");
 
@@ -81,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
     public void skip(View view) {
         EditText editText = (EditText) view.getRootView().findViewById(R.id.login_edit_text);
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(getString(R.string.skipped_key), true);
         ((MyApplication)getApplication()).setPASSWORD("");
+        ((MyApplication)getApplication()).setSKIPPED_LOGIN(true);
         editText.setText("");
         startActivity(intent);
         //this.finish();
