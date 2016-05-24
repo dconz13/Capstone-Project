@@ -11,7 +11,6 @@ import android.view.ViewGroup;
  * Created by dillon on 5/24/16.
  */
 public class TutorialPageFragment extends Fragment{
-    private int mPageNumber;
 
     @Nullable
     @Override
