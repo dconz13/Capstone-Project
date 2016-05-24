@@ -16,11 +16,11 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if(sharedPreferences.getBoolean(getString(R.string.first_run_key),false)){
+//        if(sharedPreferences.getBoolean(getString(R.string.first_run_key),false)){
             startActivity(new Intent(this, FirstRunActivity.class));
-        } else {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+//        } else {
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
         finish();
     }
 }

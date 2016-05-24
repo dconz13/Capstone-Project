@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".FirstRunActivity">
+        <activity android:name=".FirstRunActivity"
+            android:label="@string/tutorial_toolbar_name">
 
         </activity>
         <activity android:name=".LoginActivity"
