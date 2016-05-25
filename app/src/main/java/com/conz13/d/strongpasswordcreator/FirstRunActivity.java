@@ -57,6 +57,8 @@ public class FirstRunActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 this.finish();
+            } else {
+                editText.setError(getString(R.string.login_password_wrong_error));
             }
         } else {
             editText.setError(getString(R.string.login_password_empty_error));

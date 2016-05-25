@@ -11,6 +11,9 @@ import com.conz13.d.strongpasswordcreator.TutorialPageFragment;
 
 /**
  * Created by dillon on 5/24/16.
+ *
+ * https://developer.android.com/training/animation/screen-slide.html
+ * for fancy screen slides
  */
 public class TutorialPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
     private final Context mContext;

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.data.DatabaseCursorLoader;
@@ -50,6 +51,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     private RecyclerView.LayoutManager mLayoutManager;
     private LockerRecyclerAdapter mAdapter;
     private TextView mEmptyTextView;
+    private ImageView mEmptyImageView;
 
     // TODO: Add hiding the toolbar on scroll of the list
     @Override
@@ -64,6 +66,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mEmptyTextView = (TextView) rootView.findViewById(R.id.locker_empty);
+        mEmptyImageView = (ImageView) rootView.findViewById(R.id.locker_empty_image);
 
         mAdapter = new LockerRecyclerAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -72,6 +75,8 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         if(mSkipFlag){
             mEmptyTextView.setText(getContext().getString(R.string.locker_empty_skipped));
             mEmptyTextView.setVisibility(View.VISIBLE);
+            mEmptyImageView.setImageDrawable(getResources().getDrawable(R.drawable.locker_locked_splash));
+            mEmptyImageView.setVisibility(View.VISIBLE);
         }
 
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
@@ -110,6 +115,8 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         if(data.getCount() == 0) {
             mEmptyTextView.setText(getContext().getString(R.string.locker_empty_text_view));
             mEmptyTextView.setVisibility(View.VISIBLE);
+            mEmptyImageView.setImageDrawable(getResources().getDrawable(R.drawable.locker_empty_splash));
+            mEmptyImageView.setVisibility(View.VISIBLE);
         }
         mAdapter.swapCursor(data);
     }

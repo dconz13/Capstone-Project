@@ -3,25 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:id="@+id/options_group" android:checkableBehavior="single">
-        <item android:title="@string/home"
+        <item
+            android:id="@+id/menu_home"
+            android:title="@string/home"
             app:showAsAction="never"
             android:orderInCategory="1"
-            android:id="@+id/menu_home" />
-        <item android:title="@string/my_locker"
+            android:icon="@drawable/ic_home_black_24dp"
+            />
+        <item
+            android:id="@+id/menu_locker"
+            android:title="@string/my_locker"
             app:showAsAction="never"
             android:orderInCategory="2"
-            android:id="@+id/menu_locker"/>
+            android:icon="@drawable/locker_icon_black_24dp"
+            />
     </group>
 
     <group android:id="@+id/settings_group" android:checkableBehavior="single">
-        <item android:title="@string/settings"
+        <item
+            android:id="@+id/menu_settings"
+            android:title="@string/settings"
             app:showAsAction="never"
             android:orderInCategory="3"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:id="@+id/menu_settings" />
-        <item android:title="@string/help"
+             />
+        <item
+            android:id="@+id/menu_help"
+            android:title="@string/help"
             app:showAsAction="never"
             android:orderInCategory="4"
-            android:id="@+id/menu_help" />
+            android:icon="@drawable/ic_info_black_24dp"
+             />
     </group>
 </menu>
