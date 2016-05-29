@@ -17,7 +17,6 @@ public class TutorialPageFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle args = getArguments();
         int layout = getLayoutResource(args.getInt("pageTest", 0));
-
         View rootView = inflater.inflate(layout, container, false);
 
         return rootView;

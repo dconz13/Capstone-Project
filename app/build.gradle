@@ -38,6 +38,7 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.amlcurran.showcaseview:library:5.4.3'
+    compile 'me.relex:circleindicator:1.2.1@aar'
     // Test only compiles
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support:support-annotations:23.1.1'

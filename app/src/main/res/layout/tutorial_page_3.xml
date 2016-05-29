@@ -1,23 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tutorial_diceware"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tutorial_diceware_explanation"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tutorial_diceware_example"/>
-    <TextView
+    <ImageView
+        android:id="@+id/tutorial_image_3"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="@string/tutorial_diceware_benefits"/>
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/tutorial_hacker_old_page3"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tutorial_3_text_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_below="@+id/tutorial_image_3"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:text="@string/tutorial_diceware"/>
+
+    <TextView
+        android:id="@+id/tutorial_3_text_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tutorial_3_text_1"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:text="@string/tutorial_diceware_explanation"/>
+
+    <TextView
+        android:id="@+id/tutorial_3_text_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tutorial_3_text_2"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:text="@string/tutorial_diceware_example"/>
+
+</RelativeLayout>
