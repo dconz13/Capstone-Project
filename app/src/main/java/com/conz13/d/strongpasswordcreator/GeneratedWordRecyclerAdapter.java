@@ -45,13 +45,13 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
         @Override
         public void onItemSelected() {
             // Shows that this is the selected view
-            itemView.setBackgroundColor(Color.WHITE);
+            //itemView.setBackgroundColor(Integer.parseInt("f9f9f9", 16));
         }
 
         @Override
         public void onItemClear() {
             // Reset background color and reset text alpha to opaque
-            itemView.setBackgroundColor(0);
+            //itemView.setBackgroundColor(0);
             mResultantWord.setAlpha(1.0f);
         }
 

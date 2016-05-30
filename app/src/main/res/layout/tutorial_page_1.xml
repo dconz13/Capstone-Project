@@ -10,7 +10,8 @@
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
         android:alpha="0.9"
-        android:src="@drawable/tutorial_thinking_page1"/>
+        android:src="@drawable/tutorial_thinking_page1"
+        android:contentDescription="@string/tutorial_image_1_content_description"/>
     <TextView
         android:id="@+id/header_1"
         android:layout_width="match_parent"
@@ -21,8 +22,7 @@
         android:layout_marginEnd="36dp"
         android:layout_below="@+id/tutorial_image_1"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="26sp"
+        style="@style/tutorial_header_text"
         android:text="@string/tutorial_intro_question"/>
 
     <TextView
@@ -35,8 +35,7 @@
         android:layout_marginTop="14dp"
         android:layout_below="@id/header_1"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        style="@style/tutorial_body_text"
         android:text="@string/tutorial_actually"/>
 
 </RelativeLayout>

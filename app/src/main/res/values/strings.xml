@@ -189,13 +189,20 @@
     <string name="tutorial_entropy_example">\"Ur3/5fop!23\" has an entropy of ~48.5 bits. This low of an entropy value can be cracked in just three days at one billion guesses per second.</string>
     <string name="tutorial_time_to_crack_example">\"Ur3/5fop!23\" can be cracked in just three days at one billion guesses per second.</string>
     <string name="tutorial_what_to_do">So what do we do?</string>
-    <string name="tutorial_diceware">Introducing Diceware!</string>
+    <string name="tutorial_diceware">Introducing Diceware</string>
     <string name="tutorial_diceware_explanation">Diceware is a method of password generation in which a dice is rolled to produce a five digit number that correlates to a word in the Diceware passphrase list.</string>
     <string name="tutorial_diceware_example">A password such as \"21st onyx hawk pear filler\" generated using Diceware has an entropy of ~107.4 bits
-        which would take roughly 2.6 quadrillion years to crack at one billion guesses per second.</string>
+        which would take ~2.6 quadrillion years to crack at one billion guesses per second.</string>
     <string name="tutorial_diceware_benefits">Plus, it\'s easier to remember for humans!</string>
     <string name="tutorial_get_started">Let\'s get started</string>
     <string name="tutorial_password_header">This app uses a local encrypted database so 3rd parties won\'t be able to access your passwords stored in this app!</string>
     <string name="tutorial_set_password">Set your password that will be used to login to the app (don\'t forget it!): </string>
     <string name="tutorial_button">Save</string>
+    <string name="tutorial_skip_button">Skip</string>
+    <string name="tutorial_next_button_content_description">Next slide button.</string>
+
+    <string name="tutorial_image_1_content_description">A man trying to think of a strong password.</string>
+    <string name="tutorial_image_2_content_description">A hacker using a brute force method to crack passwords.</string>
+    <string name="tutorial_image_3_content_description">A hacker waiting forever to crack a strong password.</string>
+
 </resources>

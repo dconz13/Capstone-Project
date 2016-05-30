@@ -4,10 +4,10 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:layout_marginTop="20dp"
-    android:layout_marginLeft="@dimen/default_margin"
-    android:layout_marginRight="@dimen/default_margin"
-    android:layout_marginStart="@dimen/default_margin"
-    android:layout_marginEnd="@dimen/default_margin">
+    android:layout_marginLeft="@dimen/dice_margin"
+    android:layout_marginRight="@dimen/dice_margin"
+    android:layout_marginStart="@dimen/dice_margin"
+    android:layout_marginEnd="@dimen/dice_margin">
 
     <ImageView
         android:id="@+id/dice_holder_one"
@@ -39,6 +39,5 @@
         android:layout_height="150dp"
         android:layout_weight="1"
         android:contentDescription="@string/dice_five_content_description"/>
-
 
 </LinearLayout>

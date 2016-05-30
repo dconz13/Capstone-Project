@@ -3,6 +3,7 @@ package com.conz13.d.strongpasswordcreator;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -42,6 +43,9 @@ public class ChangePassDialogFragment extends DialogFragment{
             @Override
             public void onShow(DialogInterface dialog) {
                 Button positiveButton = builder.getButton(AlertDialog.BUTTON_POSITIVE);
+                Button negativeButton = builder.getButton(AlertDialog.BUTTON_NEGATIVE);
+                //negativeButton.setTextColor(Color.BLACK);
+                //positiveButton.setTextColor(Color.BLACK);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

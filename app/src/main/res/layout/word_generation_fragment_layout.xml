@@ -5,6 +5,7 @@
     android:id="@+id/coord_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,14 +32,12 @@
         <ImageButton
             android:id="@+id/add_to_list_button"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
+            android:padding="10dp"
             android:visibility="invisible"
             android:src="@drawable/ic_add_circle_black_24dp"
-            android:tint="@color/colorPrimary"
+            android:tint="@color/colorAccent"
             android:background="@android:color/transparent"
             android:contentDescription="@string/add_to_list_button_content_description"/>
         <TextView
@@ -53,12 +52,11 @@
         <Button
             android:id="@+id/roll_button"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="48dp"
             android:layout_weight="2"
             android:text="@string/roll_button_text"
             android:layout_gravity="center_horizontal"
-            style="?android:attr/borderlessButtonStyle"
-            android:background="@color/colorAccent"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:contentDescription="@string/roll_button_content_description"
             />
 
@@ -90,6 +88,7 @@
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin"
         android:layout_gravity="bottom|end"
+        android:tint="@color/white"
         android:elevation="4dp"
         android:src="@drawable/ic_save_black_24dp" />
 

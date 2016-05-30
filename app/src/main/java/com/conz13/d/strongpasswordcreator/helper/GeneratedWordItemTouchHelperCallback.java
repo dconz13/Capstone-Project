@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -86,10 +87,16 @@ public class GeneratedWordItemTouchHelperCallback extends android.support.v7.wid
             if(dX >0){
                 mPaint.setColor(itemView.getResources().getColor(R.color.red));
                 Bitmap icon = BitmapFactory.decodeResource(itemView.getResources(), R.drawable.ic_delete_black_24dp);
-                c.drawRect((float) itemView.getLeft(),(float) itemView.getTop(),
-                        (float) itemView.getRight(),(float) itemView.getBottom(),mPaint);
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    c.drawRoundRect((float) itemView.getLeft(), (float) itemView.getTop(),
+                            (float) itemView.getRight(), (float) itemView.getBottom(), 7f, 7f, mPaint);
+                }
+                else {
+                    c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(),
+                            (float) itemView.getRight(), (float) itemView.getBottom(), mPaint);
+                }
 
-                float margin_left = (float) itemView.getLeft() + itemView.getResources().getDimension(R.dimen.default_margin)*2;
+                float margin_left = (float) itemView.getLeft() + itemView.getResources().getDimension(R.dimen.default_margin);
                 float margin_top = (float) itemView.getTop() + ((float) itemView.getBottom() - (float) itemView.getTop() - icon.getHeight())/2;
                 c.drawBitmap(icon, margin_left, margin_top, mPaint);
 

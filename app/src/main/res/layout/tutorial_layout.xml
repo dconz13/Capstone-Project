@@ -9,44 +9,46 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorPrimaryLight">
+        android:background="@color/colorPrimaryLight"
+        android:weightSum="3">
 
         <Button
             android:id="@+id/tutorial_skip"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginStart="14dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:background="@color/colorPrimaryLight"
             android:textColor="@color/white"
-            android:text="Skip"/>
+            android:text="@string/tutorial_skip_button"
+            android:contentDescription="@string/tutorial_skip_button"/>
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/circle_indicator"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
             android:background="@color/colorPrimaryLight"
-            android:layout_centerHorizontal="true"
-            android:layout_height="48dp"/>
+            />
 
         <ImageButton
             android:id="@+id/tutorial_next_page"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
             android:tint="@color/white"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="@color/colorPrimaryLight"/>
+            android:background="@color/colorPrimaryLight"
+            android:contentDescription="@string/tutorial_next_button_content_description"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

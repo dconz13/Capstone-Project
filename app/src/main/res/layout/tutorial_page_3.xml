@@ -7,9 +7,11 @@
     <ImageView
         android:id="@+id/tutorial_image_3"
         android:layout_width="wrap_content"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/tutorial_hacker_old_page3"/>
+        android:layout_below="@+id/tutorial_3_text_2"
+        android:contentDescription="@string/tutorial_image_3_content_description"
+        android:src="@drawable/tutorial_hacker_old_page3" />
 
     <TextView
         android:id="@+id/tutorial_3_text_1"
@@ -19,10 +21,9 @@
         android:layout_marginStart="36dp"
         android:layout_marginRight="36dp"
         android:layout_marginEnd="36dp"
-        android:layout_below="@+id/tutorial_image_3"
+        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="26sp"
+        style="@style/tutorial_header_text"
         android:text="@string/tutorial_diceware"/>
 
     <TextView
@@ -36,8 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tutorial_3_text_1"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        style="@style/tutorial_body_text"
         android:text="@string/tutorial_diceware_explanation"/>
 
     <TextView
@@ -48,11 +48,9 @@
         android:layout_marginStart="36dp"
         android:layout_marginRight="36dp"
         android:layout_marginEnd="36dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/tutorial_3_text_2"
+        android:layout_below="@+id/tutorial_image_3"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        style="@style/tutorial_body_text"
         android:text="@string/tutorial_diceware_example"/>
 
 </RelativeLayout>

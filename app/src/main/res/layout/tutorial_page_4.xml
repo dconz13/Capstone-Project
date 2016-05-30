@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/create_pass_show_password"
                 android:text="@string/tutorial_button"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:onClick="createDbLoginPassword"/>
 
         </RelativeLayout>

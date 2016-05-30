@@ -10,7 +10,8 @@
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
         android:alpha="0.9"
-        android:src="@drawable/tutorial_hacker_page2"/>
+        android:src="@drawable/tutorial_hacker_page2"
+        android:contentDescription="@string/tutorial_image_2_content_description"/>
 
     <TextView
         android:id="@+id/tutorial_2_text_1"
@@ -22,8 +23,7 @@
         android:layout_marginEnd="36dp"
         android:layout_below="@+id/tutorial_image_2"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="26sp"
+        style="@style/tutorial_header_text"
         android:text="@string/tutorial_entropy_def"/>
 
     <TextView
@@ -37,8 +37,7 @@
         android:layout_marginTop="14dp"
         android:layout_below="@+id/tutorial_2_text_1"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        style="@style/tutorial_body_text"
         android:text="@string/tutorial_entropy_example"
         />
 
