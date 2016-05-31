@@ -23,13 +23,11 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@+id/locker_edit_button"
-            android:text="Sample Text"
-            android:paddingBottom="15dp"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"/>
+            android:text="Sample"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            />
 
         <ImageButton
             android:id="@+id/locker_edit_button"

@@ -31,7 +31,6 @@ public class EditFragment extends Fragment {
     private EditText mUsernameText;
     private EditText mPasswordText;
     private EditText mAddInfoText;
-    private View snackBarRef;
     private long ID;
 
     private String previousHeaderText;
@@ -53,7 +52,6 @@ public class EditFragment extends Fragment {
         mUsernameText = (EditText)rootView.findViewById(R.id.edit_username_edit_text);
         mPasswordText = (EditText)rootView.findViewById(R.id.edit_password_edit_text);
         mAddInfoText = (EditText)rootView.findViewById(R.id.edit_add_info_edit_text);
-        snackBarRef = rootView;
 
         initTextFields();
         initDeleteButton((Button)rootView.findViewById(R.id.edit_delete_button));

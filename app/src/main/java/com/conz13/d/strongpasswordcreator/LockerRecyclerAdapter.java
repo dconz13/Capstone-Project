@@ -33,9 +33,9 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
             super(view);
             mHeaderTextView = (TextView)view.findViewById(R.id.locker_item_title);
             mEditButton = (ImageButton)view.findViewById(R.id.locker_edit_button);
-            mUsernameTextView = (TextView)view.findViewById(R.id.locker_item_username_label);
-            mPasswordTextView = (TextView)view.findViewById(R.id.locker_item_password_label);
-            mAddInfoTextView = (TextView)view.findViewById(R.id.locker_item_additional_info_label);
+            mUsernameTextView = (TextView)view.findViewById(R.id.locker_item_username);
+            mPasswordTextView = (TextView)view.findViewById(R.id.locker_item_password);
+            mAddInfoTextView = (TextView)view.findViewById(R.id.locker_item_additional_info);
             ID = -1;
 
             mEditButton.setOnClickListener(this);
@@ -83,16 +83,14 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
 
         holder.mHeaderTextView.setText(mCursor.getString(LockerFragment.COL_HEADER_TITLE));
 
-        String username = "Username: ";
-        username = username.concat(" " + mCursor.getString(LockerFragment.COL_USERNAME));
+
+        String username = mCursor.getString(LockerFragment.COL_USERNAME);
         holder.mUsernameTextView.setText(username);
 
-        String password = "Password: ";
-        password = password.concat(" " + mCursor.getString(LockerFragment.COL_PASSWORD));
+        String password = mCursor.getString(LockerFragment.COL_PASSWORD);
         holder.mPasswordTextView.setText(password);
 
-        String add_info = "Additional info: ";
-        add_info = add_info.concat(" " + mCursor.getString(LockerFragment.COL_ADD_INFO));
+        String add_info = mCursor.getString(LockerFragment.COL_ADD_INFO);
         holder.mAddInfoTextView.setText(add_info);
 
         holder.ID = mCursor.getLong(0);

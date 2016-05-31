@@ -8,34 +8,67 @@
         android:id="@+id/locker_item_username_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/username_label"
-        android:paddingStart="5dp"
-        android:paddingLeft="5dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
         android:paddingTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/username_label"/>
+    <TextView
+        android:id="@+id/locker_item_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
         android:paddingBottom="5dp"
-        android:paddingEnd="5dp"
-        android:paddingRight="5dp"/>
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:text="@string/username_label"/>
     <TextView
         android:id="@+id/locker_item_password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/password_label"
-        android:paddingStart="5dp"
-        android:paddingLeft="5dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
         android:paddingTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/password_label"/>
+    <TextView
+        android:id="@+id/locker_item_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
         android:paddingBottom="5dp"
-        android:paddingEnd="5dp"
-        android:paddingRight="5dp"/>
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:text="@string/username_label"/>
     <TextView
         android:id="@+id/locker_item_additional_info_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/additional_info_label"
-        android:paddingStart="5dp"
-        android:paddingLeft="5dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
         android:paddingTop="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/additional_info_label"/>
+    <TextView
+        android:id="@+id/locker_item_additional_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
         android:paddingBottom="5dp"
-        android:paddingEnd="5dp"
-        android:paddingRight="5dp"/>
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:text="@string/username_label"/>
 
 </LinearLayout>

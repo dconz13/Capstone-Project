@@ -28,7 +28,7 @@ public class EditActivity extends AppCompatActivity {
         try {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_black_24dp);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_white_24dp);
 
         } catch(NullPointerException e){
             Log.e(LOG_TAG, e.toString());

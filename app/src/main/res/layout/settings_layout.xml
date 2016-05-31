@@ -21,7 +21,7 @@
         android:paddingEnd="?attr/listPreferredItemPaddingRight"
         android:clickable="true"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="com.android.internal.R.styleable.Preference"
+        android:textColor="#000"
         android:text="@string/change_password_title"/>
 
 </LinearLayout>
