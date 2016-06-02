@@ -2,6 +2,7 @@ package com.conz13.d.strongpasswordcreator;
 
 import android.database.Cursor;
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         public final TextView mPasswordTextView;
         public final TextView mAddInfoTextView;
         public long ID;
+        public final CardView mCardViewBody;
 
         public LockerViewHolder(View view){
             super(view);
@@ -37,14 +39,25 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
             mPasswordTextView = (TextView)view.findViewById(R.id.locker_item_password);
             mAddInfoTextView = (TextView)view.findViewById(R.id.locker_item_additional_info);
             ID = -1;
+            mCardViewBody = (CardView)view.findViewById(R.id.locker_card);
 
+            mCardViewBody.setOnClickListener(this);
             mEditButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            // Execute edit button
-            mOnEditButtonPressed.startEditActivity(ID);
+            if(v.getId() == R.id.locker_edit_button) {
+                // Execute edit button
+                mOnEditButtonPressed.startEditActivity(ID);
+                v.getRootView().findViewById(R.id.child_layout).setVisibility(View.GONE);
+            } else {
+                if(v.findViewById(R.id.child_layout).getVisibility() == View.GONE) {
+                    v.findViewById(R.id.child_layout).setVisibility(View.VISIBLE);
+                } else {
+                    v.findViewById(R.id.child_layout).setVisibility(View.GONE);
+                }
+            }
         }
 
         @Override

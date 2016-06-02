@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -49,19 +50,37 @@ public class ChangePassDialogFragment extends DialogFragment{
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Verify the passwords are the same and valid
-                        if(!checkIfEmpty() && checkIfCurrentIsValid()
-                                && !checkIfCurrentEqualsNew() && checkIfNewEqualsConfirm()){
-                            String newPass = mNewPass.getText().toString().trim();
-                            ((SettingsActivity)getActivity()).changePassword(newPass);
-                            builder.dismiss();
-                        }
+                        save();
                     }
                 });
             }
         });
 
+        mConfirmPass.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP){
+                    save();
+                }
+                return false;
+            }
+        });
+
         return builder;
+    }
+
+    private void save(){
+        // Verify the passwords are the same and valid
+        // This way if there is an error it won't check the other error cases until it is resolved.
+        if(!checkIfEmpty())
+            if(checkIfCurrentIsValid())
+                if(!checkIfCurrentEqualsNew())
+                    if(checkIfNewEqualsConfirm()) {
+                        String newPass = mNewPass.getText().toString().trim();
+                        ((SettingsActivity) getActivity()).changePassword(newPass);
+                        this.dismiss();
+                    }
+
     }
 
     private boolean checkIfCurrentIsValid(){

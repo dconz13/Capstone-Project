@@ -36,7 +36,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:design:23.1.1'
-    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.amlcurran.showcaseview:library:5.4.3'
     compile 'me.relex:circleindicator:1.2.1@aar'
     compile project(":wheel")

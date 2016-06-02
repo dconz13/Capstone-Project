@@ -139,11 +139,12 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
-            if(resultCode == MainActivity.RESULT_OK){
-                getLoaderManager().restartLoader(LOADER, null, this);
-                CharSequence message = data.getCharSequenceExtra(getString(R.string.edit_snackbar_key));
-                Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG).show();
-            }
+            if(null != data)
+                if (resultCode == MainActivity.RESULT_OK) {
+                    getLoaderManager().restartLoader(LOADER, null, this);
+                    CharSequence message = data.getCharSequenceExtra(getString(R.string.edit_snackbar_key));
+                    Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG).show();
+                }
         }
     }
 }

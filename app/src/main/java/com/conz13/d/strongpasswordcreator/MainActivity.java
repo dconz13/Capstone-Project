@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        // TODO: Add item icons
-
         mNavDrawer = (NavigationView) findViewById(R.id.nav_drawer);
         setUpNavigationDrawerListener(mNavDrawer);
         mNavDrawer.setCheckedItem(R.id.menu_home);
@@ -164,9 +162,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return true;
                     case R.id.menu_settings:
-                        // TODO: Create helper method to change the nav selection to the current fragment
                         startActivity(new Intent(context, SettingsActivity.class));
-                        return true;
+                        return false;
                     case R.id.menu_help:
                         return true;
                     default:
@@ -230,7 +227,6 @@ public class MainActivity extends AppCompatActivity {
         long row = 0;
         try {
             row = db.insert(PasswordContract.PasswordEntry.TABLE_NAME, null, contentValues);
-            Log.d(LOG_TAG, "ROW: " + Long.toString(row));
         } catch(Exception e){
             Log.e(LOG_TAG, e.getMessage());
             return row;

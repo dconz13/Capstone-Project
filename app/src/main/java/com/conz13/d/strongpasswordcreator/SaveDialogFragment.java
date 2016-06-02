@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -60,25 +61,39 @@ public class SaveDialogFragment extends DialogFragment {
                 positiveButton.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        // Check header and password are not empty
-                        if(checkHeaderAndPassword()){
-                            // Check if it exists first
-                            String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
-                            if(Utility.checkIfEntryExists(getContext(), password, mHeaderEditText.getText().toString())){
-                                mHeaderEditText.setError(getString(R.string.save_dialog_header_not_unique));
-                            }else {
-                                ((MainActivity) getActivity()).onSavePositiveClick(buildContentValues());
-                                builder.dismiss();
-                            }
-                        }
+                        save();
                     }
                 });
+            }
+        });
+
+        mAddInfoEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP){
+                    save();
+                }
+                return false;
             }
         });
 
         setPasswordString();
 
         return builder;
+    }
+
+    private void save(){
+        // Check header and password are not empty
+        if(checkHeaderAndPassword()){
+            // Check if it exists first
+            String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
+            if(Utility.checkIfEntryExists(getContext(), password, mHeaderEditText.getText().toString())){
+                mHeaderEditText.setError(getString(R.string.save_dialog_header_not_unique));
+            }else {
+                ((MainActivity) getActivity()).onSavePositiveClick(buildContentValues());
+                this.dismiss();
+            }
+        }
     }
 
     private ContentValues buildContentValues(){

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -26,21 +24,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
 
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.List;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.OnWheelScrollListener;
 import kankan.wheel.widget.WheelView;
-import kankan.wheel.widget.adapters.AbstractWheelAdapter;
 
 /**
  * Created by dillon on 4/18/16.
@@ -353,10 +347,10 @@ public class WordGenerationFragment extends Fragment
     private void spinDice(int generatedNumber[]){
         if(animationsEnabled) {
             mDiceOne.scroll(-350 + generatedNumber[0], 2000);
-            mDiceTwo.scroll(-350 + generatedNumber[1], 2100);
-            mDiceThree.scroll(-350 + generatedNumber[2], 2200);
-            mDiceFour.scroll(-350 + generatedNumber[3], 2300);
-            mDiceFive.scroll(-350 + generatedNumber[4], 2400);
+            mDiceTwo.scroll(-350 + generatedNumber[1], 2050);
+            mDiceThree.scroll(-350 + generatedNumber[2], 2100);
+            mDiceFour.scroll(-350 + generatedNumber[3], 2150);
+            mDiceFive.scroll(-350 + generatedNumber[4], 2200);
         }
         else {
             mDiceOne.setCurrentItem(generatedNumber[0], false);
@@ -408,75 +402,4 @@ public class WordGenerationFragment extends Fragment
             }
         }
     };
-
-    private class SlotMachineAdapter extends AbstractWheelAdapter {
-        // Image size
-        final int IMAGE_WIDTH = 260;
-        final int IMAGE_HEIGHT = 150;
-
-        // Slot machine symbols
-        private final int items[] = new int[] {
-                R.drawable.one,
-                R.drawable.two,
-                R.drawable.three,
-                R.drawable.four,
-                R.drawable.five,
-                R.drawable.six
-        };
-
-        // Cached images
-        private List<SoftReference<Bitmap>> images;
-
-        // Layout inflater
-        private Context context;
-
-        /**
-         * Constructor
-         */
-        public SlotMachineAdapter(Context context) {
-            this.context = context;
-            images = new ArrayList<SoftReference<Bitmap>>(items.length);
-            for (int id : items) {
-                images.add(new SoftReference<Bitmap>(loadImage(id)));
-            }
-        }
-
-        /**
-         * Loads image from resources
-         */
-        private Bitmap loadImage(int id) {
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id);
-            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, IMAGE_WIDTH, IMAGE_HEIGHT, true);
-            bitmap.recycle();
-            return scaled;
-        }
-
-        @Override
-        public int getItemsCount() {
-            return items.length;
-        }
-
-        // Layout params for image view
-        final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(IMAGE_WIDTH, IMAGE_HEIGHT);;
-
-        @Override
-        public View getItem(int index, View cachedView, ViewGroup parent) {
-            ImageView img;
-            if (cachedView != null) {
-                img = (ImageView) cachedView;
-            } else {
-                img = new ImageView(context);
-            }
-            img.setLayoutParams(params);
-            SoftReference<Bitmap> bitmapRef = images.get(index);
-            Bitmap bitmap = bitmapRef.get();
-            if (bitmap == null) {
-                bitmap = loadImage(items[index]);
-                images.set(index, new SoftReference<Bitmap>(bitmap));
-            }
-            img.setImageBitmap(bitmap);
-
-            return img;
-        }
-    }
 }
