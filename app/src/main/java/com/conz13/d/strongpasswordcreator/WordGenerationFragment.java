@@ -3,7 +3,11 @@ package com.conz13.d.strongpasswordcreator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -28,26 +32,33 @@ import android.widget.TextView;
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
-import com.squareup.picasso.Picasso;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.List;
+
+import kankan.wheel.widget.OnWheelChangedListener;
+import kankan.wheel.widget.OnWheelScrollListener;
+import kankan.wheel.widget.WheelView;
+import kankan.wheel.widget.adapters.AbstractWheelAdapter;
 
 /**
  * Created by dillon on 4/18/16.
  */
 public class WordGenerationFragment extends Fragment
-    implements ClearDeleteButton, OnDragListener{
+    implements ClearDeleteButton, OnDragListener, SharedPreferences.OnSharedPreferenceChangeListener{
 
     public static final int DELETE_ALL_BUTTON = 0;
     public static final int SAVE_BUTTON = 1;
 
-    private ImageView mDiceOne;
-    private ImageView mDiceTwo;
-    private ImageView mDiceThree;
-    private ImageView mDiceFour;
-    private ImageView mDiceFive;
+    private WheelView mDiceOne;
+    private WheelView mDiceTwo;
+    private WheelView mDiceThree;
+    private WheelView mDiceFour;
+    private WheelView mDiceFive;
     private TextView mTextView;
     private ImageButton mAddButton;
+    private boolean animationsEnabled;
 
     private Menu mMenu;
 
@@ -78,6 +89,17 @@ public class WordGenerationFragment extends Fragment
                 mResultantWords = new ArrayList<>();
         }
         setHasOptionsMenu(true);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        animationsEnabled = prefs
+                .getBoolean(getContext().getString(R.string.disable_dice_animation_key), true);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if(null != sharedPreferences && null!= key && key.equals(getContext().getString(R.string.disable_dice_animation_key))){
+            animationsEnabled = sharedPreferences.getBoolean(key, true);
+        }
     }
 
     @Override
@@ -94,11 +116,11 @@ public class WordGenerationFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.word_generation_fragment_layout, container, false);
-        mDiceOne = (ImageView)rootView.findViewById(R.id.dice_holder_one);
-        mDiceTwo = (ImageView)rootView.findViewById(R.id.dice_holder_two);
-        mDiceThree = (ImageView)rootView.findViewById(R.id.dice_holder_three);
-        mDiceFour = (ImageView)rootView.findViewById(R.id.dice_holder_four);
-        mDiceFive = (ImageView)rootView.findViewById(R.id.dice_holder_five);
+        mDiceOne = (WheelView) rootView.findViewById(R.id.slot_1);
+        mDiceTwo = (WheelView) rootView.findViewById(R.id.slot_2);
+        mDiceThree = (WheelView) rootView.findViewById(R.id.slot_3);
+        mDiceFour = (WheelView) rootView.findViewById(R.id.slot_4);;
+        mDiceFive = (WheelView) rootView.findViewById(R.id.slot_5);
         mTextView = (TextView)rootView.findViewById(R.id.temp_word_textview);
         mAddButton = (ImageButton)rootView.findViewById(R.id.add_to_list_button);
 
@@ -121,7 +143,8 @@ public class WordGenerationFragment extends Fragment
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
         } else{
-            initDice();
+            Context context = getContext();
+            initDice(context);
         }
 
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
@@ -191,17 +214,6 @@ public class WordGenerationFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
 
-    private void spinOnClick(Button rollButton){
-        rollButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int generatedNumber[] = Utility.getDiceRoll();
-                mGeneratedNumber = generatedNumber;
-                setUpDice(generatedNumber);
-            }
-        });
-    }
-
     private void addOnClick(ImageButton addButton){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,41 +243,6 @@ public class WordGenerationFragment extends Fragment
                 }
             }
         });
-    }
-
-    // Used Picasso to load large PNG files on a separate thread so less frames would be skipped.
-    // Also used Picasso to avoid writing an inefficient AsyncTask.
-    private void initDice(){
-        Context context = getContext();
-        mDiceOne.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(1)));
-        mDiceTwo.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(2)));
-        mDiceThree.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(3)));
-        mDiceFour.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(4)));
-        mDiceFive.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(5)));
-//        Picasso.with(context).load(Utility.getDiceImage(1)).into(mDiceOne);
-//        Picasso.with(context).load(Utility.getDiceImage(2)).into(mDiceTwo);
-//        Picasso.with(context).load(Utility.getDiceImage(3)).into(mDiceThree);
-//        Picasso.with(context).load(Utility.getDiceImage(4)).into(mDiceFour);
-//        Picasso.with(context).load(Utility.getDiceImage(5)).into(mDiceFive);
-    }
-
-    private void setUpDice(int generatedNumber[]){
-        Context context = getContext();
-        mDiceOne.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[0])));
-        mDiceTwo.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[1])));
-        mDiceThree.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[2])));
-        mDiceFour.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[3])));
-        mDiceFive.setImageDrawable(getResources().getDrawable(Utility.getDiceImage(generatedNumber[4])));
-//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[0])).into(mDiceOne);
-//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[1])).into(mDiceTwo);
-//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[2])).into(mDiceThree);
-//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[3])).into(mDiceFour);
-//        Picasso.with(context).load(Utility.getDiceImage(generatedNumber[4])).into(mDiceFive);
-
-        String numberAsString = Utility.convertIntArrayToString(generatedNumber);
-        String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString, Utility.getLanguage(context));
-        mTextView.setText(dicewareWord);
-        mAddButton.setVisibility(View.VISIBLE);
     }
 
     public void clearList(int source){
@@ -301,5 +278,205 @@ public class WordGenerationFragment extends Fragment
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    /**
+     * The following code was referenced from https://github.com/maarek/android-wheel and heavily edited for my use case
+     */
+
+    private void initDice(Context context){
+        WheelView test[] = {mDiceOne, mDiceTwo, mDiceThree, mDiceFour, mDiceFive};
+        for(WheelView wheel : test) {
+            wheel.setViewAdapter(new SlotMachineAdapter(context));
+            wheel.setCurrentItem(0);
+
+            wheel.addChangingListener(changedListener);
+            wheel.addScrollingListener(scrolledListener);
+            wheel.setCyclic(true);
+            wheel.setEnabled(false);
+        }
+    }
+
+    // Set up dice when a number is restored from savedInstanceState
+    private void initDice(int generatedNumber[], Context context){
+        WheelView test[] = {mDiceOne, mDiceTwo, mDiceThree, mDiceFour, mDiceFive};
+        int index = 0;
+        for(WheelView wheel : test) {
+            wheel.setViewAdapter(new SlotMachineAdapter(context));
+            wheel.setCurrentItem(generatedNumber[index] - 1);
+
+            wheel.addChangingListener(changedListener);
+            wheel.addScrollingListener(scrolledListener);
+            wheel.setCyclic(true);
+            wheel.setEnabled(false);
+            ++index;
+        }
+    }
+
+    // Updates the currently displayed number value
+    private void updateDice() {
+        int generatedNumber[] = getDiceValue();
+        mGeneratedNumber = generatedNumber;
+
+        // If the user rotates the device while the dice are still spinning this context check
+        // will prevent a crash
+        if (null != getContext()){
+            String numberAsString = Utility.convertIntArrayToString(generatedNumber);
+            String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString, Utility.getLanguage(getContext()));
+            mTextView.setText(dicewareWord);
+            mAddButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // Converts the current dice values to an int array
+    private int[] getDiceValue(){
+        int value[] = new int[5];
+        value[0] = mDiceOne.getCurrentItem() + 1;
+        value[1] = mDiceTwo.getCurrentItem() + 1;
+        value[2] = mDiceThree.getCurrentItem() + 1;
+        value[3] = mDiceFour.getCurrentItem() + 1;
+        value[4] = mDiceFive.getCurrentItem() + 1;
+        return value;
+    }
+
+    // Sets up the dice and word on a rotation change
+    private void setUpDice(int generatedNumber[]){
+        Context context = getContext();
+        initDice(generatedNumber, context);
+
+        String numberAsString = Utility.convertIntArrayToString(generatedNumber);
+        String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString, Utility.getLanguage(context));
+        mTextView.setText(dicewareWord);
+        mAddButton.setVisibility(View.VISIBLE);
+    }
+
+    private void spinDice(int generatedNumber[]){
+        if(animationsEnabled) {
+            mDiceOne.scroll(-350 + generatedNumber[0], 2000);
+            mDiceTwo.scroll(-350 + generatedNumber[1], 2100);
+            mDiceThree.scroll(-350 + generatedNumber[2], 2200);
+            mDiceFour.scroll(-350 + generatedNumber[3], 2300);
+            mDiceFive.scroll(-350 + generatedNumber[4], 2400);
+        }
+        else {
+            mDiceOne.setCurrentItem(generatedNumber[0], false);
+            mDiceTwo.setCurrentItem(generatedNumber[1], false);
+            mDiceThree.setCurrentItem(generatedNumber[2], false);
+            mDiceFour.setCurrentItem(generatedNumber[3], false);
+            mDiceFive.setCurrentItem(generatedNumber[4], false);
+        }
+    }
+
+    private void spinOnClick(Button rollButton){
+        rollButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int generatedNumber[] = Utility.getDiceRoll();
+                mGeneratedNumber = generatedNumber;
+                spinDice(generatedNumber);
+            }
+        });
+    }
+
+    // Wheel scrolled flag
+    private boolean wheelScrolled = false;
+    private int x = 0;
+
+    // Wheel scrolled listener
+    OnWheelScrollListener scrolledListener = new OnWheelScrollListener() {
+        @Override
+        public void onScrollingStarted(WheelView wheel) {
+            wheelScrolled = true;
+        }
+        @Override
+        public void onScrollingFinished(WheelView wheel) {
+            if(wheelScrolled && x>=4) {
+                wheelScrolled = false;
+                updateDice();
+                x=0;
+            }
+            x++;
+        }
+    };
+
+    // Wheel changed listener
+    private OnWheelChangedListener changedListener = new OnWheelChangedListener() {
+        @Override
+        public void onChanged(WheelView wheel, int oldValue, int newValue) {
+            if (!wheelScrolled) {
+                updateDice();
+            }
+        }
+    };
+
+    private class SlotMachineAdapter extends AbstractWheelAdapter {
+        // Image size
+        final int IMAGE_WIDTH = 260;
+        final int IMAGE_HEIGHT = 150;
+
+        // Slot machine symbols
+        private final int items[] = new int[] {
+                R.drawable.one,
+                R.drawable.two,
+                R.drawable.three,
+                R.drawable.four,
+                R.drawable.five,
+                R.drawable.six
+        };
+
+        // Cached images
+        private List<SoftReference<Bitmap>> images;
+
+        // Layout inflater
+        private Context context;
+
+        /**
+         * Constructor
+         */
+        public SlotMachineAdapter(Context context) {
+            this.context = context;
+            images = new ArrayList<SoftReference<Bitmap>>(items.length);
+            for (int id : items) {
+                images.add(new SoftReference<Bitmap>(loadImage(id)));
+            }
+        }
+
+        /**
+         * Loads image from resources
+         */
+        private Bitmap loadImage(int id) {
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id);
+            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, IMAGE_WIDTH, IMAGE_HEIGHT, true);
+            bitmap.recycle();
+            return scaled;
+        }
+
+        @Override
+        public int getItemsCount() {
+            return items.length;
+        }
+
+        // Layout params for image view
+        final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(IMAGE_WIDTH, IMAGE_HEIGHT);;
+
+        @Override
+        public View getItem(int index, View cachedView, ViewGroup parent) {
+            ImageView img;
+            if (cachedView != null) {
+                img = (ImageView) cachedView;
+            } else {
+                img = new ImageView(context);
+            }
+            img.setLayoutParams(params);
+            SoftReference<Bitmap> bitmapRef = images.get(index);
+            Bitmap bitmap = bitmapRef.get();
+            if (bitmap == null) {
+                bitmap = loadImage(items[index]);
+                images.set(index, new SoftReference<Bitmap>(bitmap));
+            }
+            img.setImageBitmap(bitmap);
+
+            return img;
+        }
     }
 }

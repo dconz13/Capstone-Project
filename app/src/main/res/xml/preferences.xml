@@ -6,8 +6,8 @@
         android:key="@string/disable_dice_animation_key"
         android:title="@string/disable_dice_animation_title"
         android:summary="@string/disable_dice_animation_summary"
-        android:defaultValue="True"
-        android:enabled="false"/>
+        android:defaultValue="true"
+        android:enabled="true"/>
 
     <!-- Diceware list language options English default-->
     <ListPreference

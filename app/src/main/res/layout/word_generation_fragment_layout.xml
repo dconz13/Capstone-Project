@@ -11,8 +11,8 @@
         android:layout_height="match_parent">
 
     <!-- View for the dice PNG images -->
-    <include layout="@layout/dice_png_layout"
-        android:id="@+id/dice_layout" />
+    <include layout="@layout/dice_slot_layout"
+        android:id="@+id/dice_layout"/>
 
     <!-- View for the interactive strip below dice PNG-->
     <LinearLayout
