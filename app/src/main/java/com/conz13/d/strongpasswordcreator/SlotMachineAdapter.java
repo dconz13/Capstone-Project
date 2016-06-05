@@ -3,8 +3,13 @@ package com.conz13.d.strongpasswordcreator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import java.lang.ref.SoftReference;
@@ -18,8 +23,15 @@ import kankan.wheel.widget.adapters.AbstractWheelAdapter;
  */
 public class SlotMachineAdapter extends AbstractWheelAdapter {
     // Image size
-    final int IMAGE_WIDTH = 260;
-    final int IMAGE_HEIGHT = 150;
+    final int IMAGE_WIDTH;
+    final int IMAGE_HEIGHT;
+    // Layout params for image view
+    final ViewGroup.LayoutParams params;
+    // Cached images
+    private List<SoftReference<Bitmap>> images;
+
+    // Layout inflater
+    private Context context;
 
     // Slot machine symbols
     private final int items[] = new int[] {
@@ -31,17 +43,34 @@ public class SlotMachineAdapter extends AbstractWheelAdapter {
             R.drawable.six
     };
 
-    // Cached images
-    private List<SoftReference<Bitmap>> images;
 
-    // Layout inflater
-    private Context context;
+    public int dp2px(float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 
     /**
      * Constructor
      */
     public SlotMachineAdapter(Context context) {
         this.context = context;
+        this.IMAGE_HEIGHT = dp2px(50f);
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        int width;
+        if(display.getRotation() == Surface.ROTATION_0 || display.getRotation() == Surface.ROTATION_180) {
+            width = size.x;
+        }
+        else {
+            width = size.y;
+        }
+
+        this.IMAGE_WIDTH = width / 5 - (int) context.getResources().getDimension(R.dimen.default_margin); //xhdpi
+        params = new ViewGroup.LayoutParams(IMAGE_WIDTH, IMAGE_HEIGHT);
+
         images = new ArrayList<SoftReference<Bitmap>>(items.length);
         for (int id : items) {
             images.add(new SoftReference<Bitmap>(loadImage(id)));
@@ -62,9 +91,6 @@ public class SlotMachineAdapter extends AbstractWheelAdapter {
     public int getItemsCount() {
         return items.length;
     }
-
-    // Layout params for image view
-    final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(IMAGE_WIDTH, IMAGE_HEIGHT);;
 
     @Override
     public View getItem(int index, View cachedView, ViewGroup parent) {

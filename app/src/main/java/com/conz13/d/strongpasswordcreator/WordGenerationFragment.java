@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
@@ -133,6 +135,7 @@ public class WordGenerationFragment extends Fragment
         addOnClick((ImageButton)rootView.findViewById(R.id.add_to_list_button));
         fabOnClick((FloatingActionButton)rootView.findViewById(R.id.save_fab));
         mCoordLayout = (CoordinatorLayout)rootView.findViewById(R.id.coord_layout);
+        ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
 
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
@@ -141,9 +144,13 @@ public class WordGenerationFragment extends Fragment
             initDice(context);
         }
 
-        ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
-
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
