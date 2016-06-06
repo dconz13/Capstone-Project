@@ -15,7 +15,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
@@ -213,6 +211,10 @@ public class WordGenerationFragment extends Fragment
             default: break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getWordListLength(){
+        return mResultantWords.size();
     }
 
     private void addOnClick(ImageButton addButton){

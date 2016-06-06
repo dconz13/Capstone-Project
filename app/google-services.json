@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1063883349657",
+    "firebase_url": "https://strong-password-creator.firebaseio.com",
+    "project_id": "strong-password-creator",
+    "storage_bucket": "strong-password-creator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063883349657:android:1b90143966f53950",
+        "android_client_info": {
+          "package_name": "com.conz13.d.strongpasswordcreator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063883349657-mnp06kqhd78dabdv5877jjd69sdse486.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.conz13.d.strongpasswordcreator",
+            "certificate_hash": "E8B98703C803A3AD53FF4795E50A89ADDFE2D9FC"
+          }
+        },
+        {
+          "client_id": "1063883349657-cr1vmui22p4gv49fo3c8sr840pdmhoj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNQ4RZE_N_VuWcHon-_MNeWdx7ZEAJku8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063883349657-cr1vmui22p4gv49fo3c8sr840pdmhoj8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import android.view.MenuItem;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private NavigationView mNavDrawer;
+    FirebaseAnalytics mFirebaseAnalytics;
 
     public static final int HOME = 0;
     public static final int LOCKER = 1;
@@ -72,11 +76,33 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.main_content_frame, new WordGenerationFragment(), getString(R.string.generation_fragment_tag))
                     .commit();
         }
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_home));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.home));
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String language = sharedPreferences.getString(getString(R.string.change_language_key),
+                getString(R.string.change_language_default));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "language");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, language);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "languageSetting");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     public void signOut() {
         boolean skippedFlag = ((MyApplication)getApplication()).getSKIPPED_LOGIN();
+
         if(skippedFlag){
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.sign_out));
+            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.sign_in));
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
@@ -87,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton(getString(R.string.logout_dalog_positive), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.sign_out));
+                            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.sign_out));
+                            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
+                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                             startActivity(new Intent(context, LoginActivity.class));
                             finish();
                         }
@@ -148,23 +180,46 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                Bundle bundle = new Bundle();
+
                 switch (item.getItemId()) {
                     case R.id.menu_home:
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_home));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.home));
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
+                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                         launchWordGenerationFragment();
                         if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
                             mDrawerLayout.closeDrawers();
                         }
                         return true;
                     case R.id.menu_locker:
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_locker));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.my_locker));
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
+                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                         launchLockerFragment();
                         if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
                             mDrawerLayout.closeDrawers();
                         }
                         return true;
                     case R.id.menu_settings:
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_settings));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.settings));
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
+                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
                         startActivity(new Intent(context, SettingsActivity.class));
                         return false;
                     case R.id.menu_help:
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_help));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.help));
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
+                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+                        //startActivity(new Intent(context, HelpActivity.class));
                         return true;
                     default:
                         return false;
@@ -209,10 +264,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSavePositiveClick(ContentValues contentValues){
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));
+        int words = ((WordGenerationFragment)fragment).getWordListLength();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.save_fab));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,
+                getString(R.string.save_dialog_tag) + " # words: " + Integer.toString(words));
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "password_length");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
         // Save to database
         saveToDatabase(contentValues);
         // Clear list in fragment
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.generation_fragment_tag));
         ((WordGenerationFragment)fragment).clearList(WordGenerationFragment.SAVE_BUTTON);
     }
 

@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import net.sqlcipher.database.SQLiteDatabase;
 
 
@@ -22,6 +24,7 @@ import net.sqlcipher.database.SQLiteDatabase;
  */
 public class LoginActivity extends AppCompatActivity {
     private static final String LOG_TAG = LoginActivity.class.getSimpleName();
+    FirebaseAnalytics mFirebaseAnalytics;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     public void setPasswordTextVisibility(View view) {
@@ -62,6 +66,12 @@ public class LoginActivity extends AppCompatActivity {
                 ((MyApplication)getApplication()).setPASSWORD(password);
                 ((MyApplication) getApplication()).setSKIPPED_LOGIN(false);
 
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.login_button));
+                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.login_button));
+                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
                 editText.setText("");
 
                 startActivity(intent);
@@ -83,6 +93,13 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         ((MyApplication)getApplication()).setPASSWORD("");
         ((MyApplication)getApplication()).setSKIPPED_LOGIN(true);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.login_skip_button));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.login_skip_button));
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+
         editText.setText("");
         startActivity(intent);
         //this.finish();
