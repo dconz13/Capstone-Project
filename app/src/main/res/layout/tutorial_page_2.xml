@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/tutorial_image_2"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:layout_centerHorizontal="true"
         android:alpha="0.9"
         android:src="@drawable/tutorial_hacker_page2"
