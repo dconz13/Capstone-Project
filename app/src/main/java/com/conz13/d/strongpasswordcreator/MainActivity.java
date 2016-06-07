@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_home));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.home));
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.home));
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String language = sharedPreferences.getString(getString(R.string.change_language_key),
                 getString(R.string.change_language_default));
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "language");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, language);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, language);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "languageSetting");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(skippedFlag){
             Bundle bundle = new Bundle();
-            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.sign_out));
+            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.sign_in));
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.sign_in));
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
             mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Bundle bundle = new Bundle();
-                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.sign_out));
+                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.sign_out));
                             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.sign_out));
                             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
                             mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.menu_home:
-                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_home));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.home));
                         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.home));
                         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return true;
                     case R.id.menu_locker:
-                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_locker));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.my_locker));
                         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.my_locker));
                         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         return true;
                     case R.id.menu_settings:
-                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_settings));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.settings));
                         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.settings));
                         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(context, SettingsActivity.class));
                         return false;
                     case R.id.menu_help:
-                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.menu_help));
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.help));
                         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.help));
                         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
         int words = ((WordGenerationFragment)fragment).getWordListLength();
 
         Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.save_fab));
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.save_dialog_tag) + " # words: " + Integer.toString(words));
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,
                 getString(R.string.save_dialog_tag) + " # words: " + Integer.toString(words));
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "password_length");

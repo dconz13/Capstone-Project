@@ -27,7 +27,6 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
     private ClearDeleteButton mClearDeleteButton;
     private OnDragListener mOnDragListener;
 
-    // TODO: set up ItemTouchHelper for swipe to delete and drag on reorder icon
     public class GeneratedWordViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {
         public final ImageView mDeleteButton;
@@ -45,13 +44,11 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
         @Override
         public void onItemSelected() {
             // Shows that this is the selected view
-            //itemView.setBackgroundColor(Integer.parseInt("f9f9f9", 16));
         }
 
         @Override
         public void onItemClear() {
             // Reset background color and reset text alpha to opaque
-            //itemView.setBackgroundColor(0);
             mResultantWord.setAlpha(1.0f);
         }
 

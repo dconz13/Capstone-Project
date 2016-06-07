@@ -96,7 +96,7 @@ public class WordGenerationFragment extends Fragment
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(null != sharedPreferences && null!= key && key.equals(getContext().getString(R.string.disable_dice_animation_key))){
+        if(null != sharedPreferences && null!= key && key.equals("disable_dice_animation_key")){
             animationsEnabled = sharedPreferences.getBoolean(key, true);
         }
     }
@@ -306,8 +306,8 @@ public class WordGenerationFragment extends Fragment
      */
 
     private void initDice(Context context){
-        WheelView test[] = {mDiceOne, mDiceTwo, mDiceThree, mDiceFour, mDiceFive};
-        for(WheelView wheel : test) {
+        WheelView wheels[] = {mDiceOne, mDiceTwo, mDiceThree, mDiceFour, mDiceFive};
+        for(WheelView wheel : wheels) {
             wheel.setViewAdapter(new SlotMachineAdapter(context));
             wheel.setCurrentItem(0);
             wheel.setVisibleItems(3);
@@ -321,9 +321,9 @@ public class WordGenerationFragment extends Fragment
 
     // Set up dice when a number is restored from savedInstanceState
     private void initDice(int generatedNumber[], Context context){
-        WheelView test[] = {mDiceOne, mDiceTwo, mDiceThree, mDiceFour, mDiceFive};
+        WheelView wheels[] = {mDiceOne, mDiceTwo, mDiceThree, mDiceFour, mDiceFive};
         int index = 0;
-        for(WheelView wheel : test) {
+        for(WheelView wheel : wheels) {
             wheel.setViewAdapter(new SlotMachineAdapter(context));
             wheel.setCurrentItem(generatedNumber[index] - 1);
             wheel.setVisibleItems(3);
