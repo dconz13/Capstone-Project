@@ -29,6 +29,10 @@ import android.widget.TextView;
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
+import com.github.amlcurran.showcaseview.MaterialShowcaseDrawer;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.ShowcaseViewApi;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 
@@ -52,6 +56,7 @@ public class WordGenerationFragment extends Fragment
     private WheelView mDiceFive;
     private TextView mTextView;
     private ImageButton mAddButton;
+    private Button mRollButton;
     private boolean animationsEnabled;
 
     private Menu mMenu;
@@ -115,8 +120,9 @@ public class WordGenerationFragment extends Fragment
         mDiceThree = (WheelView) rootView.findViewById(R.id.slot_3);
         mDiceFour = (WheelView) rootView.findViewById(R.id.slot_4);;
         mDiceFive = (WheelView) rootView.findViewById(R.id.slot_5);
-        mTextView = (TextView)rootView.findViewById(R.id.temp_word_textview);
-        mAddButton = (ImageButton)rootView.findViewById(R.id.add_to_list_button);
+        mTextView = (TextView) rootView.findViewById(R.id.temp_word_textview);
+        mAddButton = (ImageButton) rootView.findViewById(R.id.add_to_list_button);
+        mRollButton = (Button) rootView.findViewById(R.id.roll_button);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.resultant_word_recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -129,8 +135,8 @@ public class WordGenerationFragment extends Fragment
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 
-        spinOnClick((Button)rootView.findViewById(R.id.roll_button));
-        addOnClick((ImageButton)rootView.findViewById(R.id.add_to_list_button));
+        spinOnClick(mRollButton);
+        addOnClick(mAddButton);
         fabOnClick((FloatingActionButton)rootView.findViewById(R.id.save_fab));
         mCoordLayout = (CoordinatorLayout)rootView.findViewById(R.id.coord_layout);
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
@@ -146,8 +152,18 @@ public class WordGenerationFragment extends Fragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+//        new ShowcaseView.Builder(getActivity())
+//                .withMaterialShowcase()
+//                .singleShot(0)
+//                .setTarget(new ViewTarget(mRollButton))
+//                .setContentTitle(getString(R.string.showcase_roll_title))
+//                .setContentText(getString(R.string.showcase_roll_description))
+//                .blockAllTouches()
+//                .setStyle(R.style.CustomShowcaseTheme)
+//                .build();
 
     }
 
@@ -284,7 +300,9 @@ public class WordGenerationFragment extends Fragment
     }
 
     /**
-     * The following code was referenced from https://github.com/maarek/android-wheel and heavily edited for my use case
+     * The following code was referenced from the sample code available at
+     * https://github.com/maarek/android-wheel and heavily edited for my use case
+     *
      */
 
     private void initDice(Context context){
@@ -292,6 +310,7 @@ public class WordGenerationFragment extends Fragment
         for(WheelView wheel : test) {
             wheel.setViewAdapter(new SlotMachineAdapter(context));
             wheel.setCurrentItem(0);
+            wheel.setVisibleItems(3);
 
             wheel.addChangingListener(changedListener);
             wheel.addScrollingListener(scrolledListener);
@@ -307,6 +326,7 @@ public class WordGenerationFragment extends Fragment
         for(WheelView wheel : test) {
             wheel.setViewAdapter(new SlotMachineAdapter(context));
             wheel.setCurrentItem(generatedNumber[index] - 1);
+            wheel.setVisibleItems(3);
 
             wheel.addChangingListener(changedListener);
             wheel.addScrollingListener(scrolledListener);

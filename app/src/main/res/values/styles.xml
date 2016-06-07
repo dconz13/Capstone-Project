@@ -26,4 +26,16 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="CustomShowcaseTheme" parent="ShowcaseView">
+        <item name="sv_backgroundColor">@color/showcase_background</item>
+        <item name="sv_titleTextAppearance">@style/CustomShowcaseTitle</item>
+        <item name="sv_showcaseColor">@color/colorAccent</item>
+        <item name="sv_tintButtonColor">true</item>
+    </style>
+
+    <style name="CustomShowcaseTitle" parent="TextAppearance.ShowcaseView.Title">
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
 </resources>

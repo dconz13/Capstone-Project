@@ -205,4 +205,8 @@
     <string name="tutorial_image_2_content_description">A hacker using a brute force method to crack passwords.</string>
     <string name="tutorial_image_3_content_description">A hacker waiting forever to crack a strong password.</string>
 
+    <!-- Showcase strings and titles -->
+    <string name="showcase_roll_title">Roll button</string>
+    <string name="showcase_roll_description">Click here to spin the dice and start generating words!</string>
+
 </resources>

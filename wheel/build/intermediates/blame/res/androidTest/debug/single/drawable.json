@@ -4,15 +4,7 @@
         "source": "/home/dillon/Documents/Capstone-Project/wheel/build/intermediates/bundles/debug/res/drawable/wheel_bg.xml"
     },
     {
-        "merged": "/home/dillon/Documents/SlotTest/wheel/build/intermediates/res/merged/androidTest/debug/drawable/wheel_bg.xml",
-        "source": "/home/dillon/Documents/SlotTest/wheel/build/intermediates/bundles/debug/res/drawable/wheel_bg.xml"
-    },
-    {
         "merged": "/home/dillon/Documents/Capstone-Project/wheel/build/intermediates/res/merged/androidTest/debug/drawable/wheel_val.xml",
         "source": "/home/dillon/Documents/Capstone-Project/wheel/build/intermediates/bundles/debug/res/drawable/wheel_val.xml"
-    },
-    {
-        "merged": "/home/dillon/Documents/SlotTest/wheel/build/intermediates/res/merged/androidTest/debug/drawable/wheel_val.xml",
-        "source": "/home/dillon/Documents/SlotTest/wheel/build/intermediates/bundles/debug/res/drawable/wheel_val.xml"
     }
 ]
