@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
@@ -51,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setUpNavigationDrawerListener(mNavDrawer);
         mNavDrawer.setCheckedItem(R.id.menu_home);
 
-        // TODO: find out why this causes illegalargumentexception. why is child null view
-        //navDrawer.addHeaderView(findViewById(R.id.nav_drawer_header));
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.nav_drawer_layout);
         Toolbar tempToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
 
         setSupportActionBar(tempToolbar);
         try {

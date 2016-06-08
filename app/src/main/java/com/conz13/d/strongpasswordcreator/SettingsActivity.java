@@ -49,10 +49,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void changePassword(String newPass){
-        String currentPass = ((MyApplication)getApplication()).getPASSWORD();
-        SQLiteDatabase db = new PasswordDbHelper(this).getReadableDatabase(currentPass);
-        db.changePassword(newPass);
-        db.close();
-        ((MyApplication)getApplication()).setPASSWORD(newPass);
+        if(!((MyApplication) getApplication()).getSKIPPED_LOGIN()) {
+            String currentPass = ((MyApplication) getApplication()).getPASSWORD();
+            SQLiteDatabase db = new PasswordDbHelper(this).getReadableDatabase(currentPass);
+            db.changePassword(newPass);
+            db.close();
+            ((MyApplication) getApplication()).setPASSWORD(newPass);
+        }
     }
 }

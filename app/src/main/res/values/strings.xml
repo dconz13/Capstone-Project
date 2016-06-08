@@ -110,6 +110,7 @@
     <string name="disable_dice_animation_summary">Dice roll animation enabled</string>
 
     <string name="change_password_title">Change login password</string>
+    <string name="change_password_key" translatable="false">change_password_key</string>
     <string name="change_password_current">Current password</string>
     <string name="change_password_new">New password</string>
     <string name="change_password_new_confirm">Re-type new password</string>

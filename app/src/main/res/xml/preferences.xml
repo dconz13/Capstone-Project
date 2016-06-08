@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Animations">
-    <!-- Animations enabled by default -->
-    <CheckBoxPreference
-        android:key="@string/disable_dice_animation_key"
-        android:title="@string/disable_dice_animation_title"
-        android:summary="@string/disable_dice_animation_summary"
-        android:defaultValue="true"
-        android:enabled="true"/>
+    <PreferenceCategory android:title="Animation">
+        <!-- Animations enabled by default -->
+        <CheckBoxPreference
+            android:key="@string/disable_dice_animation_key"
+            android:title="@string/disable_dice_animation_title"
+            android:summary="@string/disable_dice_animation_summary"
+            android:defaultValue="true"
+            android:enabled="true"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Language">
-    <!-- Diceware list language options English default-->
-    <ListPreference
-        android:key="@string/change_language_key"
-        android:title="@string/change_language_title"
-        android:defaultValue="@string/change_language_default"
-        android:entries="@array/diceware_languages_entries"
-        android:entryValues="@array/diceware_languages_values"
-        android:dialogTitle="@string/change_language_dialog_title"
-        />
+        <!-- Diceware list language options English default-->
+        <ListPreference
+            android:key="@string/change_language_key"
+            android:title="@string/change_language_title"
+            android:defaultValue="@string/change_language_default"
+            android:entries="@array/diceware_languages_entries"
+            android:entryValues="@array/diceware_languages_values"
+            android:dialogTitle="@string/change_language_dialog_title"
+            />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Password Management" />
+    <PreferenceCategory android:title="Password Management" >
+        <PreferenceScreen
+            android:key="@string/change_password_key"
+            android:title="@string/change_password_title"
+            />
+    </PreferenceCategory>
 
 </PreferenceScreen>

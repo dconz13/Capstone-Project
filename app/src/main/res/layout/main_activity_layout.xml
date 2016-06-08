@@ -30,13 +30,12 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:paddingTop="?attr/actionBarSize"
         android:divider="@android:color/black"
         android:background="@color/navDrawerBackground"
         android:fitsSystemWindows="true"
-        app:menu="@menu/nav_menu">
-
-        <!--<include layout="@layout/nav_drawer_header" />-->
+        android:minHeight="?android:listPreferredItemHeightLarge"
+        app:menu="@menu/nav_menu"
+        app:itemTextAppearance="?android:textAppearanceLarge">
 
     </android.support.design.widget.NavigationView>
 

@@ -122,8 +122,6 @@ public class GeneratedWordItemTouchHelperCallback extends android.support.v7.wid
                     c.drawRoundRect((float) itemView.getLeft(), (float) itemView.getTop(),
                             (float) itemView.getRight(), (float) itemView.getBottom(), 7f, 7f, mPaint);
                 } else {
-//                    c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(),
-//                            (float) itemView.getRight(), (float) itemView.getBottom(), mPaint);
                     Path path = preLollipopRoundedRect((float) itemView.getLeft() + 1f, (float) itemView.getTop() + 1f,
                             (float) itemView.getRight() - 1f, (float) itemView.getBottom() - 1f, 7f, 7f);
                     c.drawPath(path, mPaint);

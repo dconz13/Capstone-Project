@@ -3,7 +3,10 @@ package com.conz13.d.strongpasswordcreator;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,26 +22,32 @@ public class SettingsFragment extends PreferenceFragment{
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.preferences);
+        initChangePass();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.settings_layout, container, false);
-        TextView changePass = (TextView) rootView.findViewById(R.id.change_pass_setting);
-        initChangePass(changePass);
-
-        return rootView;
+        return inflater.inflate(R.layout.settings_fragment, container, false);
     }
 
-    public void initChangePass(TextView view){
-        if(((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN()){
-            view.setEnabled(false);
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        Context context = getActivity().getApplicationContext();
+        String key = preference.getKey();
+
+        if(key.equals(context.getString(R.string.change_password_key))){
+            ((SettingsActivity) getActivity()).showChangePasswordDialog();
         }
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((SettingsActivity) getActivity()).showChangePasswordDialog();
-            }
-        });
+
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    public void initChangePass(){
+        PreferenceManager prefs = getPreferenceManager();
+        Context context = getActivity().getApplicationContext();
+
+        if(((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN()){
+            prefs.findPreference(context.getString(R.string.change_password_key)).setEnabled(false);
+        }
     }
 }
