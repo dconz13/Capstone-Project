@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:background="@color/colorPrimaryLight">
 
     <ImageView
         android:id="@+id/tutorial_image_2"
-        android:layout_width="wrap_content"
-        android:layout_height="350dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:alpha="0.9"
         android:src="@drawable/tutorial_hacker_page2"
         android:contentDescription="@string/tutorial_image_2_content_description"/>
 
-    <TextView
-        android:id="@+id/tutorial_2_text_1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_below="@+id/tutorial_image_2"
-        android:gravity="center_vertical"
-        style="@style/tutorial_header_text"
-        android:text="@string/tutorial_entropy_def"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/tutorial_2_text_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="14dp"
-        android:layout_below="@+id/tutorial_2_text_1"
-        android:gravity="center_vertical"
-        style="@style/tutorial_body_text"
-        android:text="@string/tutorial_entropy_example"
-        />
+        <TextView
+            android:id="@+id/tutorial_2_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginEnd="36dp"
+            android:gravity="center_vertical"
+            style="@style/tutorial_header_text"
+            android:text="@string/tutorial_entropy_def"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tutorial_2_text_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="14dp"
+            android:layout_below="@+id/tutorial_2_text_1"
+            android:gravity="center_vertical"
+            style="@style/tutorial_body_text"
+            android:text="@string/tutorial_entropy_example"
+            />
+
+    </RelativeLayout>
+</LinearLayout>

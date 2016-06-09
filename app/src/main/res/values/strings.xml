@@ -197,7 +197,7 @@
     <string name="tutorial_diceware_benefits">Plus, it\'s easier to remember for humans!</string>
     <string name="tutorial_get_started">Let\'s get started</string>
     <string name="tutorial_password_header">This app uses a local encrypted database so 3rd parties won\'t be able to access your passwords stored in this app!</string>
-    <string name="tutorial_set_password">Set your password that will be used to login to the app (don\'t forget it!): </string>
+    <string name="tutorial_set_password">Set your password that will be used to encrypt your stored passwords and to login to the app (don\'t forget it!)</string>
     <string name="tutorial_button">Save</string>
     <string name="tutorial_skip_button">Skip</string>
     <string name="tutorial_next_button_content_description">Next slide button.</string>

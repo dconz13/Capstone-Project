@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tutorial_header">30sp</dimen>
+    <dimen name="tutorial_body">24sp</dimen>
+
+</resources>

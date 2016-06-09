@@ -6,4 +6,7 @@
     <dimen name="default_margin">16dp</dimen>
     <dimen name="default_margin_tablet">48dp</dimen>
     <dimen name="resultant_word_margin_top">4dp</dimen>
+
+    <dimen name="tutorial_header">20sp</dimen>
+    <dimen name="tutorial_body">14sp</dimen>
 </resources>
