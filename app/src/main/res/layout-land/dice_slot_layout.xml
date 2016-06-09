@@ -13,22 +13,27 @@
     <kankan.wheel.widget.WheelView android:id="@+id/slot_1"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:contentDescription="@string/wheel_view_content_description"/>
     <kankan.wheel.widget.WheelView android:id="@+id/slot_2"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:contentDescription="@string/wheel_view_content_description"/>
     <kankan.wheel.widget.WheelView android:id="@+id/slot_3"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:contentDescription="@string/wheel_view_content_description"/>
     <kankan.wheel.widget.WheelView android:id="@+id/slot_4"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:contentDescription="@string/wheel_view_content_description"/>
     <kankan.wheel.widget.WheelView android:id="@+id/slot_5"
         android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:contentDescription="@string/wheel_view_content_description"/>
 
 </LinearLayout>

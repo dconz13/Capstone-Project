@@ -14,7 +14,8 @@ import java.util.List;
 import kankan.wheel.widget.adapters.AbstractWheelAdapter;
 
 /**
- * Referenced from sample code provided at https://github.com/maarek/android-wheel and modified for my use case
+ * Referenced from sample code provided at https://github.com/maarek/android-wheel
+ * and modified for my use case
  */
 public class SlotMachineAdapter extends AbstractWheelAdapter {
     // Image size
@@ -24,8 +25,6 @@ public class SlotMachineAdapter extends AbstractWheelAdapter {
     final ViewGroup.LayoutParams params;
     // Cached images
     private List<SoftReference<Bitmap>> images;
-
-    // Layout inflater
     private Context context;
 
     // Slot machine symbols
@@ -38,9 +37,6 @@ public class SlotMachineAdapter extends AbstractWheelAdapter {
             R.drawable.six
     };
 
-    /**
-     * Constructor
-     */
     public SlotMachineAdapter(Context context) {
         this.context = context;
         this.IMAGE_HEIGHT = ViewGroup.LayoutParams.WRAP_CONTENT;

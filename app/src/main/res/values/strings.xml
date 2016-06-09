@@ -21,15 +21,6 @@
     <string name="sign_out">Sign out</string>
     <string name="sign_in">Sign in</string>
 
-    <!-- Alert dialog for entering locker -->
-    <string name="alert_dialog_title">Unlock Locker</string>
-    <string name="alert_dialog_body">Please enter your password to enter your locker</string>
-    <string name="alert_edit_hint">Password</string>
-    <string name="show_password">Show Password</string>
-    <string name="alert_dialog_positive">Submit</string>
-    <string name="alert_dialog_negative">Cancel</string>
-    <string name="alert_dialog_tag" translatable="false">alert_dialog</string>
-
     <!-- Alert dialog for saving password -->
     <string name="save_dialog_title">Save your strong password</string>
     <string name="save_dialog_positive">Save</string>
@@ -58,18 +49,12 @@
     <string name="delete_positive">Delete</string>
     <string name="delete_negative">Cancel</string>
 
-    <!-- Dice png content descriptions -->
-    <string name="dice_one_content_description">You rolled a one.</string>
-    <string name="dice_two_content_description">You rolled a two.</string>
-    <string name="dice_three_content_description">You rolled a three.</string>
-    <string name="dice_four_content_description">You rolled a four.</string>
-    <string name="dice_five_content_description">You rolled a five.</string>
-    <string name="dice_six_content_description">You rolled a six.</string>
+    <!-- Wheel view content description -->
+    <string name="wheel_view_content_description">Dice wheel.</string>
 
     <!-- Resultant Word Descriptions -->
     <string name="roll_button_text">Roll!</string>
     <string name="roll_button_content_description">Button to roll the dice</string>
-    <!-- TODO: Fill in word that was generated -->
     <string name="resultant_word_content_description">Resultant word</string>
     <string name="move_button_content_description">Drag to move item up or down in the list</string>
     <string name="delete_button_content_description">Press to delete list item</string>
@@ -184,19 +169,15 @@
     <!-- Tutorial Screen -->
     <string name="tutorial_toolbar_name">Introduction</string>
     <string name="tutorial_intro_question">Making a strong password is hard</string>
-    <string name="tutorial_example_password">Ur3/5fop!23</string>
     <string name="tutorial_actually">We have been taught to make passwords that are hard for humans to remember and easy for computers to crack.</string>
     <string name="tutorial_entropy_def">Password strength is measured with entropy</string>
     <string name="tutorial_entropy_example">\"Ur3/5fop!23\" has an entropy of ~48.5 bits. This low of an entropy value can be cracked in just three days at one billion guesses per second.</string>
     <string name="tutorial_time_to_crack_example">\"Ur3/5fop!23\" can be cracked in just three days at one billion guesses per second.</string>
-    <string name="tutorial_what_to_do">So what do we do?</string>
     <string name="tutorial_diceware">Introducing Diceware</string>
     <string name="tutorial_diceware_explanation">Diceware is a method of password generation in which a dice is rolled to produce a five digit number that correlates to a word in the Diceware passphrase list.</string>
     <string name="tutorial_diceware_example">A password such as \"21st onyx hawk pear filler\" generated using Diceware has an entropy of ~107.4 bits
         which would take ~2.6 quadrillion years to crack at one billion guesses per second.</string>
-    <string name="tutorial_diceware_benefits">Plus, it\'s easier to remember for humans!</string>
     <string name="tutorial_get_started">Let\'s get started</string>
-    <string name="tutorial_password_header">This app uses a local encrypted database so 3rd parties won\'t be able to access your passwords stored in this app!</string>
     <string name="tutorial_set_password">Set your password that will be used to encrypt your stored passwords and to login to the app (don\'t forget it!)</string>
     <string name="tutorial_button">Save</string>
     <string name="tutorial_skip_button">Skip</string>

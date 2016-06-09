@@ -3,6 +3,7 @@ package com.conz13.d.strongpasswordcreator;
 import android.graphics.Color;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
     private ArrayList<String> mWords;
     private ClearDeleteButton mClearDeleteButton;
     private OnDragListener mOnDragListener;
+    private Boolean isRtl;
 
     public class GeneratedWordViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {
@@ -38,7 +40,6 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
             mDeleteButton = (ImageView)view.findViewById(R.id.delete_button);
             mReorderButton = (ImageView)view.findViewById(R.id.reorder_button);
             mResultantWord = (TextView)view.findViewById(R.id.resultant_word);
-
         }
 
         @Override
@@ -54,9 +55,10 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
 
     }
 
-    public GeneratedWordRecyclerAdapter(ArrayList<String> resultantWords,
+    public GeneratedWordRecyclerAdapter(Boolean rtl, ArrayList<String> resultantWords,
                                         ClearDeleteButton clearDeleteButton,
                                         OnDragListener onDragListener){
+        isRtl = rtl;
         mWords = resultantWords;
         mClearDeleteButton = clearDeleteButton;
         mOnDragListener = onDragListener;
@@ -74,6 +76,9 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
     public void onBindViewHolder(final GeneratedWordViewHolder holder, int position) {
         if(null != mWords.get(position)) {
             holder.mResultantWord.setText(mWords.get(position));
+            if(isRtl){
+                holder.mResultantWord.setGravity(Gravity.END);
+            }
 
             holder.mReorderButton.setOnTouchListener(new View.OnTouchListener() {
                 @Override

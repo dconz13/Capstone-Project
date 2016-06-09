@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -28,9 +29,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Boolean isRtl = getResources().getBoolean(R.bool.is_right_to_left);
         SQLiteDatabase.loadLibs(this);
         setContentView(R.layout.login_activity_layout);
         EditText editText = (EditText) findViewById(R.id.login_edit_text);
+        if(isRtl){
+            editText.setGravity(Gravity.RIGHT);
+        }
         editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {

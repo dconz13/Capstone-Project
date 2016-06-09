@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,6 +88,13 @@ public class EditFragment extends Fragment {
             mDeleteDialog.dismiss();
         }
     }
+    // Using right works better than end in this case
+    private void setRtlMode(){
+        mHeaderText.setGravity(Gravity.RIGHT);
+        mUsernameText.setGravity(Gravity.RIGHT);
+        mPasswordText.setGravity(Gravity.RIGHT);
+        mAddInfoText.setGravity(Gravity.RIGHT);
+    }
 
     private void initDeleteButton(Button button){
         button.setOnClickListener(new View.OnClickListener(){
@@ -128,6 +136,7 @@ public class EditFragment extends Fragment {
      */
     private void initTextFields(){
         Bundle bundle = getArguments();
+        Boolean isRtl = getContext().getResources().getBoolean(R.bool.is_right_to_left);
         if(bundle != null){
             ID = bundle.getLong(getString(R.string.intent_extra_id));
             mHeaderText.setText(bundle.getString(getString(R.string.intent_extra_header)));
@@ -137,6 +146,10 @@ public class EditFragment extends Fragment {
             // Only set if it hasn't been set before
             if(null == previousHeaderText){
                 previousHeaderText = bundle.getString(getString(R.string.intent_extra_header));
+            }
+            // Set up Rtl mode
+            if(isRtl){
+                setRtlMode();
             }
         }
     }

@@ -12,6 +12,7 @@
         android:alpha="0.6"
         android:visibility="gone" />
 
+    <!-- Content description is set in LockerFragment based on image -->
     <ImageView
         android:id="@+id/locker_empty_image"
         android:layout_width="wrap_content"

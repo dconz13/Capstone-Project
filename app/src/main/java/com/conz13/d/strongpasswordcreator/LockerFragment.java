@@ -77,6 +77,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
             mEmptyTextView.setVisibility(View.VISIBLE);
             mEmptyImageView.setImageDrawable(getResources().getDrawable(R.drawable.locker_locked_splash));
             mEmptyImageView.setVisibility(View.VISIBLE);
+            mEmptyImageView.setContentDescription(getContext().getString(R.string.locker_empty_skipped));
         }
 
         ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
@@ -117,6 +118,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
             mEmptyTextView.setVisibility(View.VISIBLE);
             mEmptyImageView.setImageDrawable(getResources().getDrawable(R.drawable.locker_empty_splash));
             mEmptyImageView.setVisibility(View.VISIBLE);
+            mEmptyImageView.setContentDescription(getContext().getString(R.string.locker_empty_text_view));
         }
         mAdapter.swapCursor(data);
     }

@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,26 +33,25 @@ import me.relex.circleindicator.CircleIndicator;
 public class FirstRunActivity extends AppCompatActivity implements skipAndArrowHider {
     ViewPager mViewPager;
     FirebaseAnalytics mFirebaseAnalytics;
+    Boolean isRtl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial_layout);
         SQLiteDatabase.loadLibs(this);
+
+        // TODO: Fix this when viewpager supports RTL
         mViewPager = (ViewPager) findViewById(R.id.tutorial_view_pager);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.circle_indicator);
         indicator.setViewPager(mViewPager);
+
         TutorialPagerAdapter adapter = new TutorialPagerAdapter(this, mViewPager, indicator, this);
-        boolean rtlMode = getResources().getBoolean(R.bool.is_right_to_left);
+
         ImageButton nextButton = (ImageButton) findViewById(R.id.tutorial_next_page);
         Button skipButton = (Button) findViewById(R.id.tutorial_skip);
+        nextButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_right_black_24dp));
 
-        if(rtlMode){
-            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_left_black_24dp));
-        }
-        else {
-            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_right_black_24dp));
-        }
         initSkipButton(skipButton);
         initNextButton(nextButton);
 
@@ -65,6 +65,10 @@ public class FirstRunActivity extends AppCompatActivity implements skipAndArrowH
 
     public void createDbLoginPassword(View view){
         EditText editText = (EditText) view.getRootView().findViewById(R.id.create_pass_edit_text);
+        isRtl = getResources().getBoolean(R.bool.is_right_to_left);
+        if(isRtl){
+            editText.setGravity(Gravity.RIGHT);
+        }
         if(!editText.getText().toString().isEmpty()){
             String password = editText.getText().toString();
             if(verifyPassword(password)){

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,10 @@ public class SaveDialogFragment extends DialogFragment {
         mHeaderEditText = (EditText) rootView.findViewById(R.id.save_header_edit_text);
         mUsernameEditText = (EditText) rootView.findViewById(R.id.save_username_edit_text);
         mAddInfoEditText = (EditText) rootView.findViewById(R.id.save_add_info_edit_text);
+
+        if(getContext().getResources().getBoolean(R.bool.is_right_to_left)){
+            setRtlMode();
+        }
 
         final AlertDialog builder = new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.save_dialog_title))
@@ -90,6 +95,14 @@ public class SaveDialogFragment extends DialogFragment {
                 this.dismiss();
             }
         }
+    }
+
+    // Setting it to right works better than end in this case
+    private void setRtlMode(){
+        mPasswordEditText.setGravity(Gravity.RIGHT);
+        mHeaderEditText.setGravity(Gravity.RIGHT);
+        mUsernameEditText.setGravity(Gravity.RIGHT);
+        mAddInfoEditText.setGravity(Gravity.RIGHT);
     }
 
     private ContentValues buildContentValues(){

@@ -24,7 +24,7 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_gravity="center"
-            android:textDirection="anyRtl"
+            android:gravity="start"
             android:layout_weight="3"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 

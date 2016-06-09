@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -123,17 +124,22 @@ public class WordGenerationFragment extends Fragment
         mTextView = (TextView) rootView.findViewById(R.id.temp_word_textview);
         mAddButton = (ImageButton) rootView.findViewById(R.id.add_to_list_button);
         mRollButton = (Button) rootView.findViewById(R.id.roll_button);
+        Boolean isRtl = getContext().getResources().getBoolean(R.bool.is_right_to_left);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.resultant_word_recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new GeneratedWordRecyclerAdapter(mResultantWords, this, this);
+        mAdapter = new GeneratedWordRecyclerAdapter(isRtl, mResultantWords, this, this);
         mRecyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper.Callback callback = new GeneratedWordItemTouchHelperCallback(mAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+        if(isRtl){
+            mTextView.setGravity(Gravity.END);
+        }
 
         spinOnClick(mRollButton);
         addOnClick(mAddButton);
@@ -233,6 +239,7 @@ public class WordGenerationFragment extends Fragment
         return mResultantWords.size();
     }
 
+    // Adds the generated word to the list
     private void addOnClick(ImageButton addButton){
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,6 +254,7 @@ public class WordGenerationFragment extends Fragment
         });
     }
 
+    // Save Floating Action Button on click
     private void fabOnClick(FloatingActionButton fab){
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,6 +272,7 @@ public class WordGenerationFragment extends Fragment
         });
     }
 
+    // Clears the word list
     public void clearList(int source){
         mResultantWords.clear();
         mAdapter.notifyDataSetChanged();
@@ -273,6 +282,7 @@ public class WordGenerationFragment extends Fragment
             Snackbar.make(mCoordLayout, getString(R.string.save_dialog_snackbar), Snackbar.LENGTH_LONG).show();
     }
 
+    // Enables menu button that clears the word list
     private void enableDeleteAll(){
         MenuItem item = mMenu.findItem(R.id.action_delete_all);
         if(!item.isEnabled()) {
@@ -281,6 +291,7 @@ public class WordGenerationFragment extends Fragment
         }
     }
 
+    // Disables menu button that clears the word list
     private void disableDeleteAll(){
         MenuItem item = mMenu.findItem(R.id.action_delete_all);
         if(item.isEnabled()){

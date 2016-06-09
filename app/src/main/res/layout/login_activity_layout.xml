@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:textDirection="anyRtl">
 
     <!-- TODO: set background image as screenshot of main screen but blurred -->
 
@@ -38,6 +39,7 @@
                 android:id="@+id/login_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="start"
                 android:inputType="textPassword"
                 android:hint="@string/login_edit_text" />
 

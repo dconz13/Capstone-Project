@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,10 @@ public class ChangePassDialogFragment extends DialogFragment{
         mCurrentPass = (EditText) rootView.findViewById(R.id.current_pass_edit_text);
         mNewPass = (EditText) rootView.findViewById(R.id.new_pass_edit_text);
         mConfirmPass = (EditText) rootView.findViewById(R.id.confirm_pass_edit_text);
+
+        if(getResources().getBoolean(R.bool.is_right_to_left)){
+            setRtlMode();
+        }
 
         final AlertDialog builder = new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.change_password_title))
@@ -81,6 +86,12 @@ public class ChangePassDialogFragment extends DialogFragment{
                         this.dismiss();
                     }
 
+    }
+
+    private void setRtlMode(){
+        mCurrentPass.setGravity(Gravity.RIGHT);
+        mNewPass.setGravity(Gravity.RIGHT);
+        mConfirmPass.setGravity(Gravity.RIGHT);
     }
 
     private boolean checkIfCurrentIsValid(){

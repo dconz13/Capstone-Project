@@ -44,7 +44,7 @@
             android:id="@+id/temp_word_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textDirection="anyRtl"
+            android:gravity="start"
             android:layout_weight="4"
             android:textAppearance="?android:textAppearanceMedium"
             android:padding="10dp"
