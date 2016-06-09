@@ -4,11 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dice_margin"
+    android:layout_marginTop="@dimen/resultant_word_margin_top"
     android:layout_marginLeft="@dimen/default_margin"
     android:layout_marginStart="@dimen/default_margin"
     android:layout_marginEnd="@dimen/default_margin"
     android:layout_marginRight="@dimen/default_margin"
+    android:layout_marginBottom="@dimen/resultant_word_margin_top"
     app:cardCornerRadius="@dimen/cardview_default_radius">
 
     <LinearLayout

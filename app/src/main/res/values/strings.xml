@@ -170,7 +170,7 @@
     <string name="about_summary">Learn more about diceware</string>
 
     <!-- Login activity -->
-    <string name="login_header">Unlock Strong Password locker</string>
+    <string name="login_header">Unlock Strong Password Creator</string>
     <string name="login_button">Login</string>
     <string name="login_edit_text">Password</string>
     <string name="login_checkbox">Show password</string>

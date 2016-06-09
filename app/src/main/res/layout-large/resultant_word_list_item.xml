@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/resultant_word_margin_top"
+    android:layout_marginLeft="@dimen/default_margin_tablet"
+    android:layout_marginStart="@dimen/default_margin_tablet"
+    android:layout_marginEnd="@dimen/default_margin_tablet"
+    android:layout_marginRight="@dimen/default_margin_tablet"
+    android:layout_marginBottom="@dimen/resultant_word_margin_top"
+    app:cardCornerRadius="@dimen/cardview_default_radius">
+
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/resultant_word"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_gravity="center"
+            android:textDirection="anyRtl"
+            android:layout_weight="3"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/reorder_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:src="@drawable/ic_reorder_black_24dp"
+            android:contentDescription="@string/move_button_content_description"/>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

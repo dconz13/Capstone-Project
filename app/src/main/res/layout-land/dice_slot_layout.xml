@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:layout_marginTop="@dimen/dice_margin_top"
+    android:layout_marginTop="@dimen/dice_margin_top_land"
     android:layout_marginLeft="@dimen/default_margin"
     android:layout_marginRight="@dimen/default_margin"
     android:layout_marginStart="@dimen/default_margin"

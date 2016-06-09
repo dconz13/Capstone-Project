@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!-- View for the dice PNG images -->
+    <!-- View for the dice WheelView -->
     <include layout="@layout/dice_slot_layout"
         android:id="@+id/dice_layout"/>
 
@@ -84,12 +84,12 @@
         android:id="@+id/save_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="normal"
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin"
         android:layout_gravity="bottom|end"
-        android:elevation="4dp"
+        app:fabSize="normal"
+        app:elevation="4dp"
         android:src="@drawable/ic_save_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
