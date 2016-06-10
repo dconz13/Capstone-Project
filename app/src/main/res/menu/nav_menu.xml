@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:id="@+id/options_group" android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_home"
             android:title="@string/home"
@@ -10,6 +10,8 @@
             android:orderInCategory="1"
             android:icon="@drawable/ic_home_black_24dp"
             />
+    </group>
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_locker"
             android:title="@string/my_locker"
@@ -19,20 +21,34 @@
             />
     </group>
 
-    <group android:id="@+id/settings_group" android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_settings"
-            android:title="@string/settings"
+            android:id="@+id/menu_about"
+            android:title="@string/about_title"
             app:showAsAction="never"
             android:orderInCategory="3"
-            android:icon="@drawable/ic_settings_black_24dp"
-             />
+            android:icon="@drawable/ic_info_black_24dp"
+            />
+    </group>
+
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_help"
             android:title="@string/help"
             app:showAsAction="never"
             android:orderInCategory="4"
-            android:icon="@drawable/ic_info_black_24dp"
-             />
+            android:icon="@drawable/ic_help_black_24dp"
+            />
     </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_settings"
+            android:title="@string/settings"
+            app:showAsAction="never"
+            android:orderInCategory="5"
+            android:icon="@drawable/ic_settings_black_24dp"
+             />
+        </group>
+
 </menu>

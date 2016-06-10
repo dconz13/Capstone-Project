@@ -13,7 +13,7 @@
     <string name="home">Home</string>
     <string name="my_locker">My Locker</string>
     <string name="settings">Settings</string>
-    <string name="help">Help / Contact</string>
+    <string name="help">Help</string>
     <string name="nav_header">Navigation drawer header image</string>
 
     <!-- Menu item strings -->
@@ -150,9 +150,20 @@
         <item>_tr</item>
     </string-array>
 
+    <!-- About -->
     <string name="about_key" translatable="false">about_key</string>
     <string name="about_title">About</string>
     <string name="about_summary">Learn more about diceware</string>
+    <string name="about_diceware_title">About Diceware</string>
+    <string name="about_diceware_body">Diceware was created by Arnold G. Reinhold. More information
+        on the theory and mathematics behind it can be found on his website http://www.world.std.com/~reinhold/diceware.html</string>
+    <string name="about_diceware_list_creators">The creators of the alternate language lists can be found
+        listed on Arnold\'s website under \"Diceware in Other Languages\".</string>
+    <string name="about_app">About This App</string>
+    <string name="about_app_body">This app was created by Dillon Connolly as a final project for the
+        Udacity android nanodegree course.</string>
+    <string name="about_feedback">Feedback</string>
+    <string name="about_fragment_tag" translatable="false">about_fragment_tag</string>
 
     <!-- Login activity -->
     <string name="login_header">Unlock Strong Password Creator</string>
