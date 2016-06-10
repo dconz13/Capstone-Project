@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
@@ -14,6 +15,7 @@ import net.sqlcipher.database.SQLiteDatabase;
  * Created by dillon on 4/17/16.
  */
 public class SettingsActivity extends AppCompatActivity {
+    private static final String LOG_TAG = SettingsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,15 @@ public class SettingsActivity extends AppCompatActivity {
             getFragmentManager().beginTransaction()
                     .replace(android.R.id.content, new SettingsFragment())
                     .commit();
+        }
+
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_white_24dp);
+
+        } catch(NullPointerException e){
+            Log.e(LOG_TAG, e.toString());
         }
     }
 

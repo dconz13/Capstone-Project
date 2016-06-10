@@ -161,7 +161,10 @@
         listed on Arnold\'s website under \"Diceware in Other Languages\".</string>
     <string name="about_app">About This App</string>
     <string name="about_app_body">This app was created by Dillon Connolly as a final project for the
-        Udacity android nanodegree course.</string>
+        Udacity android nanodegree course. It uses an encrypted database to store passwords locally
+        so passwords are safe from prying eyes. I do not recommend storing vital passwords solely in this app
+        because if your device is lost or stolen you will not be able to recover them. If a feature
+        that you want is not present in the app, send some feedback and I will add it!</string>
     <string name="about_feedback">Feedback</string>
     <string name="about_fragment_tag" translatable="false">about_fragment_tag</string>
 

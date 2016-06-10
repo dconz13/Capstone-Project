@@ -142,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
         if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
             mDrawerLayout.closeDrawers();
         }else {
-            super.onBackPressed();
+            signOut();
+            //super.onBackPressed();
         }
     }
 
@@ -223,6 +224,8 @@ public class MainActivity extends AppCompatActivity {
                         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
+                        //Dialog to run the tutorial
+
                         //startActivity(new Intent(context, HelpActivity.class));
                         return true;
                     case R.id.menu_about:
@@ -231,25 +234,13 @@ public class MainActivity extends AppCompatActivity {
                         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
                         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-                        launchAboutFragment();
-                        if(mDrawerLayout.isDrawerVisible(GravityCompat.START)){
-                            mDrawerLayout.closeDrawers();
-                        }
-                        return true;
+                        startActivity(new Intent(context, AboutActivity.class));
+                        return false;
                     default:
                         return false;
                 }
             }
         });
-    }
-
-    private void launchAboutFragment(){
-        if(null == getSupportFragmentManager().findFragmentByTag(getString(R.string.about_fragment_tag))
-                || !getSupportFragmentManager().findFragmentByTag(getString(R.string.about_fragment_tag)).isVisible()){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_content_frame, new AboutFragment(), getString(R.string.about_fragment_tag))
-                    .commit();
-        }
     }
 
     private void launchLockerFragment(){
