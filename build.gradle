@@ -12,10 +12,11 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+// jitpack is for the MaterialShowcaseView library
 allprojects {
     repositories {
         jcenter()
+        maven{ url "https://jitpack.io"}
     }
 }
 

@@ -202,7 +202,19 @@
     <string name="tutorial_image_3_content_description">A hacker waiting forever to crack a strong password.</string>
 
     <!-- Showcase strings and titles -->
-    <string name="showcase_roll_title">Roll button</string>
+    <string name="showcase_roll_title">The Roll button</string>
     <string name="showcase_roll_description">Click here to spin the dice and start generating words!</string>
+    <string name="showcase_add_description">Click here to add the generated word to the list below.
+        Feel free to continue rolling until you get a good word.</string>
+    <string name="showcase_item_description">Your words will appear here. They can be reordered by
+        dragging the reorder icon or deleted by swiping them away.</string>
+    <string name="showcase_save_description">When you are finished click here to save your strong password
+        to your locker.</string>
+    <string name="showcase_dismiss">Got it</string>
+
+    <string name="showcase_dialog_title">Show tutorial</string>
+    <string name="showcase_dialog_message">Show the interface tutorial again?</string>
+    <string name="showcase_positive">Continue</string>
+    <string name="showcase_negative">Cancel</string>
 
 </resources>

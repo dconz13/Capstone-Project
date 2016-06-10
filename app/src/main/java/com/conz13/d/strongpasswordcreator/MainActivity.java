@@ -218,16 +218,6 @@ public class MainActivity extends AppCompatActivity {
 
                         startActivity(new Intent(context, SettingsActivity.class));
                         return false;
-                    case R.id.menu_help:
-                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.help));
-                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.help));
-                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
-                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
-                        //Dialog to run the tutorial
-
-                        //startActivity(new Intent(context, HelpActivity.class));
-                        return true;
                     case R.id.menu_about:
                         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.about_title));
                         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.about_title));

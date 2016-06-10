@@ -30,16 +30,15 @@ import android.widget.TextView;
 import com.conz13.d.strongpasswordcreator.helper.ClearDeleteButton;
 import com.conz13.d.strongpasswordcreator.helper.GeneratedWordItemTouchHelperCallback;
 import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
-import com.github.amlcurran.showcaseview.MaterialShowcaseDrawer;
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.ShowcaseViewApi;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.OnWheelScrollListener;
 import kankan.wheel.widget.WheelView;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 /**
  * Created by dillon on 4/18/16.
@@ -58,6 +57,7 @@ public class WordGenerationFragment extends Fragment
     private TextView mTextView;
     private ImageButton mAddButton;
     private Button mRollButton;
+    private FloatingActionButton mSaveButton;
     private boolean animationsEnabled;
 
     private Menu mMenu;
@@ -70,8 +70,14 @@ public class WordGenerationFragment extends Fragment
     private CoordinatorLayout mCoordLayout;
 
     private AlertDialog mDeleteAllDialog;
+    private AlertDialog mHelpDialog;
 
     int mGeneratedNumber[];
+
+    // MaterialShowcaseView ID's so they only show on first run
+    private static final String SHOWCASE_ADD_ID = "add";
+    private static final String SHOWCASE_ROLL_ID ="roll";
+    private static final String SHOWCASE_SAVE_ID = "save";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,6 +130,7 @@ public class WordGenerationFragment extends Fragment
         mTextView = (TextView) rootView.findViewById(R.id.temp_word_textview);
         mAddButton = (ImageButton) rootView.findViewById(R.id.add_to_list_button);
         mRollButton = (Button) rootView.findViewById(R.id.roll_button);
+        mSaveButton = (FloatingActionButton) rootView.findViewById(R.id.save_fab);
         Boolean isRtl = getContext().getResources().getBoolean(R.bool.is_right_to_left);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.resultant_word_recycler_view);
@@ -143,9 +150,9 @@ public class WordGenerationFragment extends Fragment
 
         spinOnClick(mRollButton);
         addOnClick(mAddButton);
-        fabOnClick((FloatingActionButton)rootView.findViewById(R.id.save_fab));
+        fabOnClick(mSaveButton);
         mCoordLayout = (CoordinatorLayout)rootView.findViewById(R.id.coord_layout);
-        ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
+        //((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
 
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);
@@ -160,17 +167,78 @@ public class WordGenerationFragment extends Fragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //MaterialShowcaseView.resetSingleUse(getContext(), SHOWCASE_ID);
+        startTutorial();
+    }
 
-//        new ShowcaseView.Builder(getActivity())
-//                .withMaterialShowcase()
-//                .singleShot(0)
-//                .setTarget(new ViewTarget(mRollButton))
-//                .setContentTitle(getString(R.string.showcase_roll_title))
-//                .setContentText(getString(R.string.showcase_roll_description))
-//                .blockAllTouches()
-//                .setStyle(R.style.CustomShowcaseTheme)
-//                .build();
+    public void startTutorial(){
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setDelay(500); // 500 ms
 
+        MaterialShowcaseSequence showcaseSequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ROLL_ID);
+
+        Context context = getContext();
+
+        showcaseSequence.setConfig(config);
+        showcaseSequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(getActivity())
+                        .setTarget(mRollButton)
+                        .setMaskColour(context.getResources().getColor(R.color.showcase_background))
+                        .setContentText(context.getString(R.string.showcase_roll_description))
+                        .setContentTextColor(context.getResources().getColor(R.color.white))
+                        .setDismissText(context.getString(R.string.showcase_dismiss).toUpperCase())
+                        .setDismissTextColor(context.getResources().getColor(R.color.colorAccent))
+                        .build()
+        );
+        showcaseSequence.start();
+    }
+
+    private void addButtonShowcase(){
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setDelay(500); // 500 ms
+
+        MaterialShowcaseSequence showcaseSequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ADD_ID);
+
+        Context context = getContext();
+
+        showcaseSequence.setConfig(config);
+        showcaseSequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(getActivity())
+                        .setTarget(mAddButton)
+                        .setMaskColour(context.getResources().getColor(R.color.showcase_background))
+                        .setContentText(context.getString(R.string.showcase_add_description))
+                        .setContentTextColor(context.getResources().getColor(R.color.white))
+                        .setDismissText(context.getString(R.string.showcase_dismiss).toUpperCase())
+                        .setDismissTextColor(context.getResources().getColor(R.color.colorAccent))
+                        .build()
+        );
+        showcaseSequence.start();
+    }
+
+    private void showcaseSaveSequence(){
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setDelay(500); // 500 ms
+
+        MaterialShowcaseSequence showcaseSequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_SAVE_ID);
+
+        Context context = getContext();
+
+        showcaseSequence.setConfig(config);
+        showcaseSequence.addSequenceItem(
+                new MaterialShowcaseView.Builder(getActivity())
+                        .setTarget(mSaveButton)
+                        .setMaskColour(context.getResources().getColor(R.color.showcase_background))
+                        .setContentText(context.getString(R.string.showcase_save_description))
+                        .setContentTextColor(context.getResources().getColor(R.color.white))
+                        .setDismissText(context.getString(R.string.showcase_dismiss).toUpperCase())
+                        .setDismissTextColor(context.getResources().getColor(R.color.colorAccent))
+                        .build()
+        );
+        showcaseSequence.start();
+    }
+
+    public void clearAllShowcaseId(){
+        MaterialShowcaseView.resetAll(getContext());
     }
 
     @Override
@@ -179,6 +247,9 @@ public class WordGenerationFragment extends Fragment
 
         if(null != mDeleteAllDialog){
             mDeleteAllDialog.dismiss();
+        }
+        if(null != mHelpDialog){
+            mHelpDialog.dismiss();
         }
     }
 
@@ -226,6 +297,27 @@ public class WordGenerationFragment extends Fragment
                 startActivity(new Intent(getContext(), SettingsActivity.class));
                 break;
             }
+            case R.id.action_help: {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.showcase_dialog_title))
+                        .setMessage(getString(R.string.showcase_dialog_message))
+                        .setPositiveButton(R.string.showcase_positive, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                MaterialShowcaseView.resetAll(getContext());
+                                startTutorial();
+                            }
+                        });
+                builder.setNegativeButton(R.string.showcase_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing!
+                    }
+                });
+                mHelpDialog = builder.create();
+                mHelpDialog.show();
+                break;
+            }
             case R.id.sign_out: {
                 ((MainActivity)getActivity()).signOut();
                 break;
@@ -249,6 +341,7 @@ public class WordGenerationFragment extends Fragment
                         if(mResultantWords.add(String.valueOf(mTextView.getText()))){
                             mAdapter.notifyDataSetChanged();
                             enableDeleteAll();
+                            showcaseSaveSequence();
                         }
             }
         });
@@ -359,6 +452,7 @@ public class WordGenerationFragment extends Fragment
             String dicewareWord = Utility.getPropertyValue(getContext(), numberAsString, Utility.getLanguage(getContext()));
             mTextView.setText(dicewareWord);
             mAddButton.setVisibility(View.VISIBLE);
+            addButtonShowcase();
         }
     }
 

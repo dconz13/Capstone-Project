@@ -11,10 +11,14 @@ import android.support.v4.app.LoaderManager;
 
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,10 +57,12 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     private TextView mEmptyTextView;
     private ImageView mEmptyImageView;
 
+
     // TODO: Add hiding the toolbar on scroll of the list
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -80,9 +86,34 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
             mEmptyImageView.setContentDescription(getContext().getString(R.string.locker_empty_skipped));
         }
 
-        ((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
+        //((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.locker_menu, menu);
+        if(((MyApplication)getActivity().getApplication()).getSKIPPED_LOGIN()){
+            menu.findItem(R.id.locker_sign_out).setTitle(getContext().getString(R.string.sign_in));
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.locker_action_settings: {
+                startActivity(new Intent(getContext(), SettingsActivity.class));
+                break;
+            }
+            case R.id.locker_sign_out: {
+                ((MainActivity)getActivity()).signOut();
+                break;
+            }
+            default: break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
