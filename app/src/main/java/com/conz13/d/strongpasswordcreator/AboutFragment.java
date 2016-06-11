@@ -10,11 +10,22 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 /**
  * Created by dillon on 6/9/16.
  */
 
 public class AboutFragment extends Fragment {
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MobileAds.initialize(getContext(), getString(R.string.banner_ad_test_unit_id));
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,6 +38,10 @@ public class AboutFragment extends Fragment {
                 imageOnClick();
             }
         });
+
+        AdView adView = (AdView) rootView.findViewById(R.id.about_ad);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         return rootView;
     }

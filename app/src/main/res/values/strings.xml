@@ -163,8 +163,24 @@
     <string name="about_app_body">This app was created by Dillon Connolly as a final project for the
         Udacity android nanodegree course. It uses an encrypted database to store passwords locally
         so passwords are safe from prying eyes. I do not recommend storing vital passwords solely in this app
-        because if your device is lost or stolen you will not be able to recover them. If a feature
+        because if your device is lost or stolen you will not be able to recover them. If you encrypt a filesystem and lose
+        the password for it because it was only stored in this app you will likely never decrypt that filesystem. If a feature
         that you want is not present in the app, send some feedback and I will add it!</string>
+    <string name="about_password_strength">Password Strength</string>
+    <string name="about_password_strength_body">Password strength is measured in entropy. When talking
+        about passwords, entropy is the number of guesses that a brute force approach to hacking would take to exhaust
+        all possible word combinations. Password entropy is measured using a base-2 logarithm. This means that each single
+        increase in entropy value makes the password significantly more secure. An easy way to increase password entropy
+        is simply to increase the amount of characters in your password. In theory a password that is 20 characters long
+        is much more secure than a password that is 8 characters long. Using diceware also increases the password strength
+        because the words are truly random. It is not advised to create your own password with random words that you think of
+        as it will be less secure.</string>
+    <string name="about_password_stength_body_cont">A brute force attack is when a hacker is able to guess at your password
+        an infinite amount of times. This method involves a program attempting every possible combination of characters until it
+        eventually guesses correctly. These types of programs can guess anywhere between 1,000 guesses per second and 100 trillion
+        guesses per second. Only hackers with serious computing power can guess at 100 trillion guesses per second. It
+        would be a very expensive operation and only worth it if you are hiding something very, very important. In addition, the
+        hacker can only use this method if there is no lock out period after guessing too many times.</string>
     <string name="about_feedback">Feedback</string>
     <string name="about_fragment_tag" translatable="false">about_fragment_tag</string>
 
@@ -216,5 +232,8 @@
     <string name="showcase_dialog_message">Show the interface tutorial again?</string>
     <string name="showcase_positive">Continue</string>
     <string name="showcase_negative">Cancel</string>
+
+    <!-- AdMob strings -->
+    <string name="banner_ad_test_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
 </resources>

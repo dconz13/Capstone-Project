@@ -1,101 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="6dp"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorAccent"
-            android:text="@string/about_diceware_title"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?listPreferredItemHeight"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            style="@style/TextAppearance.AppCompat"
-            android:text="@string/about_diceware_body"
-            android:autoLink="web"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?listPreferredItemHeight"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="@dimen/default_margin"
-            style="@style/TextAppearance.AppCompat"
-            android:text="@string/about_diceware_list_creators"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginBottom="6dp"
-            android:textColor="@color/colorAccent"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:text="@string/about_app"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?listPreferredItemHeight"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            style="@style/TextAppearance.AppCompat"
-            android:text="@string/about_app_body" />
-
         <LinearLayout
-            android:id="@+id/feedback_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?listPreferredItemHeight"
-            android:gravity="center_vertical"
-            android:clickable="true"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/feedback_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tint="@color/colorAccent"
-                android:padding="@dimen/default_margin"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/about_feedback"
-                android:clickable="false"
-                android:src="@drawable/ic_feedback_black_24dp"/>
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginRight="@dimen/default_margin"
-                android:text="@string/about_feedback"
-                style="@style/TextAppearance.AppCompat"/>
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="6dp"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorAccent"
+                android:text="@string/about_diceware_title"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?listPreferredItemHeight"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                style="@style/TextAppearance.AppCompat"
+                android:text="@string/about_diceware_body"
+                android:autoLink="web"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?listPreferredItemHeight"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="@dimen/default_margin"
+                style="@style/TextAppearance.AppCompat"
+                android:text="@string/about_diceware_list_creators"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/colorAccent"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/about_password_strength"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?listPreferredItemHeight"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="@dimen/default_margin"
+                style="@style/TextAppearance.AppCompat"
+                android:text="@string/about_password_strength_body"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?listPreferredItemHeight"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="@dimen/default_margin"
+                style="@style/TextAppearance.AppCompat"
+                android:text="@string/about_password_stength_body_cont"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginBottom="6dp"
+                android:textColor="@color/colorAccent"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/about_app"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?listPreferredItemHeight"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                style="@style/TextAppearance.AppCompat"
+                android:text="@string/about_app_body" />
+
+            <LinearLayout
+                android:id="@+id/feedback_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?listPreferredItemHeight"
+                android:layout_marginBottom="?android:listPreferredItemHeightLarge"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/feedback_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/colorAccent"
+                    android:padding="@dimen/default_margin"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/about_feedback"
+                    android:clickable="false"
+                    android:src="@drawable/ic_feedback_black_24dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:text="@string/about_feedback"
+                    style="@style/TextAppearance.AppCompat"/>
+
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/about_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_test_unit_id"/>
+</RelativeLayout>

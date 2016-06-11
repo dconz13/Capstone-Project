@@ -188,6 +188,7 @@ public class WordGenerationFragment extends Fragment
                         .setContentTextColor(context.getResources().getColor(R.color.white))
                         .setDismissText(context.getString(R.string.showcase_dismiss).toUpperCase())
                         .setDismissTextColor(context.getResources().getColor(R.color.colorAccent))
+                        .setDismissOnTouch(true)
                         .build()
         );
         showcaseSequence.start();
@@ -210,6 +211,7 @@ public class WordGenerationFragment extends Fragment
                         .setContentTextColor(context.getResources().getColor(R.color.white))
                         .setDismissText(context.getString(R.string.showcase_dismiss).toUpperCase())
                         .setDismissTextColor(context.getResources().getColor(R.color.colorAccent))
+                        .setDismissOnTouch(true)
                         .build()
         );
         showcaseSequence.start();
@@ -232,6 +234,7 @@ public class WordGenerationFragment extends Fragment
                         .setContentTextColor(context.getResources().getColor(R.color.white))
                         .setDismissText(context.getString(R.string.showcase_dismiss).toUpperCase())
                         .setDismissTextColor(context.getResources().getColor(R.color.colorAccent))
+                        .setDismissOnTouch(true)
                         .build()
         );
         showcaseSequence.start();
