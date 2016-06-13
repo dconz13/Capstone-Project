@@ -85,24 +85,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, getString(R.string.home));
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.home));
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String language = sharedPreferences.getString(getString(R.string.change_language_key),
                 getString(R.string.change_language_default));
+        Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, language);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, language);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "languageSetting");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
-        MobileAds.initialize(this, getString(R.string.banner_ad_test_unit_id));
-        AdView adView = (AdView) findViewById(R.id.nav_drawer_ad);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
     }
 
     public void signOut() {

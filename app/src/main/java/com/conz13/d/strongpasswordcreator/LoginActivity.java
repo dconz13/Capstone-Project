@@ -15,6 +15,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.sqlcipher.database.SQLiteDatabase;
@@ -45,7 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        AdView adView = (AdView) findViewById(R.id.login_ad);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     public void setPasswordTextVisibility(View view) {

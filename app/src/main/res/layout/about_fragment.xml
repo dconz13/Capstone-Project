@@ -3,10 +3,19 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/about_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_margin"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_test_unit_id"/>
 
     <ScrollView
+        android:layout_below="@+id/about_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -112,7 +121,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="?listPreferredItemHeight"
-                android:layout_marginBottom="?android:listPreferredItemHeightLarge"
                 android:gravity="center_vertical"
                 android:clickable="true"
                 android:orientation="horizontal">
@@ -141,12 +149,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/about_ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_test_unit_id"/>
 </RelativeLayout>

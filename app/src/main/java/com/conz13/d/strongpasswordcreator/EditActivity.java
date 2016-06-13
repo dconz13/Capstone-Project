@@ -11,11 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 /**
  * Created by dillon on 5/12/16.
  */
 public class EditActivity extends AppCompatActivity {
     private final static String LOG_TAG = EditActivity.class.getSimpleName();
+    FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +46,12 @@ public class EditActivity extends AppCompatActivity {
                     .add(R.id.edit_content_frame, editFragment, getString(R.string.edit_fragment_tag))
                     .commit();
         }
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "EditMode");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "EditMode");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "currentScreen");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     public void setResult(CharSequence message){
