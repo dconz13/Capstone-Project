@@ -50,9 +50,4 @@
         <item name="android:textSize">@dimen/tutorial_body</item>
     </style>
 
-    <style name="WidgetAccentOverlay" parent="ThemeOverlay.AppCompat">
-        <item name="android:background">@color/colorAccent</item>
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
 </resources>
