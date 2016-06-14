@@ -23,4 +23,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="WidgetAccentOverlay" parent="ThemeOverlay.AppCompat">
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

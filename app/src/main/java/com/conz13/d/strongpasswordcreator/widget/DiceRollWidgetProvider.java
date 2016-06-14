@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -91,7 +90,12 @@ public class DiceRollWidgetProvider extends AppWidgetProvider {
             }
         }
         else {
-            layoutId = R.layout.widget_layout;
+            if(widgetWidth <=one_by_one) {
+                layoutId = R.layout.widget_layout_1_by_1;
+            }
+            else {
+                layoutId = R.layout.widget_layout;
+            }
         }
         return layoutId;
     }

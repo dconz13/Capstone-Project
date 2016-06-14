@@ -3,7 +3,6 @@ package com.conz13.d.strongpasswordcreator.widget;
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +14,6 @@ import android.widget.RemoteViews;
 import com.conz13.d.strongpasswordcreator.R;
 import com.conz13.d.strongpasswordcreator.Utility;
 
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 
 /**
@@ -93,7 +91,12 @@ public class RollDiceIntentService extends IntentService {
             }
         }
         else {
-            layoutId = R.layout.widget_layout;
+            if(widgetWidth <=one_by_one) {
+                layoutId = R.layout.widget_layout_1_by_1;
+            }
+            else {
+                layoutId = R.layout.widget_layout;
+            }
         }
         return layoutId;
     }

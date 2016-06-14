@@ -59,13 +59,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center"/>
+            android:minHeight="40dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
         <Button
             android:id="@+id/widget_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/widget_custom_button"
             android:text="@string/roll_button_text"/>
     </LinearLayout>
 
