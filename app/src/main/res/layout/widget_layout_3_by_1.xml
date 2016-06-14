@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin"
+    android:background="@color/colorPrimaryLight"
+    android:id="@+id/widget_dice_holder_3">
+
+        <ImageView android:id="@+id/widget_slot_3_1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:src="@drawable/one"
+            android:contentDescription="@string/wheel_view_content_description"/>
+        <ImageView android:id="@+id/widget_slot_3_2"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:src="@drawable/one"
+            android:contentDescription="@string/wheel_view_content_description"/>
+        <ImageView android:id="@+id/widget_slot_3_3"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:src="@drawable/one"
+            android:contentDescription="@string/wheel_view_content_description"/>
+        <ImageView android:id="@+id/widget_slot_3_4"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:src="@drawable/one"
+            android:contentDescription="@string/wheel_view_content_description"/>
+        <ImageView android:id="@+id/widget_slot_3_5"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:src="@drawable/one"
+            android:contentDescription="@string/wheel_view_content_description"/>
+
+</LinearLayout>
