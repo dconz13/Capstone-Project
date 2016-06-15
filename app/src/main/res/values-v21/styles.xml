@@ -15,6 +15,7 @@
     <style name="MainTheme" parent="AppTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+
     </style>
 
     <!-- Edit Activity Theme -->
@@ -32,8 +33,7 @@
         <item name="android:backgroundDimEnabled">true</item>
 
         <item name="android:windowEnterTransition">@transition/edit_activity_enter</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/card_view_transform</item>
-        <item name="android:windowSharedElementExitTransition">@transition/card_view_transform</item>
+        <item name="android:windowExitTransition">@transition/edit_activity_enter</item>
     </style>
 
     <!-- Settings theme -->

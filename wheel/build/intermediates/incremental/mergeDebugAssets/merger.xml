@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/dillon/Documents/Capstone-Project/wheel/src/main/assets"/><source path="/home/dillon/Documents/Capstone-Project/wheel/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/dillon/Documents/Capstone-Project/wheel/src/debug/assets"/></dataSet></merger>
