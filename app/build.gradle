@@ -6,7 +6,7 @@ android {
             keyAlias 'StrongPasswordCreatorKey'
             keyPassword 'nine scrap colony scale'
             storeFile file('~/app/android.jks')
-            storePassword '4204612m'
+            storePassword 'udacity pass'
         }
     }
     compileSdkVersion 23
