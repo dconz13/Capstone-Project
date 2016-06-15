@@ -9,12 +9,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -160,7 +157,7 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     }
 
     @Override
-    public void startEditActivity(long Id) {
+    public void startEditActivity(long Id, View view) {
         // Send bundle of arguments from the view
         Intent data = new Intent(getContext(), EditActivity.class);
         String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();

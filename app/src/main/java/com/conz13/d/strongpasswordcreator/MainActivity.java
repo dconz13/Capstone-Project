@@ -21,13 +21,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.sqlcipher.database.SQLiteDatabase;

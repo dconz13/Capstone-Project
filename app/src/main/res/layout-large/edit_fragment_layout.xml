@@ -15,7 +15,8 @@
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
         app:cardElevation="@dimen/cardview_default_elevation"
-        app:cardCornerRadius="@dimen/cardview_default_radius">
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        android:transitionName="@string/edit_shared_content_transition_tag">
 
         <LinearLayout
             android:layout_width="match_parent"

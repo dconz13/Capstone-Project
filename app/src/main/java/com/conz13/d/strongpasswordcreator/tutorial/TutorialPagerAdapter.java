@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.conz13.d.strongpasswordcreator.FirstRunActivity;
 import com.conz13.d.strongpasswordcreator.TutorialPageFragment;
 
 import me.relex.circleindicator.CircleIndicator;

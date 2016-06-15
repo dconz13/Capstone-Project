@@ -49,7 +49,7 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
         public void onClick(View v) {
             if(v.getId() == R.id.locker_edit_button) {
                 // Execute edit button
-                mOnEditButtonPressed.startEditActivity(ID);
+                mOnEditButtonPressed.startEditActivity(ID, v);
                 v.getRootView().findViewById(R.id.child_layout).setVisibility(View.GONE);
             } else {
                 if(v.findViewById(R.id.child_layout).getVisibility() == View.GONE) {

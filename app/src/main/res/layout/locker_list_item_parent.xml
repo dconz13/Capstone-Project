@@ -10,7 +10,8 @@
     android:layout_marginEnd="@dimen/default_margin"
     android:layout_marginTop="@dimen/default_margin"
     app:cardCornerRadius="4dp"
-    android:id="@+id/locker_card">
+    android:id="@+id/locker_card"
+    android:transitionName="@string/edit_shared_content_transition_tag">
 
     <RelativeLayout
         android:layout_width="match_parent"

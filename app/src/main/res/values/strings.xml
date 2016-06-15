@@ -88,6 +88,7 @@
     <string name="edit_snackbar_key" translatable="false">snackbar_key</string>
     <string name="edit_snackbar_save">Strong Password saved!</string>
     <string name="edit_snackbar_delete">Strong Password deleted</string>
+    <string name="edit_shared_content_transition_tag">sharedCardView</string>
 
     <!-- Settings Activity -->
     <string name="disable_dice_animation_key" translatable="false">disable_dice_animation_key</string>

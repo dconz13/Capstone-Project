@@ -1,6 +1,5 @@
 package com.conz13.d.strongpasswordcreator;
 
-import android.graphics.Color;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
