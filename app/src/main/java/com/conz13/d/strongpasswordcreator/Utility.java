@@ -10,9 +10,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
-import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
-
-import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -136,24 +133,33 @@ public class Utility {
      * @return returns true if the entry exists
      */
     public static boolean checkIfEntryExists(Context context, String password, String headerName){
-        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
+      //  String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String[] columns = {"header_title"};
         String selection = "header_title='" + headerName + "' ";
         boolean existsFlag = false;
-        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
-        Cursor cursor = db.query(
-                table_name,
+        String method = context.getString(R.string.database_password_method);
+        context.getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
+        Cursor cursor = context.getContentResolver().query(
+                PasswordContract.PasswordEntry.CONTENT_URI,
                 columns,
                 selection,
                 null,
-                null,
-                null,
-                null,
                 null
         );
+//        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
+//        Cursor cursor = db.query(
+//                table_name,
+//                columns,
+//                selection,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null
+//        );
         try {
 
-            if(cursor.moveToFirst()){
+            if(cursor != null && cursor.moveToFirst()){
                 existsFlag = true;
             }
         }catch (NullPointerException e){
@@ -161,7 +167,7 @@ public class Utility {
             existsFlag = false;
         }finally{
             cursor.close();
-            db.close();
+          //  db.close();
         }
         return existsFlag;
     }
@@ -176,18 +182,26 @@ public class Utility {
      * @return returns true on successful update
      */
     public static boolean updateExistingEntry(Context context, String password, ContentValues contentValues, long ID){
-        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
-        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
+//        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
+//        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String selection = "_ID='" + ID + "'";
-
-        int rows = db.update(
-                table_name,
+        String method = context.getString(R.string.database_password_method);
+        context.getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
+        int rows = context.getContentResolver().update(
+                PasswordContract.PasswordEntry.CONTENT_URI,
                 contentValues,
                 selection,
                 null
-                );
+        );
 
-        db.close();
+//        int rows = db.update(
+//                table_name,
+//                contentValues,
+//                selection,
+//                null
+//                );
+//
+//        db.close();
 
         if(rows > 0) return true;
 
@@ -205,21 +219,30 @@ public class Utility {
      */
     public static Bundle buildBundleFromId(Context context, String password, long id){
         Bundle bundle = new Bundle();
-        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
-        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
+//        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
+//        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String selection = "_ID='" + id + "'";
-        Cursor cursor = db.query(
-                table_name,
+        String method = context.getString(R.string.database_password_method);
+        context.getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
+        Cursor cursor = context.getContentResolver().query(
+                PasswordContract.PasswordEntry.CONTENT_URI,
                 null,
                 selection,
                 null,
-                null,
-                null,
-                null,
                 null
         );
+//        Cursor cursor = db.query(
+//                table_name,
+//                null,
+//                selection,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null
+//        );
         try {
-            if(cursor.moveToFirst()) {
+            if(cursor != null && cursor.moveToFirst()) {
                 bundle.putLong(context.getString(R.string.intent_extra_id),
                         cursor.getLong(0));
                 bundle.putString(context.getString(R.string.intent_extra_header),
@@ -235,7 +258,7 @@ public class Utility {
             Log.e(LOG_TAG, e.getMessage());
         }finally {
             cursor.close();
-            db.close();
+           // db.close();
         }
 
         return bundle;

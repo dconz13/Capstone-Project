@@ -16,7 +16,7 @@
     <ImageView
         android:id="@+id/locker_empty_image"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/locker_image_height"
         android:adjustViewBounds="true"
         android:layout_centerInParent="true"
         android:alpha="0.6"

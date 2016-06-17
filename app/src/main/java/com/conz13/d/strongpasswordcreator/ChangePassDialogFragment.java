@@ -12,21 +12,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by dillon on 5/23/16.
  */
 public class ChangePassDialogFragment extends DialogFragment{
-    private EditText mCurrentPass;
-    private EditText mNewPass;
-    private EditText mConfirmPass;
+    @BindView(R.id.current_pass_edit_text) EditText mCurrentPass;
+    @BindView(R.id.new_pass_edit_text) EditText mNewPass;
+    @BindView(R.id.confirm_pass_edit_text) EditText mConfirmPass;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View rootView = inflater.inflate(R.layout.change_password_dialog, null);
-        mCurrentPass = (EditText) rootView.findViewById(R.id.current_pass_edit_text);
-        mNewPass = (EditText) rootView.findViewById(R.id.new_pass_edit_text);
-        mConfirmPass = (EditText) rootView.findViewById(R.id.confirm_pass_edit_text);
+        ButterKnife.bind(this, rootView);
 
         if(getResources().getBoolean(R.bool.is_right_to_left)){
             setRtlMode();

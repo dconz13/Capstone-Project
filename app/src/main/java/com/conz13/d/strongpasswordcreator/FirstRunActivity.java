@@ -1,9 +1,7 @@
 package com.conz13.d.strongpasswordcreator;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -18,7 +16,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
 import com.conz13.d.strongpasswordcreator.tutorial.TutorialPagerAdapter;
 import com.conz13.d.strongpasswordcreator.tutorial.skipAndArrowHider;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -141,29 +138,6 @@ public class FirstRunActivity extends AppCompatActivity implements skipAndArrowH
         }else{
             editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             editText.setSelection(editText.getText().length());
-        }
-    }
-
-    private class VerifyPasswordTask extends AsyncTask<String, Void, Boolean> {
-        private Context mContext;
-
-        public VerifyPasswordTask(Context context){
-            mContext = context;
-        }
-        @Override
-        protected Boolean doInBackground(String... params) {
-            PasswordDbHelper dbHelper = new PasswordDbHelper(mContext);
-            String password = params[0];
-
-            try {
-                dbHelper.getReadableDatabase(password);
-                return true;
-            } catch (Exception e){
-                //Log.e(LOG_TAG, e.getMessage());
-                return false;
-            } finally{
-                dbHelper.close();
-            }
         }
     }
 

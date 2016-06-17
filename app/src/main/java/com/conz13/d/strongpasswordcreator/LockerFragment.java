@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,8 +22,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.conz13.d.strongpasswordcreator.data.DatabaseCursorLoader;
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by dillon on 4/17/16.
@@ -48,14 +51,16 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     static final int COL_PASSWORD = 3;
     static final int COL_ADD_INFO = 4;
 
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.locker_recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.locker_empty) TextView mEmptyTextView;
+    @BindView(R.id.locker_empty_image) ImageView mEmptyImageView;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private LockerRecyclerAdapter mAdapter;
-    private TextView mEmptyTextView;
-    private ImageView mEmptyImageView;
 
 
-    // TODO: Add hiding the toolbar on scroll of the list
+
+    // TODO: Add parallax scrolling
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +70,9 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.locker_layout, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.locker_recycler_view);
+        ButterKnife.bind(this, rootView);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mEmptyTextView = (TextView) rootView.findViewById(R.id.locker_empty);
-        mEmptyImageView = (ImageView) rootView.findViewById(R.id.locker_empty_image);
 
         mAdapter = new LockerRecyclerAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -82,8 +85,6 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
             mEmptyImageView.setVisibility(View.VISIBLE);
             mEmptyImageView.setContentDescription(getContext().getString(R.string.locker_empty_skipped));
         }
-
-        //((MainActivity)getActivity()).updateNavItemSelected(MainActivity.LOCKER);
 
         return rootView;
     }
@@ -127,16 +128,15 @@ public class LockerFragment extends Fragment  implements LoaderManager.LoaderCal
         // TODO: add sort options in locker menu
         String sortOrder = PasswordContract.PasswordEntry.HEADER_TITLE + " ASC";
         String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
-        return new DatabaseCursorLoader(getActivity(),
-                password,
+        String method = getContext().getString(R.string.database_password_method);
+        getContext().getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
+        return new CursorLoader(getActivity(),
+                PasswordContract.PasswordEntry.CONTENT_URI,
                 PASSWORD_COLUMNS,
                 null,
                 null,
-                null,
-                null,
-                sortOrder,
-                null
-                );
+                sortOrder
+        );
     }
 
     @Override

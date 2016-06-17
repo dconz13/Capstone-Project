@@ -18,6 +18,9 @@ import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by dillon on 5/5/16.
  */
@@ -30,20 +33,20 @@ public class GeneratedWordRecyclerAdapter extends RecyclerView.Adapter<Generated
 
     public class GeneratedWordViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {
-        public final ImageView mDeleteButton;
-        public final ImageView mReorderButton;
-        public final TextView mResultantWord;
+        @BindView(R.id.reorder_button) ImageView mReorderButton;
+        @BindView(R.id.resultant_word) TextView mResultantWord;
 
         public GeneratedWordViewHolder(View view){
             super(view);
-            mDeleteButton = (ImageView)view.findViewById(R.id.delete_button);
-            mReorderButton = (ImageView)view.findViewById(R.id.reorder_button);
-            mResultantWord = (TextView)view.findViewById(R.id.resultant_word);
+            ButterKnife.bind(this, view);
         }
 
         @Override
         public void onItemSelected() {
             // Shows that this is the selected view
+        }
+        public TextView getMResultantWord(){
+            return this.mResultantWord;
         }
 
         @Override

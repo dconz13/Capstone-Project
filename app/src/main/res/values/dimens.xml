@@ -18,6 +18,9 @@
     <dimen name="widget_default_width">250dp</dimen>
     <dimen name="widget_default_height">110dp</dimen>
 
+    <!-- Locker image size -->
+    <dimen name="locker_image_height">200dp</dimen>
+
 
     <!-- From android platform_frameworks_base -->
 

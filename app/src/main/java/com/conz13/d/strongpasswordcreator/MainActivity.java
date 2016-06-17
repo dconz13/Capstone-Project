@@ -23,10 +23,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
-import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import net.sqlcipher.database.SQLiteDatabase;
 
 import java.util.ArrayList;
 
@@ -138,23 +135,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             signOut();
             //super.onBackPressed();
-        }
-    }
-
-    // Easy way to update nav menu selected item from fragments in onCreateView
-    public void updateNavItemSelected(int tag){
-        switch(tag){
-            case HOME: {
-                mNavDrawer.setCheckedItem(R.id.menu_home);
-                break;
-            }
-            case LOCKER: {
-                mNavDrawer.setCheckedItem(R.id.menu_locker);
-                break;
-            }
-            default:{
-                break;
-            }
         }
     }
 
@@ -283,20 +263,12 @@ public class MainActivity extends AppCompatActivity {
         // Do nothing
     }
 
-    private long saveToDatabase(ContentValues contentValues){
-        PasswordDbHelper dbHelper = new PasswordDbHelper(this);
+    private void saveToDatabase(ContentValues contentValues){
+        // Password for unlocking the db that the user provided at login
         String password = ((MyApplication)getApplication()).getPASSWORD();
-        SQLiteDatabase db = dbHelper.getWritableDatabase(password);
-        long row = 0;
-        try {
-            row = db.insert(PasswordContract.PasswordEntry.TABLE_NAME, null, contentValues);
-        } catch(Exception e){
-            Log.e(LOG_TAG, e.getMessage());
-            return row;
-        } finally {
-            db.close();
-        }
-        return row;
+        String method = getString(R.string.database_password_method);
+        getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
+        getContentResolver().insert(PasswordContract.PasswordEntry.CONTENT_URI, contentValues);
     }
 
 }

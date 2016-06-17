@@ -4,6 +4,8 @@
 
     <!-- Content authority for the password provider-->
     <string name="content_authority" translatable="false">com.conz13.d.strongpasswordcreator.provider</string>
+    <!-- Used for setting the password variable in the password provider for accessing the db -->
+    <string name="database_password_method" translatable="false">setPASSWORD</string>
 
     <string name="generation_fragment_tag" translatable="false">generation_fragment</string>
 

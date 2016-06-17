@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     signingConfigs {
@@ -46,10 +47,13 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.github.deano2390:MaterialShowcaseView:1.1.0'
     compile 'me.relex:circleindicator:1.2.1@aar'
+    // ButterKnife library needs the compiler
+    compile 'com.jakewharton:butterknife:8.1.0'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile project(':wheel')
     // Test only compiles
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile 'com.android.support:support-annotations:23.3.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'

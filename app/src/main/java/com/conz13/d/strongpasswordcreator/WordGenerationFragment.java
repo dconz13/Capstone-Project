@@ -33,6 +33,9 @@ import com.conz13.d.strongpasswordcreator.helper.OnDragListener;
 
 import java.util.ArrayList;
 
+import butterknife.BindBool;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.OnWheelScrollListener;
 import kankan.wheel.widget.WheelView;
@@ -49,25 +52,28 @@ public class WordGenerationFragment extends Fragment
     public static final int DELETE_ALL_BUTTON = 0;
     public static final int SAVE_BUTTON = 1;
 
-    private WheelView mDiceOne;
-    private WheelView mDiceTwo;
-    private WheelView mDiceThree;
-    private WheelView mDiceFour;
-    private WheelView mDiceFive;
-    private TextView mTextView;
-    private ImageButton mAddButton;
-    private Button mRollButton;
-    private FloatingActionButton mSaveButton;
+    @BindView(R.id.slot_1) WheelView mDiceOne;
+    @BindView(R.id.slot_2) WheelView mDiceTwo;
+    @BindView(R.id.slot_3) WheelView mDiceThree;
+    @BindView(R.id.slot_4) WheelView mDiceFour;
+    @BindView(R.id.slot_5) WheelView mDiceFive;
+    @BindView(R.id.temp_word_textview) TextView mTextView;
+    @BindView(R.id.add_to_list_button) ImageButton mAddButton;
+    @BindView(R.id.roll_button) Button mRollButton;
+    @BindView(R.id.save_fab) FloatingActionButton mSaveButton;
+    @BindView(R.id.resultant_word_recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.coord_layout) CoordinatorLayout mCoordLayout;
+    @BindBool(R.bool.is_right_to_left) boolean isRtl;
+
     private boolean animationsEnabled;
 
     private Menu mMenu;
 
-    private RecyclerView mRecyclerView;
     private GeneratedWordRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> mResultantWords;
     private ItemTouchHelper mItemTouchHelper;
-    private CoordinatorLayout mCoordLayout;
+
 
     private AlertDialog mDeleteAllDialog;
     private AlertDialog mHelpDialog;
@@ -122,18 +128,9 @@ public class WordGenerationFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.word_generation_fragment_layout, container, false);
-        mDiceOne = (WheelView) rootView.findViewById(R.id.slot_1);
-        mDiceTwo = (WheelView) rootView.findViewById(R.id.slot_2);
-        mDiceThree = (WheelView) rootView.findViewById(R.id.slot_3);
-        mDiceFour = (WheelView) rootView.findViewById(R.id.slot_4);;
-        mDiceFive = (WheelView) rootView.findViewById(R.id.slot_5);
-        mTextView = (TextView) rootView.findViewById(R.id.temp_word_textview);
-        mAddButton = (ImageButton) rootView.findViewById(R.id.add_to_list_button);
-        mRollButton = (Button) rootView.findViewById(R.id.roll_button);
-        mSaveButton = (FloatingActionButton) rootView.findViewById(R.id.save_fab);
-        Boolean isRtl = getContext().getResources().getBoolean(R.bool.is_right_to_left);
+        ButterKnife.bind(this, rootView);
+        ButterKnife.setDebug(true);
 
-        mRecyclerView = (RecyclerView)rootView.findViewById(R.id.resultant_word_recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -151,8 +148,6 @@ public class WordGenerationFragment extends Fragment
         spinOnClick(mRollButton);
         addOnClick(mAddButton);
         fabOnClick(mSaveButton);
-        mCoordLayout = (CoordinatorLayout)rootView.findViewById(R.id.coord_layout);
-        //((MainActivity)getActivity()).updateNavItemSelected(MainActivity.HOME);
 
         if(null != savedInstanceState && null != mGeneratedNumber){
             setUpDice(mGeneratedNumber);

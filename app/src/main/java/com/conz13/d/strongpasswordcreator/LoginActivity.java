@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                 editText.setText("");
 
                 startActivity(intent);
-               // this.finish();
             } else {
                 editText.setError(getString(R.string.login_password_wrong_error));
             }
@@ -114,29 +113,5 @@ public class LoginActivity extends AppCompatActivity {
 
         editText.setText("");
         startActivity(intent);
-        //this.finish();
-    }
-
-    private class VerifyPasswordTask extends AsyncTask<String, Void, Boolean> {
-        private Context mContext;
-
-        public VerifyPasswordTask(Context context){
-            mContext = context;
-        }
-        @Override
-        protected Boolean doInBackground(String... params) {
-            PasswordDbHelper dbHelper = new PasswordDbHelper(mContext);
-            String password = params[0];
-
-            try {
-                dbHelper.getReadableDatabase(password);
-                return true;
-            } catch (Exception e){
-                //Log.e(LOG_TAG, e.getMessage());
-                return false;
-            } finally{
-                dbHelper.close();
-            }
-        }
     }
 }

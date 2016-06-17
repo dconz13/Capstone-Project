@@ -138,7 +138,7 @@ public class GeneratedWordItemTouchHelperCallback extends android.support.v7.wid
                 c.drawBitmap(icon, margin_left, margin_top, mPaint);
             }
 
-            TextView itemText = ((GeneratedWordRecyclerAdapter.GeneratedWordViewHolder)viewHolder).mResultantWord;
+            TextView itemText = ((GeneratedWordRecyclerAdapter.GeneratedWordViewHolder)viewHolder).getMResultantWord();
             itemText.setAlpha(1.0f - Math.abs(dX) / (float) itemView.getWidth());
             itemView.setTranslationX(dX);
 

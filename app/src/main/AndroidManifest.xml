@@ -60,6 +60,10 @@
                 android:resource="@xml/dice_widget_info"/>
         </receiver>
         <service android:name=".widget.RollDiceIntentService" />
+        <provider
+            android:authorities="@string/content_authority"
+            android:name=".data.PasswordProvider"
+            android:exported="false" />
 
     </application>
 

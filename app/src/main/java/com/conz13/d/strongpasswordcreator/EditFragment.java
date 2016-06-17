@@ -18,19 +18,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
-import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by dillon on 5/12/16.
  */
 public class EditFragment extends Fragment {
 
-    private EditText mHeaderText;
-    private EditText mUsernameText;
-    private EditText mPasswordText;
-    private EditText mAddInfoText;
+    @BindView(R.id.edit_header_edit_text) EditText mHeaderText;
+    @BindView(R.id.edit_username_edit_text) EditText mUsernameText;
+    @BindView(R.id.edit_password_edit_text) EditText mPasswordText;
+    @BindView(R.id.edit_add_info_edit_text) EditText mAddInfoText;
     private long ID;
 
     private String previousHeaderText;
@@ -47,11 +47,7 @@ public class EditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.edit_fragment_layout, container, false);
-
-        mHeaderText = (EditText)rootView.findViewById(R.id.edit_header_edit_text);
-        mUsernameText = (EditText)rootView.findViewById(R.id.edit_username_edit_text);
-        mPasswordText = (EditText)rootView.findViewById(R.id.edit_password_edit_text);
-        mAddInfoText = (EditText)rootView.findViewById(R.id.edit_add_info_edit_text);
+        ButterKnife.bind(this, rootView);
 
         initTextFields();
         initDeleteButton((Button)rootView.findViewById(R.id.edit_delete_button));
@@ -125,9 +121,13 @@ public class EditFragment extends Fragment {
 
     private void deleteFromDb(String selection){
         String password = ((MyApplication)getActivity().getApplication()).getPASSWORD();
-        SQLiteDatabase db = new PasswordDbHelper(getContext()).getWritableDatabase(password);
-        db.delete(PasswordContract.PasswordEntry.TABLE_NAME, selection, null);
-        db.close();
+        String method = getContext().getString(R.string.database_password_method);
+        getContext().getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
+        getContext().getContentResolver().delete(
+                PasswordContract.PasswordEntry.CONTENT_URI,
+                selection,
+                null
+        );
     }
 
     /**

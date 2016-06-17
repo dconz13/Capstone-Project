@@ -18,24 +18,24 @@ import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by dillon on 5/9/16.
  */
 public class SaveDialogFragment extends DialogFragment {
-    private EditText mPasswordEditText;
-    private EditText mHeaderEditText;
-    private EditText mUsernameEditText;
-    private EditText mAddInfoEditText;
+    @BindView(R.id.save_password_edit_text) EditText mPasswordEditText;
+    @BindView(R.id.save_header_edit_text) EditText mHeaderEditText;
+    @BindView(R.id.save_username_edit_text) EditText mUsernameEditText;
+    @BindView(R.id.save_add_info_edit_text) EditText mAddInfoEditText;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View rootView = inflater.inflate(R.layout.save_password_dialog_layout,null);
-        mPasswordEditText = (EditText) rootView.findViewById(R.id.save_password_edit_text);
-        mHeaderEditText = (EditText) rootView.findViewById(R.id.save_header_edit_text);
-        mUsernameEditText = (EditText) rootView.findViewById(R.id.save_username_edit_text);
-        mAddInfoEditText = (EditText) rootView.findViewById(R.id.save_add_info_edit_text);
+        ButterKnife.bind(this, rootView);
 
         if(getContext().getResources().getBoolean(R.bool.is_right_to_left)){
             setRtlMode();

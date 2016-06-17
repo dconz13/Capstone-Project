@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.conz13.d.strongpasswordcreator.helper.ItemTouchHelperViewHolder;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * Created by dillon on 5/10/16.
@@ -23,24 +26,20 @@ public class LockerRecyclerAdapter extends RecyclerView.Adapter<LockerRecyclerAd
 
     public class LockerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             ItemTouchHelperViewHolder {
-        public final TextView mHeaderTextView;
-        public final ImageButton mEditButton;
-        public final TextView mUsernameTextView;
-        public final TextView mPasswordTextView;
-        public final TextView mAddInfoTextView;
+        @BindView(R.id.locker_item_title) TextView mHeaderTextView;
+        @BindView(R.id.locker_edit_button) ImageButton mEditButton;
+        @BindView(R.id.locker_item_username) TextView mUsernameTextView;
+        @BindView(R.id.locker_item_password) TextView mPasswordTextView;
+        @BindView(R.id.locker_item_additional_info) TextView mAddInfoTextView;
+        @BindView(R.id.locker_card) CardView mCardViewBody;
+
         public long ID;
-        public final CardView mCardViewBody;
 
         public LockerViewHolder(View view){
             super(view);
-            mHeaderTextView = (TextView)view.findViewById(R.id.locker_item_title);
-            mEditButton = (ImageButton)view.findViewById(R.id.locker_edit_button);
-            mUsernameTextView = (TextView)view.findViewById(R.id.locker_item_username);
-            mPasswordTextView = (TextView)view.findViewById(R.id.locker_item_password);
-            mAddInfoTextView = (TextView)view.findViewById(R.id.locker_item_additional_info);
-            ID = -1;
-            mCardViewBody = (CardView)view.findViewById(R.id.locker_card);
+            ButterKnife.bind(this, view);
 
+            ID = -1;
             mCardViewBody.setOnClickListener(this);
             mEditButton.setOnClickListener(this);
         }
