@@ -238,5 +238,8 @@
 
     <!-- AdMob strings -->
     <string name="banner_ad_test_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="settings_ad_unit_id">ca-app-pub-1169781822048991/3538603668</string>
+    <string name="about_ad_unit_id">ca-app-pub-1169781822048991/5015336863</string>
+    <string name="login_ad_unit_id">ca-app-pub-1169781822048991/6492070060</string>
 
 </resources>

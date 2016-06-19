@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'StrongPasswordCreatorKey'
             keyPassword 'nine scrap colony scale'
-            storeFile file('~/app/android.jks')
+            storeFile file('/home/dillon/keystores/android.jks')
             storePassword 'udacity pass'
         }
     }

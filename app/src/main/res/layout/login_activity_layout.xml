@@ -80,6 +80,6 @@
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin"
         app:adSize="BANNER"
-        app:adUnitId="@string/banner_ad_test_unit_id"/>
+        app:adUnitId="@string/login_ad_unit_id"/>
 
 </LinearLayout>
