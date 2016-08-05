@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.conz13.d.strongpasswordcreator.data.PasswordContract;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -133,7 +134,6 @@ public class Utility {
      * @return returns true if the entry exists
      */
     public static boolean checkIfEntryExists(Context context, String password, String headerName){
-      //  String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String[] columns = {"header_title"};
         String selection = "header_title='" + headerName + "' ";
         boolean existsFlag = false;
@@ -146,17 +146,7 @@ public class Utility {
                 null,
                 null
         );
-//        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
-//        Cursor cursor = db.query(
-//                table_name,
-//                columns,
-//                selection,
-//                null,
-//                null,
-//                null,
-//                null,
-//                null
-//        );
+
         try {
 
             if(cursor != null && cursor.moveToFirst()){
@@ -182,8 +172,6 @@ public class Utility {
      * @return returns true on successful update
      */
     public static boolean updateExistingEntry(Context context, String password, ContentValues contentValues, long ID){
-//        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
-//        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String selection = "_ID='" + ID + "'";
         String method = context.getString(R.string.database_password_method);
         context.getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
@@ -193,15 +181,6 @@ public class Utility {
                 selection,
                 null
         );
-
-//        int rows = db.update(
-//                table_name,
-//                contentValues,
-//                selection,
-//                null
-//                );
-//
-//        db.close();
 
         if(rows > 0) return true;
 
@@ -219,8 +198,6 @@ public class Utility {
      */
     public static Bundle buildBundleFromId(Context context, String password, long id){
         Bundle bundle = new Bundle();
-//        SQLiteDatabase db = new PasswordDbHelper(context).getReadableDatabase(password);
-//        String table_name = PasswordContract.PasswordEntry.TABLE_NAME;
         String selection = "_ID='" + id + "'";
         String method = context.getString(R.string.database_password_method);
         context.getContentResolver().call(PasswordContract.BASE_CONTENT_URI, method, password, null);
@@ -231,16 +208,7 @@ public class Utility {
                 null,
                 null
         );
-//        Cursor cursor = db.query(
-//                table_name,
-//                null,
-//                selection,
-//                null,
-//                null,
-//                null,
-//                null,
-//                null
-//        );
+
         try {
             if(cursor != null && cursor.moveToFirst()) {
                 bundle.putLong(context.getString(R.string.intent_extra_id),
@@ -262,6 +230,26 @@ public class Utility {
         }
 
         return bundle;
+    }
+
+    /**
+     * Helper function for sending an event to FirebaseAnalytics
+     *
+     * @param context activity context
+     * @param id ITEM_ID for param
+     * @param name ITEM_NAME for param
+     * @param contentType CONTENT_TYPE for param
+     */
+
+    public static void sendAnalytics(Context context, String id, String name, String contentType){
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType);
+
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
 }

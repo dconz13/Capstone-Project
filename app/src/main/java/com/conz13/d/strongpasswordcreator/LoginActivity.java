@@ -1,8 +1,6 @@
 package com.conz13.d.strongpasswordcreator;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +12,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.conz13.d.strongpasswordcreator.data.PasswordDbHelper;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -28,7 +24,6 @@ import net.sqlcipher.database.SQLiteDatabase;
  */
 public class LoginActivity extends AppCompatActivity {
     private static final String LOG_TAG = LoginActivity.class.getSimpleName();
-    FirebaseAnalytics mFirebaseAnalytics;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         AdView adView = (AdView) findViewById(R.id.login_ad);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -78,11 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 ((MyApplication)getApplication()).setPASSWORD(password);
                 ((MyApplication) getApplication()).setSKIPPED_LOGIN(false);
 
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.login_button));
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.login_button));
-                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+                Utility.sendAnalytics(this, getString(R.string.login_button), getString(R.string.login_button), "button");
 
                 editText.setText("");
 
@@ -105,12 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         ((MyApplication)getApplication()).setPASSWORD("");
         ((MyApplication)getApplication()).setSKIPPED_LOGIN(true);
 
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.login_skip_button));
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.login_skip_button));
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "button");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
-
+        Utility.sendAnalytics(this, getString(R.string.login_skip_button), getString(R.string.login_skip_button), "button");
         editText.setText("");
         startActivity(intent);
     }

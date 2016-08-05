@@ -18,7 +18,6 @@ import android.widget.ImageButton;
 
 import com.conz13.d.strongpasswordcreator.tutorial.TutorialPagerAdapter;
 import com.conz13.d.strongpasswordcreator.tutorial.skipAndArrowHider;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -29,7 +28,6 @@ import me.relex.circleindicator.CircleIndicator;
  */
 public class FirstRunActivity extends AppCompatActivity implements skipAndArrowHider {
     ViewPager mViewPager;
-    FirebaseAnalytics mFirebaseAnalytics;
     Boolean isRtl;
 
     @Override
@@ -52,12 +50,6 @@ public class FirstRunActivity extends AppCompatActivity implements skipAndArrowH
         initSkipButton(skipButton);
         initNextButton(nextButton);
 
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.tutorial_view_pager));
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Tutorial");
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "begin");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, bundle);
     }
 
     public void createDbLoginPassword(View view){
@@ -79,11 +71,7 @@ public class FirstRunActivity extends AppCompatActivity implements skipAndArrowH
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
                 sharedPreferences.edit().putBoolean(getString(R.string.first_run_key),false).apply();
 
-                Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Integer.toString(R.id.tutorial_view_pager));
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Tutorial");
-                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "finish");
-                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, bundle);
+                Utility.sendAnalytics(this, "Tutorial Complete", "Tutorial Complete", "currentScreen");
 
                 startActivity(intent);
                 this.finish();
