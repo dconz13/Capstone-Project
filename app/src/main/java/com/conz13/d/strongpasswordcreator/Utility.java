@@ -13,8 +13,8 @@ import com.conz13.d.strongpasswordcreator.data.PasswordContract;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.SecureRandom;
 import java.util.Properties;
-import java.util.Random;
 
 /**
  * Created by dillon on 4/17/16.
@@ -74,7 +74,7 @@ public class Utility {
      * @return temp (the integer array holding the 5 digit number)
      */
     public static int[] getDiceRoll(){
-        Random rndNumber = new Random();
+        SecureRandom rndNumber = new SecureRandom();
         int MAX_INT = 6;
         int temp[] = new int[5];
         for(int i = 0; i < temp.length; i++){

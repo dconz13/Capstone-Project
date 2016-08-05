@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 /**
  * Created by dillon on 4/18/16.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses(dicewarePassphraseUnitTest.class)
-public class TestSuite {
-}
+//@RunWith(Suite.class)
+//@Suite.SuiteClasses(dicewarePassphraseUnitTest.class)
+//public class TestSuite {
+//}
